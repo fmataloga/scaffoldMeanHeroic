@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
+    
+    <title>Scaffold MEAN Heroic</title>
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+
+    <!-- Materials icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Javascript Libraries --> 
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+    <!-- This Script concatenate all the file in the  folder /public/javascripts/ --> 
+    <script type="text/javascript" src="includes/concat.js"></script>
+
+</head>
+
+<body class="cyan lighten-1" ng-app="appAngular">
+     <div id="container-body">
+        <ui-view></ui-view>
+    </div>
+</body>
+
+</html>

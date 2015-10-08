@@ -1,0 +1,36 @@
+#logo-container{
+    display: block;
+    width: 55px;
+    margin-top: 0.34em;
+    height: 45px;
+}
+
+#model-list { /*grid*/
+    transition: box-shadow .25s;
+    padding: 20px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px;
+    background-color: #fff; }
+
+#container-body {
+    margin: 0 auto;
+    max-width: 1440px;
+    width: 96%; }
+
+.card-reveal {
+    opacity: 0.9;
+}
+
+.modelGrid{
+    display: inline-block;
+    margin: 1em;
+}
+
+/*.login-form{*/
+    /*margin-top: 5em;*/
+/*}*/
+
+.profile-image-login{
+    width: 150px;
+    height: 150px !important;
+}
