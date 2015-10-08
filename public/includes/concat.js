@@ -14,10 +14,6 @@ angular.module('appAngular', ['ui.router'])
 
         $urlRouterProvider.otherwise('login');
     })
-    
-    
-    
-
 .controller('loginController', function($scope, $state, loginFactorie) {
         $scope.titleLoginController = "SCAFFOLD MEAN HEROIC!!!";
 

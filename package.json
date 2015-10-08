@@ -25,5 +25,8 @@
     "npm": "^3.3.5",
     "password-hash": "^1.2.2",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "gulp-watch": "^4.3.5"
   }
 }

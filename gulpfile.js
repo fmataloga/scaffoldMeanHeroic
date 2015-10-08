@@ -2,10 +2,11 @@ var gulp = require('gulp'),
 	minifyCSS = require('gulp-minify-css'),
 	concatCss = require('gulp-concat-css'),
 	concatJs = require('gulp-concat'),
-  notify = require('gulp-notify'),
+    notify = require('gulp-notify'),
 	uglify = require('gulp-uglify'),
-  connect = require('gulp-connect'),
-  historyApiFallback = require('connect-history-api-fallback');
+    connect = require('gulp-connect'),
+    watch = require('gulp-watch'),
+    historyApiFallback = require('connect-history-api-fallback');
  
 gulp.task('css', function () 
 {
@@ -22,18 +23,17 @@ gulp.task('js', function()
   gulp.src('public/javascripts/**/*.js')
     .pipe(concatJs('concat.js'))
     .pipe(gulp.dest('public/includes'))
-    .pipe(notify("Ha finalizado la tarea js!"));
+    .pipe(notify("Su sistema ha Sido actualizado!"));
 });
 
 
-gulp.task('js2', function() 
-{
-  gulp.src('public/javascripts/angular/*.js')
-    .pipe(concatJs('concat.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('out/js'))
-    .pipe(notify("Ha finalizado la task js!"));
+
+gulp.task('watch', function() {
+  watch('public/javascripts/**/*.js', function() {
+    gulp.run(['js']);
+  });
 });
+
 
 
 gulp.task("uglify-src", function() {

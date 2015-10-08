@@ -14,6 +14,3 @@ angular.module('appAngular', ['ui.router'])
 
         $urlRouterProvider.otherwise('login');
     })
-    
-    
-    
