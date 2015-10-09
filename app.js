@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
-var app = module.exports.app = exports.app = express();
 
 mongoose.connect('mongodb://localhost/users');
 
