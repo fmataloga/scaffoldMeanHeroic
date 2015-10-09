@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
+var app = module.exports.app = exports.app = express();
 
 mongoose.connect('mongodb://localhost/users');
 
@@ -29,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

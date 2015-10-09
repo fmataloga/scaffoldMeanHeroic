@@ -16,8 +16,7 @@ angular.module('appAngular', ['ui.router'])
     })
 .controller('loginController', function($scope, $state, loginFactorie) {
         $scope.titleLoginController = "SCAFFOLD MEAN HEROIC!!!";
-
-    })
+})
 .factory('loginFactorie', function($http) {
         var comun = {};
 

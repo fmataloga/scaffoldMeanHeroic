@@ -1,13 +1,39 @@
 var gulp = require('gulp'),
-	minifyCSS = require('gulp-minify-css'),
-	concatCss = require('gulp-concat-css'),
-	concatJs = require('gulp-concat'),
+    minifyCSS = require('gulp-minify-css'),
+    concatCss = require('gulp-concat-css'),
+    concatJs = require('gulp-concat'),
     notify = require('gulp-notify'),
-	uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify'),
+    nodemon = require('gulp-nodemon'),
     connect = require('gulp-connect'),
     watch = require('gulp-watch'),
+    run = require('gulp-run'),
     historyApiFallback = require('connect-history-api-fallback');
- 
+
+
+/* ---------------------------------------------------
+    Examples use command Run
+gulp.task('start', function () {
+  run('npm restart').exec() 
+  .pipe(notify("Node Server Inicio!")); 
+});
+
+gulp.task('stop', function () {
+  run('taskkill /IM node.exe -F').exec() 
+  .pipe(notify("Se detuvo node server!")); 
+});
+------------------------------------------------------*/
+
+gulp.task('server', function () {
+  nodemon({ script: 'bin/www'
+          , ext: 'js' })
+    .on('restart', function () {
+      console.log('restarted!')
+    })
+})
+
+
+
 gulp.task('css', function () 
 {
   gulp.src('public/stylesheets/*.css')
@@ -23,12 +49,11 @@ gulp.task('js', function()
   gulp.src('public/javascripts/**/*.js')
     .pipe(concatJs('concat.js'))
     .pipe(gulp.dest('public/includes'))
-    .pipe(notify("Su sistema ha Sido actualizado!"));
+    .pipe(notify("Su Front ha Sido actualizado!"));
 });
 
 
-
-gulp.task('watch', function() {
+gulp.task('watch-front', function() {
   watch('public/javascripts/**/*.js', function() {
     gulp.run(['js']);
   });
@@ -36,22 +61,5 @@ gulp.task('watch', function() {
 
 
 
-gulp.task("uglify-src", function() {
-    gulp.src([ "public/javascripts/*.js" ])
-    .pipe(concatJs("afvs.js"))
-    .pipe(ignore.exclude([ "**/*.map" ]))
-    .pipe(uglify())
-    .pipe(gulp.dest("dist/js"));
-});
 
-gulp.task('server', function() {
-    connect.server({ 
-        root: './app', 
-        hostname: '127.0.0.1', 
-        port: 6000, 
-        livereload: true, 
-        middleware: function(connect, opt) {
-            return [ historyApiFallback ];
-        } 
-    })
-});
+
