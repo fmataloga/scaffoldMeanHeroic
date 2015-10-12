@@ -28,8 +28,6 @@ router.post('/users', function(req, res, next){
 //PUT - Update users
 router.put('/users/:id', function(req, res){
     Users.findById(req.params.id, function(err, user){
-        user.nombre = req.body.nombre;
-        user.prioridad = req.body.prioridad;
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.country = req.body.country;
