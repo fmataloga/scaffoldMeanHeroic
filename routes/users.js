@@ -10,7 +10,7 @@ var passport = require('passport');
 
 
     router.post('/register', function(req, res) {
-      Users.register(new Users({ username: req.body.username }), req.body.password, function(err, account) {
+      Users.register(new Users({ username: req.body.username,rol: req.body.rol }), req.body.password, function(err, account) {
         if (err) {
           return res.status(500).json({err: err});
         }
@@ -36,9 +36,17 @@ var passport = require('passport');
             req.session.us = false;
             return res.status(500).json({err: 'Could not log in user'});
           }
+          if(req.body.check){
+            var hour = 3600000;
+            req.session.cookie.expires = new Date(Date.now() + hour);
+            req.session.cookie.maxAge = hour;
+            req.session.cookie.maxAge;
+            req.session.check = req.body.check;
+          }
           req.session.us = true;
           req.session.name = user.username;
-          req.session.id = user.id;
+          req.session.idd = user._id;
+          req.session.rol = user.rol;
           res.status(200).json({status: 'Login successful!'});
 
         });

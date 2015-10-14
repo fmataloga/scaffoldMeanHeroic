@@ -5,25 +5,25 @@
     .when('/', {
         templateUrl: 'templates/home.html',
         controller: 'homeController',
-        access: {restricted: false}
+        access: {restricted: false,rol:2}
     })
     .when('/login', {
       templateUrl: 'templates/login/loginIndex.html',
       controller: 'loginController',
-      access: {restricted: true}
+      access: {restricted: true,rol:1}
     })
     .when('/logout', {
       controller: 'logoutController',
-      access: {restricted: true}
+      access: {restricted: true,rol:1}
     })
     .when('/register', {
       templateUrl: 'templates/login/loginIndex.html',
       controller: 'loginController',
-      access: {restricted: false}
+      access: {restricted: false,rol:1}
     })
-    .when('/one', {
-      template: '<h1>This is page one!</h1>',
-      access: {restricted: true}
+    .when('/accessDenied', {
+      template: '<center><h2>Access Dennied!</h2></center>',
+      access: {restricted: true,rol:1}
     })
     .when('/two', {
       template: '<h1>This is page two!</h1>',
@@ -34,7 +34,7 @@
 
 .run(function ($rootScope, $location, $route, AuthService,$http) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      var session ;
+      var session;
       $http.get('/cookie').
         success(function(data) {
             if(!data.comp){
@@ -43,7 +43,19 @@
                 session = data.comp;
                 $rootScope.user = data.user;
             }
-            console.log(next.access.restricted+" Session "+session);
+
+            if(next.access.rol){
+              if (data.user.rol){
+                if(data.user.rol < next.access.rol ){
+                  $location.path('/accessDenied');
+                }
+              }
+            }
+            if(next.$$route.originalPath == '/login'){
+              $rootScope.route = false;
+            }else{
+              $rootScope.route = true;
+            }
             if (session == false && next.access.restricted == false ) {
               $location.path('/login');
             }
@@ -51,11 +63,11 @@
         });  
   });
 })
-.controller('homeController',
+.controller('bootstrapController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
-    $scope.titleHomeController = "Welcome";
-    
+    $scope.test = "Menú 1";
+    $scope.logo = "ScaffoldMEANHeroic";
          /*  LOGOUT  */
 	    $scope.logout = function () {
 	      AuthService.logout()
@@ -66,19 +78,25 @@
 	    };
 
 }])
+.controller('homeController',
+  ['$scope', '$location', 'AuthService',
+  function ($scope, $location, AuthService) {
+    $scope.titleHomeController = "Welcome";
+    
+
+}])
 .controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
-
     $scope.titleLoginController = "scaffoldMeanHeroic";
     $scope.login = function () {
 
       // initial values
       $scope.error = false;
       $scope.disabled = true;
-
+      //$scope.remember = "hola";
       // call login from service
-      AuthService.login($scope.loginForm.username, $scope.loginForm.password)
+      AuthService.login($scope.loginForm.username, $scope.loginForm.password,$scope.remember)
         // handle success
         .then(function () {
           $location.path('/');
@@ -94,7 +112,6 @@
         });
 
     };
-
 
    
     /* REGISTRAR  */
@@ -154,13 +171,13 @@
     }
 
 
-    function login(username, password) {
+    function login(username, password,check) {
 
       // create a new instance of deferred
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/login', {username: username, password: password})
+      $http.post('/api/login', {username: username, password: password,check: check})
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

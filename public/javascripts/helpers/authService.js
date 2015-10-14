@@ -22,13 +22,13 @@
     }
 
 
-    function login(username, password) {
+    function login(username, password,check) {
 
       // create a new instance of deferred
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/login', {username: username, password: password})
+      $http.post('/api/login', {username: username, password: password,check: check})
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

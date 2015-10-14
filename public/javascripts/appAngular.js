@@ -5,25 +5,25 @@
     .when('/', {
         templateUrl: 'templates/home.html',
         controller: 'homeController',
-        access: {restricted: false}
+        access: {restricted: false,rol:2}
     })
     .when('/login', {
       templateUrl: 'templates/login/loginIndex.html',
       controller: 'loginController',
-      access: {restricted: true}
+      access: {restricted: true,rol:1}
     })
     .when('/logout', {
       controller: 'logoutController',
-      access: {restricted: true}
+      access: {restricted: true,rol:1}
     })
     .when('/register', {
       templateUrl: 'templates/login/loginIndex.html',
       controller: 'loginController',
-      access: {restricted: false}
+      access: {restricted: false,rol:1}
     })
-    .when('/one', {
-      template: '<h1>This is page one!</h1>',
-      access: {restricted: true}
+    .when('/accessDenied', {
+      template: '<center><h2>Access Dennied!</h2></center>',
+      access: {restricted: true,rol:1}
     })
     .when('/two', {
       template: '<h1>This is page two!</h1>',
@@ -34,7 +34,7 @@
 
 .run(function ($rootScope, $location, $route, AuthService,$http) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      var session ;
+      var session;
       $http.get('/cookie').
         success(function(data) {
             if(!data.comp){
@@ -43,7 +43,19 @@
                 session = data.comp;
                 $rootScope.user = data.user;
             }
-            console.log(next.access.restricted+" Session "+session);
+
+            if(next.access.rol){
+              if (data.user.rol){
+                if(data.user.rol < next.access.rol ){
+                  $location.path('/accessDenied');
+                }
+              }
+            }
+            if(next.$$route.originalPath == '/login'){
+              $rootScope.route = false;
+            }else{
+              $rootScope.route = true;
+            }
             if (session == false && next.access.restricted == false ) {
               $location.path('/login');
             }

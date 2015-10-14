@@ -41,7 +41,7 @@ app.use(require('express-session')({
 app.get('/cookie', function(req, res) {
        /*req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
        res.send('You have visited this page ' + req.session.visitCount + ' times '+req.session.us);*/
-       res.json({comp:req.session.us,user:{id:req.session.id,username: req.session.name}});
+       res.json({comp:req.session.us,check:req.session.check,user:{id:req.session.idd,username: req.session.name,rol:req.session.rol}});
  });
 
 //Call cookie end

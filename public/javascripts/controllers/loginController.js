@@ -1,16 +1,15 @@
 .controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
-
     $scope.titleLoginController = "scaffoldMeanHeroic";
     $scope.login = function () {
 
       // initial values
       $scope.error = false;
       $scope.disabled = true;
-
+      //$scope.remember = "hola";
       // call login from service
-      AuthService.login($scope.loginForm.username, $scope.loginForm.password)
+      AuthService.login($scope.loginForm.username, $scope.loginForm.password,$scope.remember)
         // handle success
         .then(function () {
           $location.path('/');
@@ -26,7 +25,6 @@
         });
 
     };
-
 
    
     /* REGISTRAR  */

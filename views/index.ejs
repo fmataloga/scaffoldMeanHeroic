@@ -1,34 +1,50 @@
 <html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
-    
-    <title>Scaffold MEAN Heroic</title>
-    <!-- Materialize -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
-
-    <!-- Materials icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Javascript Libraries --> 
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-    <script type="text/javascript" src="https://code.angularjs.org/1.4.7/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-
-    <!-- This Script concatenate all the file in the  folder /public/javascripts/ --> 
-    <script type="text/javascript" src="includes/concat.js"></script>
-
-</head>
-
-<body class="cyan lighten-1" ng-app="appAngular">
-     <div id="container-body">
-        <ng-view></ng-view>
-    </div>
-</body>
-
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
+        
+        <title ng-controller="bootstrapController">Scaffold MEAN Heroic</title>
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+        
+        <!-- Custom Styles -->
+        <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+        <!-- Materials icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Javascript Libraries -->
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.7/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+        <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
+        <script type="text/javascript" src="includes/concat.js"></script>
+        <script type="text/javascript" src="includes/jquery-extras.js"></script>
+    </head>
+    <body ng-app="appAngular">
+        <div>
+            <!-- Everything exept views inherit the login -->
+            <section ng-show="route" ng-controller="bootstrapController" >
+                 <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!">{{test}}</a></li>
+                    <li><a href="#!">Menú 2</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click='logout()'>Logout</a></li>
+                </ul>
+                <nav class="grey darken-3 z-depth-2">
+                    <div class="nav-wrapper">
+                        <a href="#!" class="brand-logo">{{logo}}</a>
+                        <ul class="right hide-on-med-and-down">
+                            <li ng-if="user.rol > 2"><a href="sass.html">Prueba Permisos</a></li>
+                            <li><a href="sass.html">Sass</a></li>
+                            <li><a href="badges.html">Components</a></li>
+                            <!-- Dropdown Trigger -->
+                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </section>
+               
+            <ng-view id="container-body"></ng-view>
+        </div>
+    </body>
 </html>
