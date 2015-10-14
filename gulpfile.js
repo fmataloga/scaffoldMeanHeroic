@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     historyApiFallback = require('connect-history-api-fallback');
 
 
+
 /* ---------------------------------------------------
     Examples use command Run
 gulp.task('start', function () {
@@ -23,6 +24,8 @@ gulp.task('stop', function () {
   .pipe(notify("Se detuvo node server!")); 
 });
 ------------------------------------------------------*/
+
+
 
 gulp.task('server', function () {
   nodemon({ script: 'bin/www'

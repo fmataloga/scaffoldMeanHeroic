@@ -2,7 +2,58 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
- var passwordHash = require('password-hash');
+var passwordHash = require('password-hash');
+var passport = require('passport');
+
+
+/*  LOGIN   */
+
+
+    router.post('/register', function(req, res) {
+      Users.register(new Users({ username: req.body.username }), req.body.password, function(err, account) {
+        if (err) {
+          return res.status(500).json({err: err});
+        }
+        passport.authenticate('local')(req, res, function () {
+          return res.status(200).json({status: 'Registration successful!'});
+        });
+      });
+    });
+
+    router.post('/login', function(req, res, next) {
+      req.session.us = false;
+      passport.authenticate('local', function(err, user, info) {
+        if (err) {
+          req.session.us = false;
+          return res.status(500).json({err: err});
+        }
+        if (!user) {
+          req.session.us = false;
+          return res.status(401).json({err: info});
+        }
+        req.logIn(user, function(err) {
+          if (err) {
+            req.session.us = false;
+            return res.status(500).json({err: 'Could not log in user'});
+          }
+          req.session.us = true;
+          req.session.name = user.username;
+          req.session.id = user.id;
+          res.status(200).json({status: 'Login successful!'});
+
+        });
+      })(req, res, next);
+    });
+
+  router.get('/logout', function(req, res) {
+    req.logout();
+    req.session.us = false;
+    res.status(200).json({status: 'Bye!'});
+  });
+
+
+
+/*  END LOGIN   */
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
@@ -17,7 +68,7 @@ router.get('/users', function(req, res, next) {
 //POST - Add users
 router.post('/users', function(req, res, next){
     var user = new Users(req.body);
-    user.password = passwordHash.generate(req.body.password); 
+    //user.password = passwordHash.generate(req.body.password); 
     user.save(function(err, user){
          if(err){return next(err)}
             res.json(user);

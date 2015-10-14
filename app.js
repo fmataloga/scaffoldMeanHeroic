@@ -6,10 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
+var passport = require('passport');
+var localStrategy = require('passport-local' ).Strategy;
+var expressSession = require('express-session');
 
 mongoose.connect('mongodb://localhost/users');
-
-require('./models/Users');
+// user schema/model
+var User = require('./models/Users.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -27,6 +30,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+
+//Call cookie
+
+app.get('/cookie', function(req, res) {
+       /*req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
+       res.send('You have visited this page ' + req.session.visitCount + ' times '+req.session.us);*/
+       res.json({comp:req.session.us,user:{id:req.session.id,username: req.session.name}});
+ });
+
+//Call cookie end
+
+//Init passport
+app.use(passport.initialize());
+app.use(passport.session());
+//configure passport
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use('/', routes);
 app.use('/api', users);
