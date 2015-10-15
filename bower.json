@@ -1,0 +1,25 @@
+{
+  "name": "scaffoldMeanHeroic",
+  "version": "0.0.1",
+  "homepage": "https://github.com/afvs1989/scaffoldMeanHeroic",
+  "authors": [
+    "Andres Valenzuela <afvs1989@gmail.com>"
+  ],
+  "description": "This is a Heroic Scaffold for the MEAN stack using MaterializeCSS",
+  "main": "views/index.ejs",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-materialize": "*"
+  }
+}

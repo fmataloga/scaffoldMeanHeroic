@@ -37,14 +37,16 @@
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       var session;
       $rootScope.titleWeb = "scaffoldMeanHeroic";
-      /*    Configuration Tables      */
+      /*    Configuration Tables     */
 
         $rootScope.configTable = {
-            itemsPerPage: 2,
-            fillLastPage: true
-          }
+              itemsPerPage: 10,
+              maxPages: 10,
+              fillLastPage: "yes"
+        };
 
-    /*    Configuration Tables      */
+    /*    Configuration Tables     */
+
       $http.get('/cookie').
         success(function(data) {
             if(!data.comp){

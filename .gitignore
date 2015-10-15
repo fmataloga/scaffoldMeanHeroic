@@ -2,6 +2,7 @@
 ### Example user template template
 ### Example user template
 node_modules/
+public/bower_components/
 
 # IntelliJ project files
 .idea

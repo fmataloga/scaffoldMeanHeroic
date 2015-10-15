@@ -20,6 +20,26 @@ var passport = require('passport');
       });
     });
 
+
+    // Bulk Insert Test
+
+    router.get('/test', function(req, res) {
+        var x;
+        for(x=1;x<=10000;x++){
+           Users.register(new Users({ username:"test"+x,rol: x }), "test", function(err, account) {
+            if (err) {
+              return res.status(500).json({err: err});
+            }
+            passport.authenticate('local')(req, res, function () {
+              return res.status(200).json({status: 'Registration successful!'});
+            });
+          });
+        }
+
+    });
+
+    //Bulk Insert Test
+
     router.post('/login', function(req, res, next) {
       req.session.us = false;
       passport.authenticate('local', function(err, user, info) {

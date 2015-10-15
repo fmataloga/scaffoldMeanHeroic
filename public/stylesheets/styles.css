@@ -4,3 +4,23 @@
 }
 
  
+#container-body{
+	padding-top: 2em;
+	margin: 0 auto;
+    max-width: 1500px;
+    width: 98%; 
+}
+
+.pagination li.active {
+    background-color: #9e9e9e;
+}
+
+.preloader-wrapper.max {
+	margin-top: 2em;
+    width: 80px;
+    height: 80px; 
+
+}
+
+.spinner-grey-only {
+  border-color: #9e9e9e; }

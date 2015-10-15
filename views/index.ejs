@@ -5,17 +5,17 @@
         
         <title >{{titleWeb}}</title>
         <!-- Materialize -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+        <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
         
         <!-- Custom Styles -->
         <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
         <!-- Materials icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="stylesheets/materialIcons/materialIcons.css" rel="stylesheet">
         <!-- Javascript Libraries -->
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-        <script type="text/javascript" src="https://code.angularjs.org/1.4.7/angular-route.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
         <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
         <script type="text/javascript" src="includes/concat.js"></script>
         <script type="text/javascript" src="includes/jquery-extras.js"></script>
@@ -25,7 +25,7 @@
         <div>
             <!-- Everything exept views inherit the login -->
             <section ng-show="route" ng-controller="bootstrapController" >
-                 <ul id="dropdown1" class="dropdown-content">
+                <ul id="dropdown1" class="dropdown-content">
                     <li><a href="#!">{{test}}</a></li>
                     <li><a href="#/userList">User List</a></li>
                     <li class="divider"></li>
@@ -44,8 +44,9 @@
                     </div>
                 </nav>
             </section>
-               
-            <ng-view id="container-body"></ng-view>
+            <div id="container-body">
+                <ng-view ></ng-view>
+            </div>
         </div>
     </body>
 </html>
