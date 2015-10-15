@@ -27,8 +27,8 @@
     })
     .when('/userList', {
       templateUrl: 'templates/login/userList.html',
-      controller: 'loginController',
-      access: {restricted: true,rol:1}
+      controller: 'userController',
+      access: {restricted: false,rol:1}
     })
     .otherwise({redirectTo: '/'});
 })
@@ -36,6 +36,15 @@
 .run(function ($rootScope, $location, $route, AuthService,$http) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       var session;
+      $rootScope.titleWeb = "scaffoldMeanHeroic";
+      /*    Configuration Tables      */
+
+        $rootScope.configTable = {
+            itemsPerPage: 2,
+            fillLastPage: true
+          }
+
+    /*    Configuration Tables      */
       $http.get('/cookie').
         success(function(data) {
             if(!data.comp){

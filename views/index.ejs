@@ -1,9 +1,9 @@
-<html>
+<html ng-app="appAngular">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
         
-        <title ng-controller="bootstrapController">Scaffold MEAN Heroic</title>
+        <title >{{titleWeb}}</title>
         <!-- Materialize -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
         
@@ -21,13 +21,13 @@
         <script type="text/javascript" src="includes/jquery-extras.js"></script>
         <script type="text/javascript" src="includes/angular-table.min.js"></script>
     </head>
-    <body ng-app="appAngular">
+    <body >
         <div>
             <!-- Everything exept views inherit the login -->
             <section ng-show="route" ng-controller="bootstrapController" >
                  <ul id="dropdown1" class="dropdown-content">
                     <li><a href="#!">{{test}}</a></li>
-                    <li><a href="#!">Menú 2</a></li>
+                    <li><a href="#/userList">User List</a></li>
                     <li class="divider"></li>
                     <li><a ng-click='logout()'>Logout</a></li>
                 </ul>

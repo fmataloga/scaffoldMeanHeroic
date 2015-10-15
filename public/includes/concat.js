@@ -27,8 +27,8 @@
     })
     .when('/userList', {
       templateUrl: 'templates/login/userList.html',
-      controller: 'loginController',
-      access: {restricted: true,rol:1}
+      controller: 'userController',
+      access: {restricted: false,rol:1}
     })
     .otherwise({redirectTo: '/'});
 })
@@ -36,6 +36,15 @@
 .run(function ($rootScope, $location, $route, AuthService,$http) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       var session;
+      $rootScope.titleWeb = "scaffoldMeanHeroic";
+      /*    Configuration Tables      */
+
+        $rootScope.configTable = {
+            itemsPerPage: 2,
+            fillLastPage: true
+          }
+
+    /*    Configuration Tables      */
       $http.get('/cookie').
         success(function(data) {
             if(!data.comp){
@@ -88,15 +97,15 @@
 
 }])
 .controller('loginController',
-  ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  ['$rootScope','$scope', '$location', 'AuthService',
+  function ($rootScope,$scope, $location, AuthService) {
     $scope.titleLoginController = "scaffoldMeanHeroic";
+    $rootScope.titleWeb = "Login";
     $scope.login = function () {
 
       // initial values
       $scope.error = false;
       $scope.disabled = true;
-      //$scope.remember = "hola";
       // call login from service
       AuthService.login($scope.loginForm.username, $scope.loginForm.password,$scope.remember)
         // handle success
@@ -142,11 +151,6 @@
         });
 
     };
-
-    $scope.config = {
-      itemsPerPage: 8,
-      fillLastPage: true
-    }
     
     $scope.personList = [
       {
@@ -235,6 +239,17 @@
 }])
 
 
+.controller('userController',
+  ['$rootScope','$scope', '$location', 'userService',
+  function ($rootScope,$scope, $location, userService) {
+    $scope.titleLoginController = "scaffoldMeanHeroic";
+    $rootScope.titleWeb = "Users";
+    userService.allUsers().then(function(data) {
+            $scope.usersList = data;
+    });
+        
+
+}])
 .factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
@@ -342,3 +357,36 @@
 
         return comun;
     })
+.factory('userService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    
+
+    // return available functions for use in controller
+    return ({
+      allUsers: allUsers
+    });
+
+
+     function allUsers () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/users')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+
+
+
+
+
+    }])

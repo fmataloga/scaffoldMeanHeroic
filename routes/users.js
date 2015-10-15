@@ -67,7 +67,6 @@ var passport = require('passport');
 router.get('/users', function(req, res, next) {
    Users.find(function(err, models){
         if(err){return next(err)}
-
         res.json(models)
     })
 });

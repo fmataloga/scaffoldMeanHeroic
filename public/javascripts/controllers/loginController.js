@@ -1,13 +1,13 @@
 .controller('loginController',
-  ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  ['$rootScope','$scope', '$location', 'AuthService',
+  function ($rootScope,$scope, $location, AuthService) {
     $scope.titleLoginController = "scaffoldMeanHeroic";
+    $rootScope.titleWeb = "Login";
     $scope.login = function () {
 
       // initial values
       $scope.error = false;
       $scope.disabled = true;
-      //$scope.remember = "hola";
       // call login from service
       AuthService.login($scope.loginForm.username, $scope.loginForm.password,$scope.remember)
         // handle success
@@ -53,11 +53,6 @@
         });
 
     };
-
-    $scope.config = {
-      itemsPerPage: 8,
-      fillLastPage: true
-    }
     
     $scope.personList = [
       {
