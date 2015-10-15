@@ -1,0 +1,13 @@
+<input type="text" ng-model="busqueda">
+<table class="table table-striped" at-table at-paginated at-list="personList | filter: busqueda" at-config="config">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td at-implicit at-sortable at-attribute="index" width="150" at-initial-sorting="asc"></td>
+      <td at-implicit at-sortable at-attribute="name"  width="250"></td>
+      <td at-implicit at-sortable at-attribute="email"></td>
+    </tr>
+  </tbody>
+</table>
+
+<at-pagination at-list="personList" at-config="config"></at-pagination>

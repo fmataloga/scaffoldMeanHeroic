@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute'])
+ angular.module('appAngular', ['ngRoute','angular-table'])
 
 .config(function ($routeProvider) {
   $routeProvider
@@ -25,9 +25,10 @@
       template: '<center><h2>Access Dennied!</h2></center>',
       access: {restricted: true,rol:1}
     })
-    .when('/two', {
-      template: '<h1>This is page two!</h1>',
-      access: {restricted: false}
+    .when('/userList', {
+      templateUrl: 'templates/login/userList.html',
+      controller: 'loginController',
+      access: {restricted: true,rol:1}
     })
     .otherwise({redirectTo: '/'});
 })
