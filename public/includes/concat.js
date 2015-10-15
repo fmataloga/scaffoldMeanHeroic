@@ -17,9 +17,9 @@
       access: {restricted: true,rol:1}
     })
     .when('/register', {
-      templateUrl: 'templates/login/loginIndex.html',
+      templateUrl: 'templates/login/loginRegister.html',
       controller: 'loginController',
-      access: {restricted: false,rol:1}
+      access: {restricted: true,rol:1}
     })
     .when('/accessDenied', {
       template: '<center><h2>Access Dennied!</h2></center>',
@@ -51,7 +51,8 @@
                 }
               }
             }
-            if(next.$$route.originalPath == '/login'){
+            //Menu Exeptions
+            if(next.$$route.originalPath == '/login' || next.$$route.originalPath == '/register' ){
               $rootScope.route = false;
             }else{
               $rootScope.route = true;
@@ -124,10 +125,10 @@
       $scope.disabled = true;
 
       // call register from service
-      AuthService.register($scope.registerForm.username, $scope.registerForm.password)
+      AuthService.register($scope.registerForm.username, $scope.registerForm.password,$scope.rol)
         // handle success
         .then(function () {
-          $location.path('/login');
+          $location.path('/');
           $scope.disabled = false;
           $scope.registerForm = {};
         })
@@ -222,13 +223,13 @@
 
     }
 
-    function register(username, password) {
+    function register(username, password,rol) {
 
       // create a new instance of deferred
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/register', {username: username, password: password})
+      $http.post('/api/register', {username: username, password: password,rol:rol})
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

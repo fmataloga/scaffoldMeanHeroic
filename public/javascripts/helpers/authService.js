@@ -73,13 +73,13 @@
 
     }
 
-    function register(username, password) {
+    function register(username, password,rol) {
 
       // create a new instance of deferred
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/register', {username: username, password: password})
+      $http.post('/api/register', {username: username, password: password,rol:rol})
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

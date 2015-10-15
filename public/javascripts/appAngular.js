@@ -17,9 +17,9 @@
       access: {restricted: true,rol:1}
     })
     .when('/register', {
-      templateUrl: 'templates/login/loginIndex.html',
+      templateUrl: 'templates/login/loginRegister.html',
       controller: 'loginController',
-      access: {restricted: false,rol:1}
+      access: {restricted: true,rol:1}
     })
     .when('/accessDenied', {
       template: '<center><h2>Access Dennied!</h2></center>',
@@ -51,7 +51,8 @@
                 }
               }
             }
-            if(next.$$route.originalPath == '/login'){
+            //Menu Exeptions
+            if(next.$$route.originalPath == '/login' || next.$$route.originalPath == '/register' ){
               $rootScope.route = false;
             }else{
               $rootScope.route = true;
