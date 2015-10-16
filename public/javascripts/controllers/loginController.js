@@ -45,11 +45,12 @@
           $scope.registerForm = {};
         })
         // handle error
-        .catch(function () {
+        .catch(function (err) {
           $scope.error = true;
-          $scope.errorMessage = "Something went wrong!";
+          $scope.errorMessage = "User already exists!";
           $scope.disabled = false;
           $scope.registerForm = {};
+          $scope.rol = "";
         });
 
     };

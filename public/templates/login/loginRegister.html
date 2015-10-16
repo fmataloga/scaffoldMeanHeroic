@@ -1,6 +1,8 @@
 <div class="col-md-4">
   <h1>Register</h2>
-  <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+  <div class="row">
+    <div ng-show="error" class="center-align white-text card-panel red accent-1">{{errorMessage}}</div>
+  </div>
   <form class="form" ng-submit="register()">
     <div class="form-group">
       <label>Username</label>
@@ -8,14 +10,14 @@
     </div>
     <div class="form-group">
       <label>Password</label>
-        <input type="password" class="form-control" name="password" ng-model="registerForm.password" required>
+      <input type="password" class="form-control" name="password" ng-model="registerForm.password" required>
     </div>
     <div class="form-group">
       <label>Rol</label>
-        <input type="text" class="form-control" name="rol" ng-model="rol" required>
+      <input type="text" class="form-control" name="rol" ng-model="rol" required>
     </div>
     <div>
-      <a class="btn grey darken-1" href="#login">Ir a Login</a>
+      <a class="btn grey darken-1" href="#login">Go to Login</a>
       <button type="submit" class="btn grey darken-1" ng-disabled="disabled">Register</button>
     </div>
   </form>

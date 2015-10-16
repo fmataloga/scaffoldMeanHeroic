@@ -28,7 +28,7 @@
     .when('/userList', {
       templateUrl: 'templates/login/userList.html',
       controller: 'userController',
-      access: {restricted: false,rol:1}
+      access: {restricted: false,rol:4}
     })
     .otherwise({redirectTo: '/'});
 })
@@ -37,7 +37,7 @@
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       var session;
       $rootScope.titleWeb = "scaffoldMeanHeroic";
-      /*    Configuration Tables     */
+    /*    Configuration Tables     */
 
         $rootScope.configTable = {
               itemsPerPage: 10,
@@ -46,6 +46,9 @@
         };
 
     /*    Configuration Tables     */
+    /*    Users Labels rols    */
+        $rootScope.labelRol = ["reader","edit","coordinator","admin"];
+    /*    Users Labels rols    */
 
       $http.get('/cookie').
         success(function(data) {
@@ -71,6 +74,10 @@
             }
             if (session == false && next.access.restricted == false ) {
               $location.path('/login');
+            }
+
+            if(next.$$route.originalPath == '/login' && session == true){
+              $location.path('/');
             }
                  
         });  
@@ -145,11 +152,12 @@
           $scope.registerForm = {};
         })
         // handle error
-        .catch(function () {
+        .catch(function (err) {
           $scope.error = true;
-          $scope.errorMessage = "Something went wrong!";
+          $scope.errorMessage = "User already exists!";
           $scope.disabled = false;
           $scope.registerForm = {};
+          $scope.rol = "";
         });
 
     };
