@@ -40,8 +40,14 @@
     /*    Configuration Tables     */
 
         $rootScope.configTable = {
-              itemsPerPage: 10,
+              itemsPerPage: 5,
               maxPages: 10,
+              fillLastPage: "yes"
+        };
+        //Cell Configuration
+        $rootScope.configTableMobile = {
+              itemsPerPage: 5,
+              maxPages: 3,
               fillLastPage: "yes"
         };
 

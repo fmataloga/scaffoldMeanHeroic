@@ -1,13 +1,13 @@
 
 <div class="input-field">
           <input placeholder="Buscar" id="search" ng-model="searchText" type="search">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+          <label for="search"><i class="fa fa-search"></i></label>
+          <i class="material-icons fa fa-times"></i>
 </div>
 
 
 
-<table class="bordered centered responsive-table" at-table at-paginated at-list="usersList | filter:filterText" at-config="configTable">
+<table class="striped" at-table at-paginated at-list="usersList | filter:filterText" at-config="configTable">
   <thead></thead>
   <tbody>
     <tr>
@@ -18,9 +18,18 @@
 </table>
 
 
-<div class="center-align" ng-show="!preloader">
+
+<div class="center-align show-on-medium-and-up hide-on-med-and-down" ng-show="!preloader">
 	<at-pagination at-list="usersList" at-config="configTable"></at-pagination>
 </div>
+
+
+<div class="center-align hide-on-med-and-up show-on-medium-and-down" ng-show="!preloader">
+  <at-pagination at-list="usersList" at-config="configTableMobile"></at-pagination>
+</div>
+
+
+
 
 <div class="center-align">
 <div class="preloader-wrapper max active" ng-show="preloader">
