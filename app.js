@@ -11,9 +11,9 @@ var localStrategy = require('passport-local' ).Strategy;
 var expressSession = require('express-session');
 
 mongoose.connect('mongodb://localhost/users');
-// user schema/model
+//MODELS CRUD BY SCAFFOLDMEANHEROIC
 var User = require('./models/Users.js');
-
+//ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -54,7 +54,7 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
+//API ROUTES CRUD BY SCAFFOLDMEANHEROIC
 app.use('/', routes);
 app.use('/api', users);
 

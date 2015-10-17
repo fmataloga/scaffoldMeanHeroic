@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var fss = require('fs');
 var fs = require('fs-extra');
+var replace = require("replace");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
@@ -35,8 +37,29 @@ router.get('/cruds', function(req, res, next) {
 	//Create models/..
 	var wsModels = fs.createOutputStream('models/'+crud+'.js');
 	wsModels.write("var mongoose = require('mongoose');\nvar "+crud+"Schema = new mongoose.Schema({\n"+fieldSchema+"\n});\nmongoose.model('"+crud+"', "+crud+"Schema);");
+  	//Add lines to app.js
+  	replace({
+	    regex: "//ROUTES CRUD BY SCAFFOLDMEANHEROIC",
+	    replacement: "//ROUTES CRUD BY SCAFFOLDMEANHEROIC\nvar route_"+crud+" = require('./routes/"+crud+"');",
+	    paths: ['app.js'],
+	    recursive: true,
+	    silent: true,
+	});
+	replace({
+	    regex: "//MODELS CRUD BY SCAFFOLDMEANHEROIC",
+	    replacement: "//MODELS CRUD BY SCAFFOLDMEANHEROIC\nvar model_"+crud+" = require('./models/"+crud+".js');",
+	    paths: ['app.js'],
+	    recursive: true,
+	    silent: true,
+	});
+	replace({
+	    regex: "//API ROUTES CRUD BY SCAFFOLDMEANHEROIC",
+	    replacement: "//API ROUTES CRUD BY SCAFFOLDMEANHEROIC\napp.use('/api',route_"+crud+");",
+	    paths: ['app.js'],
+	    recursive: true,
+	    silent: true,
+	});
   	res.status(200).json({status: 'Crud Successful!'});
 });
-
 
 module.exports = router;
