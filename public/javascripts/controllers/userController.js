@@ -5,9 +5,10 @@
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     userService.allUsers().then(function(data) {
-            $scope.usersList = data;
-            $scope.preloader = false;
+            $scope.usersList = data; 
+            $scope.preloader = false;      
     });
+    
 
     /*    Configuration Watch  Change Serch    */
           $scope.filterText = '';

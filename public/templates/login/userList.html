@@ -6,8 +6,7 @@
 </div>
 
 
-
-<table class="striped" at-table at-paginated at-list="usersList | filter:filterText" at-config="configTable">
+<table ng-hide="preloader" class="striped" at-table at-paginated at-list="usersList | filter:filterText" at-config="configTable">
   <thead></thead>
   <tbody>
     <tr>
@@ -19,20 +18,14 @@
 
 
 
-<div class="center-align show-on-medium-and-up hide-on-med-and-down" ng-show="!preloader">
+<div class="center-align" ng-hide="preloader">
 	<at-pagination at-list="usersList" at-config="configTable"></at-pagination>
 </div>
 
 
-<div class="center-align hide-on-med-and-up show-on-medium-and-down" ng-show="!preloader">
-  <at-pagination at-list="usersList" at-config="configTableMobile"></at-pagination>
-</div>
 
-
-
-
-<div class="center-align">
-<div class="preloader-wrapper max active" ng-show="preloader">
+<div class="center-align"  ng-hide="!preloader">
+<div class="preloader-wrapper max active">
     <div class="spinner-layer spinner-grey-only">
       <div class="circle-clipper left">
         <div class="circle"></div>

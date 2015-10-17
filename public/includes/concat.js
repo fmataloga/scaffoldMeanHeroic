@@ -33,24 +33,33 @@
     .otherwise({redirectTo: '/'});
 })
 
-.run(function ($rootScope, $location, $route, AuthService,$http) {
+.run(function ($rootScope, $location, $route, AuthService,$http,$window) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       var session;
       $rootScope.titleWeb = "scaffoldMeanHeroic";
+      //Window Width
+      var windowWidth = $window.innerWidth;
     /*    Configuration Tables     */
-
+        var itemsPerPage,maxPages;
+        if (windowWidth <= 600) {
+            //Mobile
+            itemsPerPage = 5;
+            maxPages = 3;
+        } else if (windowWidth <= 992) {
+            //Tablet
+            itemsPerPage = 5;
+            maxPages = 5;
+        } else {
+            //PC
+            itemsPerPage = 5;
+            maxPages = 10;
+        }
         $rootScope.configTable = {
-              itemsPerPage: 5,
-              maxPages: 10,
+              itemsPerPage: itemsPerPage,
+              maxPages: maxPages,
               fillLastPage: "yes"
         };
-        //Cell Configuration
-        $rootScope.configTableMobile = {
-              itemsPerPage: 5,
-              maxPages: 3,
-              fillLastPage: "yes"
-        };
-
+        
     /*    Configuration Tables     */
     /*    Users Labels rols    */
         $rootScope.labelRol = ["reader","edit","coordinator","admin"];
@@ -262,9 +271,10 @@
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     userService.allUsers().then(function(data) {
-            $scope.usersList = data;
-            $scope.preloader = false;
+            $scope.usersList = data; 
+            $scope.preloader = false;      
     });
+    
 
     /*    Configuration Watch  Change Serch    */
           $scope.filterText = '';
