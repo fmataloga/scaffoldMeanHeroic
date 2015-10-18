@@ -4,70 +4,83 @@
         <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title >{{titleWeb}}</title>
-        <!-- Materialize -->
-        <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
-        
         <!-- Custom Styles -->
         <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
         <!-- Materials icons -->
-        <link href="stylesheets/materialIcons/materialIcons.css" rel="stylesheet">
         <link href="stylesheets/fontAwesome/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <!-- Javascript Libraries -->
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-        <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
         <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
         <script type="text/javascript" src="includes/concat.js"></script>
         <script type="text/javascript" src="includes/jquery-extras.js"></script>
         <script type="text/javascript" src="includes/angular-table.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     </head>
     <body >
         <div>
             <!-- Everything exept views inherit the login -->
             
             <section ng-show="route" ng-controller="bootstrapController">
-
-                <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="#!">{{test}}</a></li>
-                    <li><a href="#/userList">User List</a></li>
-                    <li class="divider"></li>
-                    <li><a ng-click='logout()'>Logout</a></li>
-                </ul>
-                <ul id="dropdown2" class="dropdown-content">
-                    <li><a href="#!">{{test}}</a></li>
-                    <li><a href="#/userList">User List</a></li>
-                    <li class="divider"></li>
-                    <li><a ng-click='logout()'>Logout</a></li>
-                </ul>
-
-                <nav class="grey darken-3 z-depth-2">
-                    <div class="nav-wrapper">
-                        <a href="#!" class="brand-logo">{{logo}}</a>
-                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars"></i></a>
-
-                        <ul class="right hide-on-med-and-down">
-                            <li ng-if="user.rol > 2"><a href="sass.html">Prueba Permisos</a></li>
-                            <li><a href="sass.html">Sass</a></li>
-                            <li><a href="badges.html">Components</a></li>
-                            <!-- Dropdown Trigger -->
-                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><span class="fa fa-user fa2x"></span> {{user.username}}<i class="fa fa-caret-down right"></i></a></li>
-                        </ul>
-
-                        <ul class="side-nav" id="mobile-demo">
-                            <li ng-if="user.rol > 2"><a href="sass.html">Prueba Permisos</a></li>
-                            <li><a href="sass.html">Sass</a></li>
-                            <li><a href="badges.html">Components</a></li>
-                            <!-- Dropdown Trigger -->
-                            <li><a class="dropdown-button" href="#!" data-activates="dropdown2">{{user.username}}<i class="fa fa-caret-down right"></i></a></li>
-                        </ul>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">{{logo}}</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                                <li><a >Link</a></li>
+                                <li class="dropdown">
+                                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Link</a></li>
+                                <li class="dropdown">
+                                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#/">{{test}}</a></li>
+                                        <li><a ng-if="user.rol > 2">Prueba Permisos</a></li>
+                                        <li><a href="#/userList">User List</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a ng-click='logout()'>LogOut</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                        
+                    </section>
+                    <div id="container-body">
+                        <ng-view ></ng-view>
                     </div>
-                </nav>
-            </section>
-            
-            <div id="container-body">
-                <ng-view ></ng-view>
-            </div>
-        </div>
-    </body>
-</html>
+                </div>
+            </body>
+        </html>

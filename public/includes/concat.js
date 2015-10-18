@@ -81,6 +81,7 @@
                 }
               }
             }
+
             //Menu Exeptions
             if(next.$$route.originalPath == '/login' || next.$$route.originalPath == '/register' ){
               $rootScope.route = false;
