@@ -1,51 +1,28 @@
-<link rel="stylesheet" type="text/css" href="../../stylesheets/stylesLogin.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<div class="row">
-	<h2 class="grey-text text-darken-1 center ">{{titleLoginController}}</h2>
-</div>
-<div class="row">
-	<form class=" grey lighten-2 col s12 m8 offset-m2 l4 offset-l4 z-depth-4 card-panel login-form " ng-submit="login()">
-		<div class="row">
-			<div class="input-field col s12 center">
-				<img src="images/default-user.png" alt="" class="circle responsive-img valign profile-image-login">
+<link rel="stylesheet" type="text/css" href="../../stylesheets/login.css">
+<login>
+	<div class="card card-container">
+		<img class="profile-img-card" src="images/default-user.png" />
+		<p class="profile-name-card">{{titleLoginController}}</p>
+		<form class="form-signin" ng-submit="login()">
+			<div class="alert alert-danger" ng-show="error">{{errorMessage}}</div>
+			<input ng-model="loginForm.username" type="text" class="form-control" placeholder="Username" required autofocus>
+			<input ng-model="loginForm.password" type="password" class="form-control" placeholder="Password" required>
+			<div class="checkbox">
+				<label>
+					<input ng-model="remember" type="checkbox" value="remember-me"> Remember me
+				</label>
 			</div>
+			<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+		</form>
+		<!-- /form -->
+		<div class="text-center">
+			<a href="#/register">
+                Register
+        </a> |
+			<a href="#">
+                Forgot the password?
+        </a>
 		</div>
-		<div class="row">
-			
-			<div class="login input-field col s12">
-				<i class="material-icons prefix fa fa-user"></i>
-				<input id="icon_prefix" type="text" class="validate" name="username" ng-model="loginForm.username" required>
-				<label for="icon_prefix">Username</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="login input-field col s12">
-				<i class="material-icons prefix fa fa-lock"></i>
-				<input id="password" type="password" name="password" ng-model="loginForm.password" required>
-				<label for="password" class="">Password</label>
-			</div>
-		</div>
-		<div class="row">
-			<div ng-show="error" class="center-align white-text card-panel red accent-1">{{errorMessage}}</div>
-		</div>
-
-			
-				<input  type="checkbox" id="remember-me" ng-model="remember">
-				<label for="remember-me">Remember me</label>
-			
-		<div class="row">
-			<div class="input-field col s12">
-				<button type="submit" class="grey-text text-darken-1 btn waves-effect indigo lighten-5 col s12" ng-disabled="disabled">Login</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6 m6 l6">
-				<p class="margin medium-small"><a href="#/register" class="grey-text text-darken-1">Register Now!</a></p>
-			</div>
-			<div class="input-field col s6 m6 l6">
-				<p class="margin right-align medium-small"><a href="#" class="grey-text text-darken-1">Forgot password ?</a></p>
-			</div>
-		</div>
-	</form>
-</div>
-</div>
+	</div>
+	<!-- /card-container -->
+</login>

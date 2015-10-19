@@ -1,26 +1,82 @@
-.profile-image-login{
-    width: 150px;
-    height: 150px !important;
+/*Search Input*/
+
+.left-inner-addon {
+	position: relative;
 }
 
- 
-#container-body{
-	padding-top: 2em;
-	margin: 0 auto;
-    max-width: 1500px;
-    width: 98%; 
+.left-inner-addon input {
+	padding-left: 30px;
 }
 
-.pagination li.active {
-    background-color: #9e9e9e;
+.left-inner-addon i {
+	position: absolute;
+	padding: 10px 12px;
+	pointer-events: none;
 }
 
-.preloader-wrapper.max {
-	margin-top: 2em;
-    width: 80px;
-    height: 80px; 
-
+.right-inner-addon {
+	position: relative;
 }
 
-.spinner-grey-only {
-  border-color: #9e9e9e; }
+.right-inner-addon input {
+	padding-right: 30px;
+}
+
+.right-inner-addon i {
+	position: absolute;
+	right: 0px;
+	padding: 10px 12px;
+	pointer-events: none;
+}
+
+
+/* /Search Input */
+
+
+/*Spinner*/
+
+.position-spinner {
+	margin-top: 0.5em;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+	color: #715A5A;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+	z-index: 3;
+	color: #715A5A;
+	background-color: #eee;
+	border-color: #ddd;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+	z-index: 2;
+	color: #fff;
+	cursor: default;
+	background-color: #715A5A;
+	border-color: #715A5A;
+}
+
+
+/* /Spinner */
+
+
+/* move the content to a lower place on mobile screens */
+
+@media screen and (max-width: 600px) {
+	.mobile-content {
+		padding-bottom: 9px;
+		margin: 120px 0 20px;
+		border-bottom: 1px solid #eee;
+	}
+}
