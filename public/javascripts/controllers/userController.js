@@ -9,15 +9,13 @@
             $scope.preloader = false;      
     });
 
-
-     $scope.items = ['Felix', 'Andres', 'Juan'];
     /*  Modal*/
 
     /*  Create    */
      $scope.open = function (size,item) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'templates/users/modalUserEdit.html',
+          templateUrl: 'templates/users/modalUserCreate.html',
           controller: 'modalUserCreateController',
           size: size,
           resolve: {
@@ -27,32 +25,47 @@
           }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-          $scope.selected = selectedItem;
-        }, function () {
-          console.log('Modal dismissed at: ' + selectedItem);
+        modalInstance.result.then(function(data) {
+          /*if(!id) {
+                VendedoresModel.getAll().then(function (vendedores) {
+                     listar.lista = vendedores;
+                });
+               
+            } else {
+                    var idx = listar.lista.indexOf(id);
+
+                    if(idx!=-1) {
+                        listar.lista[idx] = vendedor;
+                     }
+                     
+
+             
+            } */ 
+          console.log(data);             
         });
     };
 
     /*  Create    */
     /*  Delete    */
-    $scope.openDelete = function (size,user) {
+    $scope.openDelete = function (size,item) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'templates/users/modalUserEdit.html',
-          controller: 'modalUserCreateController',
+          templateUrl: 'templates/users/modalUserDelete.html',
+          controller: 'modalUserDeleteController',
           size: size,
           resolve: {
-            user: function () {
-              return user;
+            item: function () {
+              return item;
             }
           }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-          $scope.selected = selectedItem;
-        }, function () {
-          $log.info('Modal dismissed at: ' + new Date());
+        modalInstance.result.then(function(data) {
+          /*var idx = listar.lista.indexOf(vendedor);
+          listar.lista.splice(idx, 1);*/ 
+          var idx = $scope.usersList.indexOf(data); 
+          $scope.usersList.splice(idx, 1);
+          console.log(data);             
         });
     };
 

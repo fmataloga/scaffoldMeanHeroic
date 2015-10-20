@@ -119,6 +119,146 @@
  		});
  	});
  })
+.factory('AuthService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    // create user variable
+    var user = null;
+
+    // return available functions for use in controller
+    return ({
+      isLoggedIn: isLoggedIn,
+      login: login,
+      logout: logout,
+      register: register
+    });
+
+    function isLoggedIn() {
+        if(user) {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+
+    function login(username, password,check) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/login', {username: username, password: password,check: check})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            user = true;
+            deferred.resolve();
+          } else {
+            user = false;
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function logout() {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a get request to the server
+      $http.get('/api/logout')
+        // handle success
+        .success(function (data) {
+          user = false;
+          deferred.resolve();
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function register(username, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/register', {username: username, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+}])
+.factory('loginFactorie', function($http) {
+        var comun = {};
+
+
+        return comun;
+    })
+.factory('userService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    
+
+    // return available functions for use in controller
+    return ({
+      allUsers: allUsers
+    });
+
+
+     function allUsers () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/users')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+
+
+
+
+
+    }])
 .controller('bootstrapController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -298,6 +438,21 @@
 
 }])
 
+.controller('modalUserDeleteController',
+  ['$scope', '$modalInstance', 'item',
+  function ($scope, $modalInstance, item) {
+    
+  $scope.item = item;
+  $scope.ok = function () {
+    $modalInstance.close($scope.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+    
+
+}])
 .controller('userController',
   ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
   function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
@@ -309,15 +464,13 @@
             $scope.preloader = false;      
     });
 
-
-     $scope.items = ['Felix', 'Andres', 'Juan'];
     /*  Modal*/
 
     /*  Create    */
      $scope.open = function (size,item) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'templates/users/modalUserEdit.html',
+          templateUrl: 'templates/users/modalUserCreate.html',
           controller: 'modalUserCreateController',
           size: size,
           resolve: {
@@ -327,32 +480,47 @@
           }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-          $scope.selected = selectedItem;
-        }, function () {
-          console.log('Modal dismissed at: ' + selectedItem);
+        modalInstance.result.then(function(data) {
+          /*if(!id) {
+                VendedoresModel.getAll().then(function (vendedores) {
+                     listar.lista = vendedores;
+                });
+               
+            } else {
+                    var idx = listar.lista.indexOf(id);
+
+                    if(idx!=-1) {
+                        listar.lista[idx] = vendedor;
+                     }
+                     
+
+             
+            } */ 
+          console.log(data);             
         });
     };
 
     /*  Create    */
     /*  Delete    */
-    $scope.openDelete = function (size,user) {
+    $scope.openDelete = function (size,item) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'templates/users/modalUserEdit.html',
-          controller: 'modalUserCreateController',
+          templateUrl: 'templates/users/modalUserDelete.html',
+          controller: 'modalUserDeleteController',
           size: size,
           resolve: {
-            user: function () {
-              return user;
+            item: function () {
+              return item;
             }
           }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-          $scope.selected = selectedItem;
-        }, function () {
-          $log.info('Modal dismissed at: ' + new Date());
+        modalInstance.result.then(function(data) {
+          /*var idx = listar.lista.indexOf(vendedor);
+          listar.lista.splice(idx, 1);*/ 
+          var idx = $scope.usersList.indexOf(data); 
+          $scope.usersList.splice(idx, 1);
+          console.log(data);             
         });
     };
 
@@ -377,143 +545,3 @@
         
 
 }])
-.factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    // create user variable
-    var user = null;
-
-    // return available functions for use in controller
-    return ({
-      isLoggedIn: isLoggedIn,
-      login: login,
-      logout: logout,
-      register: register
-    });
-
-    function isLoggedIn() {
-        if(user) {
-          return true;
-        } else {
-          return false;
-        }
-    }
-
-
-    function login(username, password,check) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/login', {username: username, password: password,check: check})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            user = true;
-            deferred.resolve();
-          } else {
-            user = false;
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function logout() {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a get request to the server
-      $http.get('/api/logout')
-        // handle success
-        .success(function (data) {
-          user = false;
-          deferred.resolve();
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function register(username, password,rol) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/register', {username: username, password: password,rol:rol})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-}])
-.factory('loginFactorie', function($http) {
-        var comun = {};
-
-
-        return comun;
-    })
-.factory('userService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    
-
-    // return available functions for use in controller
-    return ({
-      allUsers: allUsers
-    });
-
-
-     function allUsers () {
-        var defered = $q.defer();
-        var promise = defered.promise;
-
-        $http.get('/api/users')
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-
-
-
-
-
-    }])

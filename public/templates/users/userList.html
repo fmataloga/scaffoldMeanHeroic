@@ -12,8 +12,8 @@
 			<td at-implicit at-sortable at-attribute="Usuario" width="150" at-initial-sorting="desc">{{item.username}}</td>
 			<td at-implicit at-sortable at-attribute="Rol" width="250">{{labelRol[item.rol-1]}}</td>
 			<td at-implicit at-attribute="Acción" width="250">
-				<button type="button" class="btn btn-default" ng-click="open('lg',item.username)"  ><i class="fa fa-pencil-square-o"></i></button>
-				<button type="button" class="btn btn-default" ng-click="openDelete('lg')" ><i class="fa fa-trash-o"></i></button>
+				<button type="button" class="btn btn-default" ng-click="open('lg',item)"  ><i class="fa fa-pencil-square-o"></i></button>
+				<button type="button" class="btn btn-default" ng-click="openDelete('lg',item)" ><i class="fa fa-trash-o"></i></button>
 			</td>
 		</tr>
 	</tbody>
