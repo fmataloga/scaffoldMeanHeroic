@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap'])
 
  .config(function ($routeProvider) {
  	$routeProvider
