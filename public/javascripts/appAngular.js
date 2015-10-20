@@ -41,7 +41,7 @@
  			}
  		})
  		.when('/userList', {
- 			templateUrl: 'templates/login/userList.html',
+ 			templateUrl: 'templates/users/userList.html',
  			controller: 'userController',
  			access: {
  				restricted: false,

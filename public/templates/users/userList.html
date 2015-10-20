@@ -12,8 +12,8 @@
 			<td at-implicit at-sortable at-attribute="Usuario" width="150" at-initial-sorting="desc">{{item.username}}</td>
 			<td at-implicit at-sortable at-attribute="Rol" width="250">{{labelRol[item.rol-1]}}</td>
 			<td at-implicit at-attribute="Acción" width="250">
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o"></i></button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash-o"></i></button>
+				<button type="button" class="btn btn-default" ng-click="open('lg')"  ><i class="fa fa-pencil-square-o"></i></button>
+				<button type="button" class="btn btn-default" ng-click="openDelete('lg')" ><i class="fa fa-trash-o"></i></button>
 			</td>
 		</tr>
 	</tbody>
@@ -27,26 +27,4 @@
 
 <div class="row col-lg-offset-6 col-md-offset-6 col-xs-offset-6" ng-hide="!preloader">
 	<i class="fa fa-spinner fa-spin fa-5x position-spinner"></i>
-</div>
-
-<!-- Modal Delete -->
-<div id="modalDelete" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
-			</div>
-			<div class="modal-body">
-				<p>Are you sure remove element?.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Remove</button>
-				<button type="button" data-dismiss="modal" class="btn">Cancel</button>
-			</div>
-		</div>
-
-	</div>
 </div>

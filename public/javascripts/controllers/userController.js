@@ -1,6 +1,6 @@
 .controller('userController',
-  ['$rootScope','$scope', '$location', 'userService','$timeout',
-  function ($rootScope,$scope, $location, userService,$timeout) {
+  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
+  function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
     $scope.titleLoginController = "scaffoldMeanHeroic";
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
@@ -8,6 +8,57 @@
             $scope.usersList = data; 
             $scope.preloader = false;      
     });
+
+
+     $scope.items = ['Felix', 'Andres', 'Juan'];
+    /*  Modal*/
+
+    /*  Create    */
+     $scope.open = function (size) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/users/modalUserEdit.html',
+          controller: 'modalUserCreateController',
+          size: size,
+          resolve: {
+            items: function () {
+              return $scope.items;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.selected = selectedItem;
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    /*  Create    */
+    /*  Delete    */
+    $scope.openDelete = function (size) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/users/modalUserEdit.html',
+          controller: 'modalUserCreateController',
+          size: size,
+          resolve: {
+            items: function () {
+              return $scope.items;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.selected = selectedItem;
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    /*  Delete    */
+
+    /*  Modal*/
     
 
     /*    Configuration Watch  Change Serch    */
