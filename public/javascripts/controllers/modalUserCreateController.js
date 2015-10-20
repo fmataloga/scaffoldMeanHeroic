@@ -1,14 +1,10 @@
 .controller('modalUserCreateController',
-  ['$scope', '$modalInstance', 'items',
-  function ($scope, $modalInstance, items) {
+  ['$scope', '$modalInstance', 'item',
+  function ($scope, $modalInstance, item) {
     
-     $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
+  $scope.item = item;
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
+    $modalInstance.close($scope.item);
   };
 
   $scope.cancel = function () {

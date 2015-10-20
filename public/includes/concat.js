@@ -283,16 +283,12 @@
 
 }])
 .controller('modalUserCreateController',
-  ['$scope', '$modalInstance', 'items',
-  function ($scope, $modalInstance, items) {
+  ['$scope', '$modalInstance', 'item',
+  function ($scope, $modalInstance, item) {
     
-     $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
+  $scope.item = item;
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
+    $modalInstance.close($scope.item);
   };
 
   $scope.cancel = function () {
@@ -318,15 +314,15 @@
     /*  Modal*/
 
     /*  Create    */
-     $scope.open = function (size) {
+     $scope.open = function (size,item) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'templates/users/modalUserEdit.html',
           controller: 'modalUserCreateController',
           size: size,
           resolve: {
-            items: function () {
-              return $scope.items;
+            item: function () {
+              return item;
             }
           }
         });
@@ -334,21 +330,21 @@
         modalInstance.result.then(function (selectedItem) {
           $scope.selected = selectedItem;
         }, function () {
-          $log.info('Modal dismissed at: ' + new Date());
+          console.log('Modal dismissed at: ' + selectedItem);
         });
     };
 
     /*  Create    */
     /*  Delete    */
-    $scope.openDelete = function (size) {
+    $scope.openDelete = function (size,user) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'templates/users/modalUserEdit.html',
           controller: 'modalUserCreateController',
           size: size,
           resolve: {
-            items: function () {
-              return $scope.items;
+            user: function () {
+              return user;
             }
           }
         });
