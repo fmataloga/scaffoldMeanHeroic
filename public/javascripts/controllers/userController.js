@@ -4,6 +4,7 @@
     $scope.titleLoginController = "scaffoldMeanHeroic";
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
+    $scope.msjAlert = false;
     userService.allUsers().then(function(data) {
             $scope.usersList = data; 
             $scope.preloader = false;      
@@ -60,19 +61,28 @@
           }
         });
 
-        modalInstance.result.then(function(data) {
-          /*var idx = listar.lista.indexOf(vendedor);
-          listar.lista.splice(idx, 1);*/ 
+        modalInstance.result.then(function(data) { 
           var idx = $scope.usersList.indexOf(data); 
           $scope.usersList.splice(idx, 1);
-          console.log(data);             
+          userService
+            .deleteUser(data._id)
+            .then(function(result) {
+                $scope.msjAlert = true;
+                $scope.alert = "success";
+                $scope.message = result.message;
+            })
+            .catch(function(err) {
+                //error
+                $scope.msjAlert = true;
+                $scope.alert = "danger";
+                $scope.message = "Error "+err;
+            })            
         });
     };
 
     /*  Delete    */
 
     /*  Modal*/
-    
 
     /*    Configuration Watch  Change Serch    */
           $scope.filterText = '';

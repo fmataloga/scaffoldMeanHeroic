@@ -1,14 +1,86 @@
+<style type="text/css" media="screen">
+	.modal-dialog {
+		width: 550px;
+	}
+
+	div.confirmacion > input[type="checkbox"] {
+		text-align: center;
+		margin: initial;
+	}
+
+	div.confirmacion > label {
+		display: inline-block;
+		margin-left: 10px;
+		color: rgb(60, 60, 60);
+	}
+
+	label {
+		font-weight: normal;
+	}
+
+	.duplicado-nombre {
+		font-weight: bold;
+	}
+	.warning{
+		color : red;	
+	}
+
+	.success{
+		color : blue;	
+	}
+	.bold{
+		text : bold;
+	}
+
+</style>
 <div class="modal-header">
-    <h3 class="modal-title">I'm a modal!</h3>
+	<div class="pull-right">
+		<button type="button" class="close pull-right" ng-click="$dismiss()">&times;</button>
+		<span ng-show="loading"><i style="margin-top:5px" class="pull-right fa fa-spinner fa-spin fa-lg"></i>
+		</span>
+		<br>
+	</div>
+	<div>
+		<h3 class="modal-title" ng-if="!item._id">Create User</h3>
+		<h3 class="modal-title" ng-if="item._id">Edit User</h3>
+
+	</div>
 </div>
-<div class="modal-body">
-    <ul>
-        <li>
-            {{ item }}
-        </li>
-    </ul>
+
+
+<div>
+	<form name="myForm" ng-submit="save()" method="POST">
+		<div class="modal-body">
+			<fieldset>
+
+				<div class="row">
+			        <div class="form-group col-md-8">
+						<label for="username" class="bold">Username</label>
+						<input name="username" type="text"class="form-control" ng-model="item.username">
+					</div>				
+				</div>
+				<div class="row" ng-if="!item._id">
+			        <div class="form-group col-md-8">
+						<label for="password" class="bold">Password</label>
+						<input name="password" type="password" class="form-control" >
+					</div>				
+				</div>
+				<div class="row">
+			        <div class="form-group col-md-8">
+						<label for="rol" class="bold">Rol</label>
+						<input name="rol" type="text"class="form-control" ng-model="item.rol">
+					</div>				
+				</div>
+
+			</fieldset>
+		</div>
+		<div class="modal-footer">
+			<button ng-disabled=" myForm.$invalid || myForm.$pristine" class="btn btn-primary pull-right" type="submit" title="Registrar">
+				<span ng-if="create.saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
+				<span>Register</span>
+			</button>
+		</div>
+	</form>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-</div>
+
+

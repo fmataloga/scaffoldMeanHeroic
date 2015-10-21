@@ -167,7 +167,7 @@ router.delete('/users/:id', function (req, res) {
 			res.send(err)
 		}
 		res.json({
-			message: 'El usuario se elimino satisfactoriamente!'
+			message: 'Record deleted successfully'
 		});
 	})
 })

@@ -17,9 +17,9 @@ router.get('/cruds', function(req, res, next) {
 	var array = inputs.split(',');
 	for (var i = 0; i < array.length; i++) {
 		if(i < array.length){
-			fields += '     data.campo'+(i+1)+' = '+'req.body.'+array[i]+';\n';
+			fields += '     data.field'+(i+1)+' = '+'req.body.'+array[i]+';\n';
 		}else{
-			fields += '     data.campo'+(i+1)+' = '+'req.body.'+array[i]+';';
+			fields += '     data.field'+(i+1)+' = '+'req.body.'+array[i]+';';
 		}		
 	}
 	var inputsType = "String,String,String,Number";

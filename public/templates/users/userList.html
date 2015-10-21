@@ -1,3 +1,6 @@
+<button ng-click="open('lg')" class="btn btn-default"><i class="fa fa-plus"></i> Create New</button>
+<div class="alert alert-{{alert}}" ng-show="msjAlert" >{{message}}</div>
+
 <div class="right-inner-addon">
 	<i class="fa fa-search"></i>
 	<input ng-model="searchText" type="search" class="form-control" placeholder="Search" />
@@ -9,7 +12,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td at-implicit at-sortable at-attribute="Usuario" width="150" at-initial-sorting="desc">{{item.username}}</td>
+			<td at-implicit at-sortable at-attribute="Usuario" width="150" at-initial-sorting="asc">{{item.username}}</td>
 			<td at-implicit at-sortable at-attribute="Rol" width="250">{{labelRol[item.rol-1]}}</td>
 			<td at-implicit at-attribute="Acción" width="250">
 				<button type="button" class="btn btn-default" ng-click="open('lg',item)"  ><i class="fa fa-pencil-square-o"></i></button>
@@ -28,3 +31,4 @@
 <div class="row col-lg-offset-6 col-md-offset-6 col-xs-offset-6" ng-hide="!preloader">
 	<i class="fa fa-spinner fa-spin fa-5x position-spinner"></i>
 </div>
+

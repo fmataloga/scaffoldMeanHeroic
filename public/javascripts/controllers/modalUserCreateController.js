@@ -1,10 +1,11 @@
 .controller('modalUserCreateController',
-  ['$scope', '$modalInstance', 'item',
-  function ($scope, $modalInstance, item) {
+  ['$scope', '$modalInstance', 'item','AuthService',
+  function ($scope, $modalInstance, item,AuthService) {
     
   $scope.item = item;
-  $scope.ok = function () {
-    $modalInstance.close($scope.item);
+  $scope.save = function (username,password,rol) {
+  	AuthService.register(item.username,item.password,item.rol);
+    $modalInstance.close(item);
   };
 
   $scope.cancel = function () {
