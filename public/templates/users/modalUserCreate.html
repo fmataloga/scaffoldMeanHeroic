@@ -1,6 +1,6 @@
 <style type="text/css" media="screen">
 	.modal-dialog {
-		width: 550px;
+		width: 650px;
 	}
 
 	div.confirmacion > input[type="checkbox"] {
@@ -56,26 +56,34 @@
 				<div class="row">
 			        <div class="form-group col-md-8">
 						<label for="username" class="bold">Username</label>
-						<input name="username" type="text"class="form-control" ng-model="item.username">
+						<input required name="username" type="text"class="form-control" ng-model="item.username">
 					</div>				
 				</div>
-				<div class="row" ng-if="!item._id">
+				<div class="row" ng-if="!item._id && !item.flat">
 			        <div class="form-group col-md-8">
 						<label for="password" class="bold">Password</label>
-						<input name="password" type="password" class="form-control" >
+						<input required name="password" type="password" class="form-control" ng-model="item.password">
+						<label for="password" class="bold">Password Confirm</label>
+						<input required name="password" type="password" class="form-control" ng-model="passwordConfirm">
+					</div>				
+				</div>
+				<div class="row" ng-if="item._id">
+			        <div class="form-group col-md-8" ng-show="false">
+						<label for="password" class="bold">Password</label>
+						<input  name="password" type="password" class="form-control" ng-model="item.password">
 					</div>				
 				</div>
 				<div class="row">
 			        <div class="form-group col-md-8">
 						<label for="rol" class="bold">Rol</label>
-						<input name="rol" type="text"class="form-control" ng-model="item.rol">
+						<input required name="rol" type="text"class="form-control" ng-model="item.rol">
 					</div>				
 				</div>
 
 			</fieldset>
 		</div>
 		<div class="modal-footer">
-			<button ng-disabled=" myForm.$invalid || myForm.$pristine" class="btn btn-primary pull-right" type="submit" title="Registrar">
+			<button ng-disabled="myForm.$invalid || myForm.$pristine" class="btn btn-primary pull-right" type="submit" title="Register">
 				<span ng-if="create.saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
 				<span>Register</span>
 			</button>

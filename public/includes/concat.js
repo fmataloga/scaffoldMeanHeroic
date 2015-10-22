@@ -287,8 +287,12 @@
   function ($scope, $modalInstance, item,AuthService) {
     
   $scope.item = item;
-  $scope.save = function (username,password,rol) {
-  	AuthService.register(item.username,item.password,item.rol);
+  $scope.save = function () {
+  	//AuthService.register(item.username,item.password,item.rol);
+    if(!item){
+      item = {username:$scope.item.username,rol:$scope.item.rol,flat:true};
+      AuthService.register($scope.item.username,$scope.item.password,$scope.item.rol);
+    }
     $modalInstance.close(item);
   };
 
@@ -343,22 +347,10 @@
         });
 
         modalInstance.result.then(function(data) {
-          /*if(!id) {
-                VendedoresModel.getAll().then(function (vendedores) {
-                     listar.lista = vendedores;
-                });
-               
-            } else {
-                    var idx = listar.lista.indexOf(id);
-
-                    if(idx!=-1) {
-                        listar.lista[idx] = vendedor;
-                     }
-                     
-
-             
-            } */ 
-          console.log(data);             
+          if(!data._id) {
+                $scope.usersList.push(data);   
+            } 
+            console.log(data);        
         });
     };
 

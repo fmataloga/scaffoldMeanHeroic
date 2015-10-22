@@ -27,22 +27,10 @@
         });
 
         modalInstance.result.then(function(data) {
-          /*if(!id) {
-                VendedoresModel.getAll().then(function (vendedores) {
-                     listar.lista = vendedores;
-                });
-               
-            } else {
-                    var idx = listar.lista.indexOf(id);
-
-                    if(idx!=-1) {
-                        listar.lista[idx] = vendedor;
-                     }
-                     
-
-             
-            } */ 
-          console.log(data);             
+          if(!data._id) {
+                $scope.usersList.push(data);   
+            } 
+            console.log(data);        
         });
     };
 
