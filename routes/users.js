@@ -27,6 +27,22 @@ router.post('/register', function (req, res) {
 	});
 });
 
+router.put('/register/:id', function (req, res) {
+	Users.findById(req.params.id, function (err, user) {
+		user.username = req.body.username;
+		user.password = req.body.password;
+		user.rol = req.body.rol;
+		user.save(function (err) {
+			if (err) {
+				res.send(err)
+			}
+
+			res.json(user);
+		})
+	})
+	
+});
+
 
 // Bulk Insert Test
 
@@ -140,16 +156,9 @@ router.post('/users', function (req, res, next) {
 //PUT - Update users
 router.put('/users/:id', function (req, res) {
 	Users.findById(req.params.id, function (err, user) {
-		user.firstName = req.body.firstName;
-		user.lastName = req.body.lastName;
-		user.country = req.body.country;
-		user.city = req.body.city;
-		user.age = req.body.age;
-		user.height = req.body.height;
-		user.tipo = req.body.tipo;
-		user.usuario = req.body.usuario;
-		user.password = passwordHash.generate(req.body.password);
-
+		user.username = req.body.username;
+		user.password = req.body.password;
+		user.rol = req.body.rol;
 		user.save(function (err) {
 			if (err) {
 				res.send(err)

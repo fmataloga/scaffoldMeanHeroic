@@ -29,13 +29,13 @@
 
         modalInstance.result.then(function(data) {
           if(!data._id) {
+         
                 $scope.usersList.push(data); 
                 $scope.usersTemp = angular.copy($scope.usersList);
-            } 
-            console.log(data);        
+            }      
         },function(result){
           $scope.usersList = $scope.usersTemp;
-          $scope.usersTemp = angular.copy($scope.usersList);
+          $scope.usersTemp = angular.copy($scope.usersList);  
         });
     };
 
@@ -78,7 +78,7 @@
     /*  Modal*/
 
     /*    Configuration Watch  Change Serch    */
-          $scope.filterText = '';
+         /* $scope.filterText = '';
           // Instantiate these variables outside the watch
           var tempFilterText = '',
           filterTextTimeout;
@@ -88,7 +88,7 @@
               filterTextTimeout = $timeout(function() {
                   $scope.filterText = tempFilterText;
               }, 1500); // delay 250 ms
-          })
+          })*/
     /*    Configuration Watch Change Serch     */
         
 
