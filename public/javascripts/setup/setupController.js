@@ -14,8 +14,8 @@ controller('setupController',
             }];
 
             // remove the "Remove" Header and Body when only left one document
-            $scope.firstRow = function(){
-                if($scope.collection[1])
+            $scope.firstRow = function () {
+                if ($scope.collection[1])
                     return false;
                 else
                     return true;
@@ -27,8 +27,7 @@ controller('setupController',
             var stringDataTypes = "";
             var stringShowOnView = "";
 
-            $scope.dataTypes = {
-                availableOptions: [
+            $scope.dataTypes = [
                     {
                         id: 1,
                         name: 'String'
@@ -44,10 +43,7 @@ controller('setupController',
                     {
                         id: 4,
                         name: 'Array'
-                    }
-                ],
-                selectedOption: {id: '1', name: 'String'} //This sets the default value of the select in the ui
-            };
+                    }];
 
             // expose a function to add new (blank) rows to the model/table
             $scope.addRow = function () {
@@ -85,13 +81,11 @@ controller('setupController',
 
                 });
                 console.log(
-                "fields = " + stringFields + " " +
-                "dataTypes = " + stringDataTypes + " " +
-                "showOnView = " + stringShowOnView
+                    "fields = " + stringFields + " " +
+                    "dataTypes = " + stringDataTypes + " " +
+                    "showOnView = " + stringShowOnView
                 )
             }
-
-
 
 
         }])

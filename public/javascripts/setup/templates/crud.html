@@ -10,20 +10,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in collection">
+        <tr ng-repeat="item in collection" ng-form="collection">
+            <!--Delete Row-->
             <td ng-hide="firstRow()">
                 <div class="col-md-1" ng-click="removeRow($index)"><i class="center-icon fa fa-times"></i></div>
             </td>
+            <!--FIELD-->
             <td>
-                <input type="text" class="form-control" ng-model="item.field" required>
-
+                <input  type="text" name="field" class="form-control" ng-model="item.field" required>
             </td>
             <td>
                 <select class="form-control" name="dataType" id="dataType"
-                        ng-options="option.name for option in dataTypes.availableOptions track by option.id"
-                        ng-model="dataTypes.selectedOption">
+                        ng-options="dataType.name for dataType in dataTypes track by dataType.id"
+                        ng-init="item.dataType=dataTypes[0]"
+                        ng-model="item.dataType">
                 </select>
+
             </td>
+            <!--Show On View-->
             <td>
                 <input class="checkbox center-select" type="checkbox" ng-init="item.showOnView = true"
                        ng-model="item.showOnView"
@@ -33,7 +37,7 @@
         <tr>
             <td colspan="5">
                 <button class="btn btn-default" ng-click="addRow()">Add Document</button>
-                <button class="btn btn-default" ng-click="validate()">Validate</button>
+                <button class="btn btn-default" ng-disabled="collection.field.$dirty && collection.field.$invalid" ng-click="validate()">Validate</button>
             </td>
         </tr>
         </tbody>
