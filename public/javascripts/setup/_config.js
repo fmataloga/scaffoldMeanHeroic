@@ -12,7 +12,7 @@
  		    templateUrl: '/javascripts/setup/templates/crud.html',
  			controller: 'setupController',
  			access: {
- 				restricted: true,
+ 				restricted: false,
  				rol: 1
  			}
  		});

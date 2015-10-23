@@ -7,6 +7,7 @@
     $scope.msjAlert = false;
     userService.allUsers().then(function(data) {
             $scope.usersList = data; 
+            $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;      
     });
 
@@ -28,9 +29,13 @@
 
         modalInstance.result.then(function(data) {
           if(!data._id) {
-                $scope.usersList.push(data);   
+                $scope.usersList.push(data); 
+                $scope.usersTemp = angular.copy($scope.usersList);
             } 
             console.log(data);        
+        },function(result){
+          $scope.usersList = $scope.usersTemp;
+          $scope.usersTemp = angular.copy($scope.usersList);
         });
     };
 

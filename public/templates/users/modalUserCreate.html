@@ -56,15 +56,16 @@
 				<div class="row">
 			        <div class="form-group col-md-8">
 						<label for="username" class="bold">Username</label>
-						<input required name="username" type="text"class="form-control" ng-model="item.username">
+						<input autofocus required name="username" type="text"class="form-control" ng-model="item.username">
 					</div>				
 				</div>
 				<div class="row" ng-if="!item._id && !item.flat">
 			        <div class="form-group col-md-8">
 						<label for="password" class="bold">Password</label>
-						<input required name="password" type="password" class="form-control" ng-model="item.password">
-						<label for="password" class="bold">Password Confirm</label>
-						<input required name="password" type="password" class="form-control" ng-model="passwordConfirm">
+						<input  required name="password" type="password" class="form-control" ng-model="item.password">
+						<label for="passwordConfirm" class="bold">Password Confirm</label>
+						<input  required name="passwordConfirm" type="password" class="form-control" ng-model="passwordConfirm">
+						<span ng-show="item.password != passwordConfirm">Your passwords do not match!</span>
 					</div>				
 				</div>
 				<div class="row" ng-if="item._id">
@@ -83,8 +84,8 @@
 			</fieldset>
 		</div>
 		<div class="modal-footer">
-			<button ng-disabled="myForm.$invalid || myForm.$pristine" class="btn btn-primary pull-right" type="submit" title="Register">
-				<span ng-if="create.saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
+			<button ng-disabled="myForm.$invalid || myForm.$pristine " class="btn btn-primary pull-right" type="submit" title="Register">
+				<span ng-if="saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
 				<span>Register</span>
 			</button>
 		</div>

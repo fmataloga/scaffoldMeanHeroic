@@ -285,21 +285,21 @@
 .controller('modalUserCreateController',
   ['$scope', '$modalInstance', 'item','AuthService',
   function ($scope, $modalInstance, item,AuthService) {
-    
-  $scope.item = item;
-  $scope.save = function () {
-  	//AuthService.register(item.username,item.password,item.rol);
-    if(!item){
-      item = {username:$scope.item.username,rol:$scope.item.rol,flat:true};
-      AuthService.register($scope.item.username,$scope.item.password,$scope.item.rol);
-    }
-    $modalInstance.close(item);
-  };
+  
+    $scope.item = item;
+    $scope.saving = false;
+    $scope.save = function () {
+    	//AuthService.register(item.username,item.password,item.rol);
+      if(!item){
+        item = {username:$scope.item.username,rol:$scope.item.rol,flat:true};
+        AuthService.register($scope.item.username,$scope.item.password,$scope.item.rol);
+        $scope.saving = true;
+      }
+      $modalInstance.close(item);
+    };
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-    
+
+      
 
 }])
 
@@ -327,6 +327,7 @@
     $scope.msjAlert = false;
     userService.allUsers().then(function(data) {
             $scope.usersList = data; 
+            $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;      
     });
 
@@ -348,9 +349,13 @@
 
         modalInstance.result.then(function(data) {
           if(!data._id) {
-                $scope.usersList.push(data);   
+                $scope.usersList.push(data); 
+                $scope.usersTemp = angular.copy($scope.usersList);
             } 
             console.log(data);        
+        },function(result){
+          $scope.usersList = $scope.usersTemp;
+          $scope.usersTemp = angular.copy($scope.usersList);
         });
     };
 
@@ -675,7 +680,7 @@ controller('setupController',
  		    templateUrl: '/javascripts/setup/templates/crud.html',
  			controller: 'setupController',
  			access: {
- 				restricted: true,
+ 				restricted: false,
  				rol: 1
  			}
  		});
