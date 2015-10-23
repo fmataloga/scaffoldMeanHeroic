@@ -94,3 +94,7 @@
 
 	font-size: 14px;
 }
+
+.col-center{
+	margin:0 auto;
+}

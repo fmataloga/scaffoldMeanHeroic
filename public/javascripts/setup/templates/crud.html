@@ -1,24 +1,37 @@
+<div class="alert alert-danger" ng-if="CollectionForm.$invalid || CollectionForm.$pristine" role="alert">
+    <div ng-if="CollectionForm.$pristine || CollectionForm.$error.required" >- Complete the available Fields</div>
+    <div ng-if="CollectionForm.$error.pattern" >- Fields Cannot Begin with a number</div>
+</div>
 <h1 class="text-center">CRUD Creation</h1>
-<form class="col-md-6 col-md-offset-3" name="CostItemsForm">
-    <table class="row table table-hover">
+
+
+<form class="container col-md-8 col-md-offset-2" name="CollectionForm" novalidate>
+    <div class="col-md-4 col-md-offset-4">
+        <h3 class="text-center">Scheme Name: </h3>
+        <input type="text" ng-pattern="/^[a-zA-Z].*/" name="field" class="form-control" ng-model="schemeName" required>
+    </div>
+    <table class="table table-responsive">
         <thead>
         <tr>
-            <th ng-hide="firstRow()">Remove</th>
-            <th>Field</th>
-            <th>Type</th>
-            <th>Show On View</th>
+            <th class="text-center" ng-hide="firstRow()"></th>
+            <th class="text-center">Field</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Show On View</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="item in collection" ng-form="collection">
             <!--Delete Row-->
             <td ng-hide="firstRow()">
-                <div class="col-md-1" ng-click="removeRow($index)"><i class="center-icon fa fa-times"></i></div>
+                <div ng-click="removeRow($index)"><i class="center-icon pull-right fa fa-times"></i></div>
             </td>
             <!--FIELD-->
             <td>
-                <input  type="text" name="field" class="form-control" ng-model="item.field" required>
+
+                <input type="text" ng-pattern="/^[a-zA-Z].*/" name="field" class="form-control" ng-model="item.field" required>
+
             </td>
+            <!--Data Types-->
             <td>
                 <select class="form-control" name="dataType" id="dataType"
                         ng-options="dataType.name for dataType in dataTypes track by dataType.id"
@@ -37,7 +50,8 @@
         <tr>
             <td colspan="5">
                 <button class="btn btn-default" ng-click="addRow()">Add Document</button>
-                <button class="btn btn-default" ng-disabled="collection.field.$dirty && collection.field.$invalid" ng-click="validate()">Validate</button>
+                <button class="btn btn-default" ng-disabled="CollectionForm.$invalid" ng-click="validate()">Validate
+                </button>
             </td>
         </tr>
         </tbody>
