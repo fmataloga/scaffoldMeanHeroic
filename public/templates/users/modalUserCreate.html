@@ -1,88 +1,61 @@
-<style type="text/css" media="screen">
-	.modal-dialog {
-		width: 650px;
-	}
-
-	div.confirmacion > input[type="checkbox"] {
-		text-align: center;
-		margin: initial;
-	}
-
-	div.confirmacion > label {
-		display: inline-block;
-		margin-left: 10px;
-		color: rgb(60, 60, 60);
-	}
-
-	label {
-		font-weight: normal;
-	}
-
-	.duplicado-nombre {
-		font-weight: bold;
-	}
-	.warning{
-		color : red;	
-	}
-
-	.success{
-		color : blue;	
-	}
-	.bold{
-		text : bold;
-	}
-
-</style>
 <div class="modal-header">
-	<div class="pull-right">
-		<button type="button" class="close pull-right" ng-click="$dismiss()">&times;</button>
-		</span>
-		<br>
-	</div>
-	<div>
-		<h3 class="modal-title" ng-if="!item._id">Create User</h3>
-		<h3 class="modal-title" ng-if="item._id">Edit User</h3>
+    <div class="pull-right">
+        <button type="button" class="close pull-right" ng-click="$dismiss()">&times;</button>
+        </span>
+        <br>
+    </div>
+    <div>
+        <h3 class="modal-title" ng-if="!item._id">Create User</h3>
 
-	</div>
+        <h3 class="modal-title" ng-if="item._id">Edit User</h3>
+    </div>
 </div>
-
-
 <div>
-	<form name="myForm" ng-submit="save()" method="POST">
-		<div class="modal-body">
-			<fieldset>
+    <form name="myForm" ng-submit="save()" method="POST">
+        <div class="modal-body">
+            <fieldset>
 
-				<div class="row">
-			        <div class="form-group col-md-8">
-						<label for="username" class="bold">Username</label>
-						<input autofocus required name="username" type="text"class="form-control" ng-model="item.username">
-					</div>				
-				</div>
-				<div class="row" >
-			        <div class="form-group col-md-8">
-						<label for="password" class="bold">Password</label>
-						<input  required name="password" type="password" class="form-control" ng-model="item.password">
-						<label for="passwordConfirm" class="bold">Password Confirm</label>
-						<input  required name="passwordConfirm" type="password" class="form-control" ng-model="passwordConfirm">
-						<span ng-show="item.password != passwordConfirm">Your passwords do not match!</span>
-					</div>				
-				</div>
-				<div class="row">
-			        <div class="form-group col-md-8">
-						<label for="rol" class="bold">Rol</label>
-						<input required name="rol" type="text"class="form-control" ng-model="item.rol">
-					</div>				
-				</div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="username" class="bold">Username</label>
+                        <input autofocus required name="username" type="text" class="form-control"
+                               ng-model="item.username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12" ng-class="{'has-error' : item.password != passwordConfirm }">
+                        <label for="password" class="bold">Password</label>
+                        <input required name="password" type="password" class="form-control" ng-model="item.password">
+                    </div>
+                </div>
 
-			</fieldset>
-		</div>
-		<div class="modal-footer">
-			<button ng-disabled="myForm.$invalid || myForm.$pristine " class="btn btn-primary pull-right" type="submit" title="Register">
-				<span ng-if="saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
-				<span>Register</span>
-			</button>
-		</div>
-	</form>
+                <div class="row">
+                    <div class="form-group col-md-12 " ng-class="{'has-error' : item.password != passwordConfirm }">
+                        <label for="passwordConfirm" class="bold">Password Confirm</label> <span class="alert-danger"
+                                                                                                 ng-show="item.password != passwordConfirm">Your passwords do not match!</span>
+                        <input required name="passwordConfirm" type="password" class="form-control"
+                               ng-model="passwordConfirm">
+
+                    </div>
+                </div>
+                <!-- Roles -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="rol" class="bold">Rol</label>
+                        <input required name="rol" type="text" class="form-control" ng-model="item.rol">
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="myForm.$invalid || (item.password != passwordConfirm)"
+                    class="btn btn-primary pull-right" type="submit" title="Register">
+                <span ng-if="saving"><i class="fa fa-spinner fa fa-spin"></i>&nbsp;</span>
+                <span>Register</span>
+            </button>
+        </div>
+    </form>
 </div>
 
 
