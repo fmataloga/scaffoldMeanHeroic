@@ -1,4 +1,4 @@
-.controller('setupController',
+.controller('crudController',
     ['$scope',
         function ($scope) {
             $scope.fieldName = [];

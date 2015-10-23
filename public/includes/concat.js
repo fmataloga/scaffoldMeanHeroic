@@ -119,260 +119,6 @@
  		});
  	});
  })
-.factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    // create user variable
-    var user = null;
-
-    // return available functions for use in controller
-    return ({
-      isLoggedIn: isLoggedIn,
-      login: login,
-      logout: logout,
-      register: register
-    });
-
-    function isLoggedIn() {
-        if(user) {
-          return true;
-        } else {
-          return false;
-        }
-    }
-
-
-    function login(username, password,check) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/login', {username: username, password: password,check: check})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            user = true;
-            deferred.resolve();
-          } else {
-            user = false;
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function logout() {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a get request to the server
-      $http.get('/api/logout')
-        // handle success
-        .success(function (data) {
-          user = false;
-          deferred.resolve();
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function register(username, password,rol) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/register', {username: username, password: password,rol:rol})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-}])
-.factory('loginFactorie', function($http) {
-        var comun = {};
-
-
-        return comun;
-    })
-.factory('userService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    
-
-    // return available functions for use in controller
-    return ({
-      allUsers: allUsers,
-      deleteUser : deleteUser
-    });
-
-
-    function allUsers () {
-        var defered = $q.defer();
-        var promise = defered.promise;
-
-        $http.get('/api/users')
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-    function deleteUser (id) {
-      var defered = $q.defer();
-      var promise = defered.promise;
-      $http.delete('/api/users/' + id)
-        .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-
-
-
-
-
-    }])
-.controller('setupController',
-    ['$scope',
-        function ($scope) {
-            $scope.fieldName = [];
-            $scope.showOnView = [];
-            var stringFields = "";
-            var stringDataTypes = "";
-            var stringShowOnView = "";
-
-//initialize data on first Row
-            $scope.collection = [{
-                field: '',
-                dataType: '',
-                showOnView: ''
-            }];
-
-            // remove the "Remove" Header and Body when only left one document
-            $scope.firstRow = function () {
-                if ($scope.collection[1])
-                    return false;
-                else
-                    return true;
-            };
-
-
-            $scope.dataTypes = [
-                {
-                    id: 1,
-                    name: 'String'
-                },
-                {
-                    id: 2,
-                    name: 'Number'
-                },
-                {
-                    id: 3,
-                    name: 'Boolean'
-                },
-                {
-                    id: 4,
-                    name: 'Array'
-                }];
-
-            // expose a function to add new (blank) rows to the model/table
-            $scope.addRow = function () {
-                // push a new object with some defaults
-                $scope.collection.push({
-                    field: $scope.fieldName[0],
-                    dataType: $scope.dataTypes[0],
-                    showOnView: $scope.showOnView[0]
-                });
-            }
-
-            $scope.removeRow = function (index) {
-                $scope.collection.splice(index, 1);
-            }
-
-            $scope.validate = function () {
-                var cont = 0;
-                angular.forEach($scope.collection, function (value, key) {
-                    cont++;
-                    if (cont != $scope.collection.length) {
-                        stringFields += value.field + ",";
-                        stringDataTypes += value.dataType.name + ",";
-                        stringShowOnView += value.showOnView + ",";
-                    } else {
-                        stringFields += value.field;
-                        stringDataTypes += value.dataType.name;
-                        stringShowOnView += value.showOnView;
-                    }
-                });
-                console.log(
-                    "schemeName = "  + '"' + $scope.schemeName + '"' + "\n" +
-                    "fields = " + '"' +stringFields + '"' + "\n" +
-                    "dataTypes = " + '"' +stringDataTypes + '"' + "\n" +
-                    "showOnView = " + '"' +stringShowOnView  + '"'
-                )
-            }
-        }])
-
-.config(function ($routeProvider) {
- 	$routeProvider
- 		.when('/setup', {
- 			templateUrl: '/javascripts/setup/templates/setup.html',
- 			controller: 'setupController',
- 			access: {
- 				restricted: true,
- 				rol: 1
- 			}
- 		})
- 		.when('/crud', {
- 		    templateUrl: '/javascripts/setup/templates/crud.html',
- 			controller: 'setupController',
- 			access: {
- 				restricted: false,
- 				rol: 1
- 			}
- 		});
- })
 .controller('bootstrapController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -536,6 +282,161 @@
 
 
 }])
+.factory('AuthService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    // create user variable
+    var user = null;
+
+    // return available functions for use in controller
+    return ({
+      isLoggedIn: isLoggedIn,
+      login: login,
+      logout: logout,
+      register: register
+    });
+
+    function isLoggedIn() {
+        if(user) {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+
+    function login(username, password,check) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/login', {username: username, password: password,check: check})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            user = true;
+            deferred.resolve();
+          } else {
+            user = false;
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function logout() {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a get request to the server
+      $http.get('/api/logout')
+        // handle success
+        .success(function (data) {
+          user = false;
+          deferred.resolve();
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function register(username, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/register', {username: username, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+}])
+.factory('loginFactorie', function($http) {
+        var comun = {};
+
+
+        return comun;
+    })
+.factory('userService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    
+
+    // return available functions for use in controller
+    return ({
+      allUsers: allUsers,
+      deleteUser : deleteUser
+    });
+
+
+    function allUsers () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/users')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+    function deleteUser (id) {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.delete('/api/users/' + id)
+        .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+
+
+
+
+
+    }])
 .controller('modalUserCreateController',
   ['$scope', '$modalInstance', 'item','AuthService',
   function ($scope, $modalInstance, item,AuthService) {
@@ -554,6 +455,20 @@
       //}
       $modalInstance.close(item);
     };
+
+    $scope.peopleObj = {
+      '1' : { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
+      '2' : { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
+      '3' : { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
+      '4' : { name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador' },
+      '5' : { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30, country: 'Ecuador' },
+      '6' : { name: 'Samantha',  email: 'samantha@email.com',  age: 30, country: 'United States' },
+      '7' : { name: 'Nicole',    email: 'nicole@email.com',    age: 43, country: 'Colombia' },
+      '8' : { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
+      '9' : { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
+      '10' : { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
+    };
+
 }])
 
 .controller('modalUserDeleteController',
@@ -666,3 +581,102 @@
         
 
 }])
+.controller('crudController',
+    ['$scope',
+        function ($scope) {
+            $scope.fieldName = [];
+            $scope.showOnView = [];
+            var stringFields = "";
+            var stringDataTypes = "";
+            var stringShowOnView = "";
+
+//initialize data on first Row
+            $scope.collection = [{
+                field: '',
+                dataType: '',
+                showOnView: ''
+            }];
+
+            // remove the "Remove" Header and Body when only left one document
+            $scope.firstRow = function () {
+                if ($scope.collection[1])
+                    return false;
+                else
+                    return true;
+            };
+
+
+            $scope.dataTypes = [
+                {
+                    id: 1,
+                    name: 'String'
+                },
+                {
+                    id: 2,
+                    name: 'Number'
+                },
+                {
+                    id: 3,
+                    name: 'Boolean'
+                },
+                {
+                    id: 4,
+                    name: 'Array'
+                }];
+
+            // expose a function to add new (blank) rows to the model/table
+            $scope.addRow = function () {
+                // push a new object with some defaults
+                $scope.collection.push({
+                    field: $scope.fieldName[0],
+                    dataType: $scope.dataTypes[0],
+                    showOnView: $scope.showOnView[0]
+                });
+            }
+
+            $scope.removeRow = function (index) {
+                $scope.collection.splice(index, 1);
+            }
+
+            $scope.validate = function () {
+                var cont = 0;
+                angular.forEach($scope.collection, function (value, key) {
+                    cont++;
+                    if (cont != $scope.collection.length) {
+                        stringFields += value.field + ",";
+                        stringDataTypes += value.dataType.name + ",";
+                        stringShowOnView += value.showOnView + ",";
+                    } else {
+                        stringFields += value.field;
+                        stringDataTypes += value.dataType.name;
+                        stringShowOnView += value.showOnView;
+                    }
+                });
+                console.log(
+                    "schemeName = "  + '"' + $scope.schemeName + '"' + "\n" +
+                    "fields = " + '"' +stringFields + '"' + "\n" +
+                    "dataTypes = " + '"' +stringDataTypes + '"' + "\n" +
+                    "showOnView = " + '"' +stringShowOnView  + '"'
+                )
+            }
+        }])
+
+.config(function ($routeProvider) {
+ 	$routeProvider
+ 		.when('/setup', {
+ 			templateUrl: '/javascripts/setup/crud/templates/setup.html',
+ 			controller: 'crudController',
+ 			access: {
+ 				restricted: true,
+ 				rol: 1
+ 			}
+ 		})
+ 		.when('/crud', {
+ 		    templateUrl: '/javascripts/setup/crud/templates/crud.html',
+ 			controller: 'crudController',
+ 			access: {
+ 				 restricted: false,
+ 				rol: 1
+ 			}
+ 		});
+ })

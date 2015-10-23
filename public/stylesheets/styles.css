@@ -98,3 +98,8 @@
 .col-center{
 	margin:0 auto;
 }
+
+/*MODAL*/
+.modal-dialog {
+	/*min-width: 0px;*/
+}
