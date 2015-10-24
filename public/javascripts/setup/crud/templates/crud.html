@@ -2,7 +2,7 @@
     <div ng-if="CollectionForm.$pristine || CollectionForm.$error.required" >- Complete the available Fields</div>
     <div ng-if="CollectionForm.$error.pattern" >- Fields Cannot Begin with a number</div>
 </div>
-<h1 class="text-center">CRUD Creation</h1>
+<h1 class="text-center">CRUD Generator</h1>
 
 
 <form class="container col-md-8 col-md-offset-2" name="CollectionForm" novalidate>
@@ -43,8 +43,7 @@
             <!--Show On View-->
             <td>
                 <input class="checkbox center-select" type="checkbox" ng-init="item.showOnView = true"
-                       ng-model="item.showOnView"
-                       required>
+                       ng-model="item.showOnView">
             </td>
         </tr>
         <tr>
