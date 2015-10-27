@@ -30,6 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
@@ -39,8 +40,6 @@ app.use(require('express-session')({
 //Call cookie
 
 app.get('/cookie', function(req, res) {
-       /*req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
-       res.send('You have visited this page ' + req.session.visitCount + ' times '+req.session.us);*/
        res.json({comp:req.session.us,check:req.session.check,user:{id:req.session.idd,username: req.session.name,rol:req.session.rol}});
  });
 

@@ -5,7 +5,6 @@ var fs = require('fs-extra');
 var replace = require("replace");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  
   res.render('index', { title: 'Express' });
 });
 
