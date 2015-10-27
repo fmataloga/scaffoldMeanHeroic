@@ -5,7 +5,9 @@ var fs = require('fs-extra');
 var replace = require("replace");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  //res.render('admin-sb/index', { title: 'Express' });
+  //res.render('simple/index', { title: 'Express' });
+  res.render('admin-lte/index', { title: 'Express' });
 });
 
 /* General Cruds. */
@@ -19,7 +21,7 @@ router.get('/cruds', function(req, res, next) {
 			fields += '     data.field'+(i+1)+' = '+'req.body.'+array[i]+';\n';
 		}else{
 			fields += '     data.field'+(i+1)+' = '+'req.body.'+array[i]+';';
-		}		
+		}
 	}
 	var inputsType = "String,String,String,Number";
 	var arrayTypes = inputsType.split(',');

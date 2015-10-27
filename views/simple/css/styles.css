@@ -1,6 +1,13 @@
-#page-wrapper {
-	width: 100%;
-	padding: 0;
-	background-color: #fff;
-	min-height: 700px;
+.div-padding{
+	padding: 14px 14px 14px 0;
+}
+
+.page-wrapper {
+	padding: 0 15px 15px 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.testdiv{
+	background: gray;
 }
