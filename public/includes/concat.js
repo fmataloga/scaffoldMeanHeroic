@@ -123,7 +123,7 @@
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
     $scope.test = "Menú 1";
-    $scope.logo = "ScaffoldMEANHeroic";
+    $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
 	    $scope.logout = function () {
 	      AuthService.logout()
@@ -143,7 +143,7 @@
 }])
 .controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
   function ($rootScope, $scope, $location, AuthService) {
-		$scope.titleLoginController = "scaffoldMeanHeroic";
+		$scope.titleLoginController = "MEAN_CASE HEROIC";
 		$rootScope.titleWeb = "Login";
 		$scope.login = function () {
 
