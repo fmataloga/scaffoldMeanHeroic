@@ -1,6 +1,6 @@
 .controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
   function ($rootScope, $scope, $location, AuthService) {
-		$scope.titleLoginController = "scaffoldMeanHeroic";
+		$scope.titleLoginController = "MEAN_CASE HEROIC";
 		$rootScope.titleWeb = "Login";
 		$scope.login = function () {
 

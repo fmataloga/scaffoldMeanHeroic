@@ -2,7 +2,7 @@
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
     $scope.test = "Menú 1";
-    $scope.logo = "ScaffoldMEANHeroic";
+    $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
 	    $scope.logout = function () {
 	      AuthService.logout()
