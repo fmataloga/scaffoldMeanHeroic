@@ -141,173 +141,147 @@
     
 
 }])
-.
-controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
-    function ($rootScope, $scope, $location, AuthService) {
-        $scope.titleLoginController = "scaffoldMeanHeroic";
-        $rootScope.titleWeb = "Login";
-        $scope.login = function () {
+.controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
+  function ($rootScope, $scope, $location, AuthService) {
+		$scope.titleLoginController = "scaffoldMeanHeroic";
+		$rootScope.titleWeb = "Login";
+		$scope.login = function () {
 
-            // initial values
-            $scope.error = false;
-            $scope.disabled = true;
-            // call login from service
-            AuthService.login($scope.loginForm.username, $scope.loginForm.password, $scope.remember)
-                // handle success
-                .then(function () {
-                    $location.path('/');
-                    $scope.disabled = false;
-                    $scope.loginForm = {};
-                })
-                // handle error
-                .catch(function () {
-                    $scope.error = true;
-                    $scope.errorMessage = "Invalid username and/or password";
-                    $scope.disabled = false;
-                    $scope.loginForm = {};
-                });
+			// initial values
+			$scope.error = false;
+			$scope.disabled = true;
+			// call login from service
+			AuthService.login($scope.loginForm.username, $scope.loginForm.password, $scope.remember)
+				// handle success
+				.then(function () {
+					$location.path('/');
+					$scope.disabled = false;
+					$scope.loginForm = {};
+				})
+				// handle error
+				.catch(function () {
+					$scope.error = true;
+					$scope.errorMessage = "Invalid username and/or password";
+					$scope.disabled = false;
+					$scope.loginForm = {};
+				});
 
-        };
-
-
-        $scope.register = function (size, item) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'templates/users/modalUserCreate.html',
-                controller: 'modalUserCreateController',
-                size: size,
-                resolve: {
-                    item: function () {
-                        return item;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (data) {
-                if (!data._id) {
-
-                    $scope.usersList.push(data);
-                    $scope.usersTemp = angular.copy($scope.usersList);
-                }
-            }, function (result) {
-                $scope.usersList = $scope.usersTemp;
-                $scope.usersTemp = angular.copy($scope.usersList);
-            });
-        };
-
-        /* REGISTRAR  */
+		};
 
 
-        $scope.register = function () {
-
-            // initial values
-            $scope.error = false;
-            $scope.disabled = true;
-
-            // call register from service
-            AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.rol)
-                // handle success
-                .then(function () {
-                    $location.path('/');
-                    $scope.disabled = false;
-                    $scope.registerForm = {};
-                })
-                // handle error
-                .catch(function (err) {
-                    $scope.error = true;
-                    $scope.errorMessage = "User already exists!";
-                    $scope.disabled = false;
-                    $scope.registerForm = {};
-                    $scope.rol = "";
-                });
-
-        };
-
-        $scope.personList = [
-            {
-                index: 1,
-                name: "Kristin Hill",
-                email: "kristin@hill.com"
-            },
-            {
-                index: 2,
-                name: "Valerie Francis",
-                email: "valerie@francis.com"
-            },
-            {
-                index: 3,
-                name: "Bob Abbott",
-                email: "bob@abbott.com"
-            },
-            {
-                index: 4,
-                name: "Greg Boyd",
-                email: "greg@boyd.com"
-            },
-            {
-                index: 5,
-                name: "Peggy Massey",
-                email: "peggy@massey.com"
-            },
-            {
-                index: 6,
-                name: "Janet Bolton",
-                email: "janet@bolton.com"
-            },
-            {
-                index: 7,
-                name: "Maria Liu",
-                email: "maria@liu.com"
-            },
-            {
-                index: 8,
-                name: "Anne Warren",
-                email: "anne@warren.com"
-            },
-            {
-                index: 9,
-                name: "Keith Steele",
-                email: "keith@steele.com"
-            },
-            {
-                index: 10,
-                name: "Jerome Lyons",
-                email: "jerome@lyons.com"
-            },
-            {
-                index: 11,
-                name: "Jacob Stone",
-                email: "jacob@stone.com"
-            },
-            {
-                index: 12,
-                name: "Marion Dunlap",
-                email: "marion@dunlap.com"
-            },
-            {
-                index: 13,
-                name: "Stacy Robinson",
-                email: "stacy@robinson.com"
-            },
-            {
-                index: 14,
-                name: "Luis Chappell",
-                email: "luis@chappell.com"
-            },
-            {
-                index: 15,
-                name: "Kimberly Horne",
-                email: "kimberly@horne.com"
-            },
-            {
-                index: 16,
-                name: "Andy Smith",
-                email: "andy@smith.com"
-            }
-        ]
+		/* REGISTRAR  */
 
 
-    }])
+		$scope.register = function () {
+
+			// initial values
+			$scope.error = false;
+			$scope.disabled = true;
+
+			// call register from service
+			AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.rol)
+				// handle success
+				.then(function () {
+					$location.path('/');
+					$scope.disabled = false;
+					$scope.registerForm = {};
+				})
+				// handle error
+				.catch(function (err) {
+					$scope.error = true;
+					$scope.errorMessage = "User already exists!";
+					$scope.disabled = false;
+					$scope.registerForm = {};
+					$scope.rol = "";
+				});
+
+		};
+
+		$scope.personList = [
+			{
+				index: 1,
+				name: "Kristin Hill",
+				email: "kristin@hill.com"
+      },
+			{
+				index: 2,
+				name: "Valerie Francis",
+				email: "valerie@francis.com"
+      },
+			{
+				index: 3,
+				name: "Bob Abbott",
+				email: "bob@abbott.com"
+      },
+			{
+				index: 4,
+				name: "Greg Boyd",
+				email: "greg@boyd.com"
+      },
+			{
+				index: 5,
+				name: "Peggy Massey",
+				email: "peggy@massey.com"
+      },
+			{
+				index: 6,
+				name: "Janet Bolton",
+				email: "janet@bolton.com"
+      },
+			{
+				index: 7,
+				name: "Maria Liu",
+				email: "maria@liu.com"
+      },
+			{
+				index: 8,
+				name: "Anne Warren",
+				email: "anne@warren.com"
+      },
+			{
+				index: 9,
+				name: "Keith Steele",
+				email: "keith@steele.com"
+      },
+			{
+				index: 10,
+				name: "Jerome Lyons",
+				email: "jerome@lyons.com"
+      },
+			{
+				index: 11,
+				name: "Jacob Stone",
+				email: "jacob@stone.com"
+      },
+			{
+				index: 12,
+				name: "Marion Dunlap",
+				email: "marion@dunlap.com"
+      },
+			{
+				index: 13,
+				name: "Stacy Robinson",
+				email: "stacy@robinson.com"
+      },
+			{
+				index: 14,
+				name: "Luis Chappell",
+				email: "luis@chappell.com"
+      },
+			{
+				index: 15,
+				name: "Kimberly Horne",
+				email: "kimberly@horne.com"
+      },
+			{
+				index: 16,
+				name: "Andy Smith",
+				email: "andy@smith.com"
+      }
+    ]
+
+
+}])
 .factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
@@ -424,7 +398,8 @@ controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService
     // return available functions for use in controller
     return ({
       allUsers: allUsers,
-      deleteUser : deleteUser
+      deleteUser : deleteUser,
+      editUser   : editUser
     });
 
 
@@ -457,6 +432,30 @@ controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService
         return promise;
     }
 
+   function editUser(username,newUsername, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.put('/api/register', {username: username,newUsername: newUsername, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
 
 
 
@@ -464,21 +463,28 @@ controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService
 
     }])
 .controller('modalUserCreateController',
-  ['$scope', '$modalInstance', 'item','AuthService',
-  function ($scope, $modalInstance, item,AuthService) {
+  ['$scope', '$modalInstance', 'item','AuthService','userService',
+  function ($scope, $modalInstance, item,AuthService,userService) {
   
     $scope.item = item;
     $scope.saving = false;
+    if(item){
+     $scope.tmpUsername = angular.copy(item.username);
+    }
+     
     $scope.save = function () {
 
-      //if(!item){
+      if(!item){
         $scope.saving = true;
         item = {username:$scope.item.username,rol:$scope.item.rol,flat:true};
         AuthService.register($scope.item.username,$scope.item.password,$scope.item.rol).then(function(r){
           $scope.saving = false;
         });
-        
-      //}
+      }else{
+        userService.editUser($scope.tmpUsername,item.username,$scope.item.password,$scope.item.rol).then(function(r){
+          $scope.saving = false;
+        });
+      }
       $modalInstance.close(item);
     };
 
@@ -512,102 +518,101 @@ controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService
     
 
 }])
-.
-controller('userController',
-    ['$rootScope', '$scope', '$location', 'userService', '$timeout', '$uibModal',
-        function ($rootScope, $scope, $location, userService, $timeout, $uibModal) {
-            $scope.titleLoginController = "scaffoldMeanHeroic";
-            $rootScope.titleWeb = "Users";
-            $scope.preloader = true;
-            $scope.msjAlert = false;
-            userService.allUsers().then(function (data) {
-                $scope.usersList = data;
+.controller('userController',
+  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
+  function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
+    $scope.titleLoginController = "scaffoldMeanHeroic";
+    $rootScope.titleWeb = "Users";
+    $scope.preloader = true;
+    $scope.msjAlert = false;
+    userService.allUsers().then(function(data) {
+            $scope.usersList = data; 
+            $scope.usersTemp = angular.copy($scope.usersList);
+            $scope.preloader = false;      
+    });
+
+    /*  Modal*/
+
+    /*  Create    */
+     $scope.open = function (size,item) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/users/modalUserCreate.html',
+          controller: 'modalUserCreateController',
+          size: size,
+          resolve: {
+            item: function () {
+              return item;
+            }
+          }
+        });
+
+        modalInstance.result.then(function(data) {
+          if(!data._id) {
+         
+                $scope.usersList.push(data); 
                 $scope.usersTemp = angular.copy($scope.usersList);
-                $scope.preloader = false;
-            });
+            }      
+        },function(result){
+          $scope.usersList = $scope.usersTemp;
+          $scope.usersTemp = angular.copy($scope.usersList);  
+        });
+    };
 
-            /*  Modal*/
+    /*  Create    */
+    /*  Delete    */
+    $scope.openDelete = function (size,item) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/users/modalUserDelete.html',
+          controller: 'modalUserDeleteController',
+          size: size,
+          resolve: {
+            item: function () {
+              return item;
+            }
+          }
+        });
 
-            /*  Create    */
-            $scope.open = function (size, item) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'templates/users/modalUserCreate.html',
-                    controller: 'modalUserCreateController',
-                    size: size,
-                    resolve: {
-                        item: function () {
-                            return item;
-                        }
-                    }
-                });
+        modalInstance.result.then(function(data) { 
+          var idx = $scope.usersList.indexOf(data); 
+          $scope.usersList.splice(idx, 1);
+          userService
+            .deleteUser(data._id)
+            .then(function(result) {
+                $scope.msjAlert = true;
+                $scope.alert = "success";
+                $scope.message = result.message;
+            })
+            .catch(function(err) {
+                //error
+                $scope.msjAlert = true;
+                $scope.alert = "danger";
+                $scope.message = "Error "+err;
+            })            
+        });
+    };
 
-                modalInstance.result.then(function (data) {
-                    if (!data._id) {
+    /*  Delete    */
 
-                        $scope.usersList.push(data);
-                        $scope.usersTemp = angular.copy($scope.usersList);
-                    }
-                }, function (result) {
-                    $scope.usersList = $scope.usersTemp;
-                    $scope.usersTemp = angular.copy($scope.usersList);
-                });
-            };
+    /*  Modal*/
 
-            /*  Create    */
-            /*  Delete    */
-            $scope.openDelete = function (size, item) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'templates/users/modalUserDelete.html',
-                    controller: 'modalUserDeleteController',
-                    size: size,
-                    resolve: {
-                        item: function () {
-                            return item;
-                        }
-                    }
-                });
+    /*    Configuration Watch  Change Serch    */
+         /* $scope.filterText = '';
+          // Instantiate these variables outside the watch
+          var tempFilterText = '',
+          filterTextTimeout;
+          $scope.$watch('searchText', function (val) {
+              if (filterTextTimeout) $timeout.cancel(filterTextTimeout);
+              tempFilterText = val;
+              filterTextTimeout = $timeout(function() {
+                  $scope.filterText = tempFilterText;
+              }, 1500); // delay 250 ms
+          })*/
+    /*    Configuration Watch Change Serch     */
+        
 
-                modalInstance.result.then(function (data) {
-                    var idx = $scope.usersList.indexOf(data);
-                    $scope.usersList.splice(idx, 1);
-                    userService
-                        .deleteUser(data._id)
-                        .then(function (result) {
-                            $scope.msjAlert = true;
-                            $scope.alert = "success";
-                            $scope.message = result.message;
-                        })
-                        .catch(function (err) {
-                            //error
-                            $scope.msjAlert = true;
-                            $scope.alert = "danger";
-                            $scope.message = "Error " + err;
-                        })
-                });
-            };
-
-            /*  Delete    */
-
-            /*  Modal*/
-
-            /*    Configuration Watch  Change Serch    */
-            /* $scope.filterText = '';
-             // Instantiate these variables outside the watch
-             var tempFilterText = '',
-             filterTextTimeout;
-             $scope.$watch('searchText', function (val) {
-             if (filterTextTimeout) $timeout.cancel(filterTextTimeout);
-             tempFilterText = val;
-             filterTextTimeout = $timeout(function() {
-             $scope.filterText = tempFilterText;
-             }, 1500); // delay 250 ms
-             })*/
-            /*    Configuration Watch Change Serch     */
-
-
-        }])
+}])
 .controller('crudController',
     ['$scope',
         function ($scope) {

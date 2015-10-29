@@ -7,7 +7,8 @@
     // return available functions for use in controller
     return ({
       allUsers: allUsers,
-      deleteUser : deleteUser
+      deleteUser : deleteUser,
+      editUser   : editUser
     });
 
 
@@ -40,6 +41,30 @@
         return promise;
     }
 
+   function editUser(username,newUsername, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.put('/api/register', {username: username,newUsername: newUsername, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
 
 
 

@@ -8,7 +8,6 @@ var passport = require('passport');
 
 /*  LOGIN   */
 
-
 router.post('/register', function (req, res) {
 	Users.register(new Users({
 		username: req.body.username,
@@ -27,20 +26,22 @@ router.post('/register', function (req, res) {
 	});
 });
 
-router.put('/register/:id', function (req, res) {
-	Users.findById(req.params.id, function (err, user) {
-		user.username = req.body.username;
-		user.password = req.body.password;
-		user.rol = req.body.rol;
-		user.save(function (err) {
-			if (err) {
-				res.send(err)
-			}
-
-			res.json(user);
-		})
-	})
+router.put('/register', function (req, res) {
 	
+	Users.findByUsername(req.body.username).then(function(sanitizedUser){
+    if (sanitizedUser){
+    	sanitizedUser.username = req.body.newUsername;
+    	sanitizedUser.rol = req.body.rol;
+        sanitizedUser.setPassword(req.body.password, function(){
+            sanitizedUser.save();
+            return res.status(200).json({msg: 'password reset successful'});
+        });
+    } else {
+        res.status(200).json({status: 0, msg: 'This user does not exist'});
+    }
+},function(err){
+    console.log(err)
+})
 });
 
 
@@ -73,7 +74,7 @@ router.get('/test', function (req, res) {
 router.post('/login', function (req, res, next) {
 	req.session.us = false;
 	passport.authenticate('local', function (err, user, info) {
-		if (err) {
+		if (err) { 
 			req.session.us = false;
 			return res.status(500).json({
 				err: err
