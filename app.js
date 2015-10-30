@@ -13,10 +13,13 @@ var expressSession = require('express-session');
 mongoose.connect('mongodb://localhost/users');
 //MODELS CRUD BY SCAFFOLDMEANHEROIC
 var User = require('./models/Users.js');
+var modelSetup = require('./config/setup/models/modelSetup.js');
+
 //ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var config = require('./config/config');
+var setup = require('./config/setup/routes/setup');
 
 var app = express();
 
@@ -58,6 +61,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', routes);
 app.use('/api', users);
 app.use('/config', config);
+app.use('/api/setup', setup);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
