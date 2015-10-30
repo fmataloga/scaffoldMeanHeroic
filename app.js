@@ -16,6 +16,7 @@ var User = require('./models/Users.js');
 //ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var config = require('./config/config');
 
 var app = express();
 
@@ -56,6 +57,7 @@ passport.deserializeUser(User.deserializeUser());
 //API ROUTES CRUD BY SCAFFOLDMEANHEROIC
 app.use('/', routes);
 app.use('/api', users);
+app.use('/config', config);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
