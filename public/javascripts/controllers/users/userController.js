@@ -1,7 +1,7 @@
 .controller('userController',
   ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
   function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
-    $scope.titleLoginController = "scaffoldMeanHeroic";
+    $scope.titleLoginController = "MEAN-CASE SUPER HEROIC";
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     $scope.msjAlert = false;
