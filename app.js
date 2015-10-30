@@ -13,18 +13,18 @@ var expressSession = require('express-session');
 mongoose.connect('mongodb://localhost/users');
 //MODELS CRUD BY SCAFFOLDMEANHEROIC
 var User = require('./models/Users.js');
-//var modelSetup = require('./config/setup/models/modelSetup.js');
+var ModelSetup = require('./config/setup/models/modelSetup.js');
 
 //ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var config = require('./config/config');
-//var setup = require('./config/setup/routes/setup');
+var setup = require('./config/setup/routes/setup');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'config')));
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
@@ -44,8 +45,8 @@ app.use(require('express-session')({
 //Call cookie
 
 app.get('/cookie', function(req, res) {
-       res.json({comp:req.session.us,check:req.session.check,user:{id:req.session.idd,username: req.session.name,rol:req.session.rol}});
- });
+    res.json({comp:req.session.us,check:req.session.check,user:{id:req.session.idd,username: req.session.name,rol:req.session.rol}});
+});
 
 //Call cookie end
 
@@ -61,14 +62,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', routes);
 app.use('/api', users);
 app.use('/config', config);
-//app.use('/api/setup', setup);
+app.use('/api/setup', setup);
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;s
+    next(err);
 });
 
 // error handlers
@@ -76,23 +77,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 

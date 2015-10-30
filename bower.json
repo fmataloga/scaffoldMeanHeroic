@@ -23,6 +23,7 @@
     "bootstrap": "~3.3.5",
     "angular-bootstrap": "~0.14.2",
     "angular-sanitize": "~1.4.7",
-    "ui-select": "angular-ui-select#~0.13.2"
+    "ui-select": "angular-ui-select#~0.13.2",
+    "fullpage.js": "~2.7.4"
   }
 }

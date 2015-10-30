@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html ng-app="setupApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>MEANCASE</title>
+    <meta name="author" content="Alvaro Trigo Lopez"/>
+    <meta name="description" content="fullPage full-screen navigation and sections control menu."/>
+    <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,navigation,control arrows, dots"/>
+    <meta name="Resource-type" content="Document"/>
+
+    <link rel="stylesheet" type="text/css" href="../../../bower_components/fullpage.js/jquery.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../setup/public/css/styles.css"/>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/fullpage.js/jquery.fullPage.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../../setup/public/js/scripts.js"></script>
+    <script type="text/javascript" src="../../../setup/public/js/setupApp.js"></script>
+</head>
+<body ng-controller="setupAppController">
+
+<div id="fullpage">
+    <!-- WELCOME -->
+    <div class="section" id="section0">
+        <div class="container">
+            <div class="row">
+                <img src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+            </div>
+            <div class="row">
+                <h1>MEANCASE - Heroic</h1>
+<h3>{{greeting}}</h3>
+                <h3>Create your Applications at MAX Speed</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Project Settings -->
+    <div class="section" id="section1">
+        <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+
+        <div class="container">
+            <div class="row">
+                <h1>Project Settings</h1>
+
+                <h3></h3>
+            </div>
+            <div class="row">
+                <form class="col-md-4 col-md-offset-4">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="projectName">Project Name</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Project Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>User login Authorization</h4>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation Template -->
+    <div class="section" id="section2">
+        <div class="container">
+            <div class="row section-header">
+                <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+
+                <h1>Navigation Template</h1>
+            </div>
+            <div class="row section-body">
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Template -->
+    <div class="section" id="section3">
+        <div class="container">
+            <div class="row section-header">
+                <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+
+                <h1>Login Template</h1>
+            </div>
+            <div class="row section-body">
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
+                            Live Preview</a>
+                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
+                            Use</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Finishing Configuration -->
+    <div class="section" id="section4">
+        <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+
+        <div class="container">
+            <div class="row">
+                <h1>Finishing Configuration</h1>
+
+                <h3></h3>
+            </div>
+            <div class="row">
+                <form class="col-md-4 col-md-offset-4">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+    /* Style for our header texts
+* --------------------------------------- */
+
+h1 {
+    font-size: 5em;
+    font-family: arial, helvetica;
+    margin: 0;
+}
+
+.intro p {
+    color: #fff;
+}
+/* Centered texts in each section
+* --------------------------------------- */
+
+.section {
+    text-align: center;
+}
+
+.section-header {
+    margin-top: -200px;
+}
+
+.section-body {
+    margin-top: 100px;
+}
+/* Bottom menu
+* --------------------------------------- */
+
+#section0 img {
+    margin-top: -100px;
+    padding: 0 0 20px 0;
+    max-width: 600px;
+    max-height: auto;
+    width: auto;
+    height: auto;
+}
+
+.logo {
+    margin-top: -60px;
+    padding: 0 0 20px 0;
+    max-width: 200px;
+    max-height: auto;
+    width: auto;
+    height: auto;
+}
+
+img {
+    margin-top: -60px;
+    padding: 0 0 20px 0;
+    max-width: 100%;
+    max-height: auto;
+    width: auto;
+    height: auto;
+}

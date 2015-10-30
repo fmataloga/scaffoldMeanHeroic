@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
-var passwordHash = require('password-hash');
 var passport = require('passport');
 
 
