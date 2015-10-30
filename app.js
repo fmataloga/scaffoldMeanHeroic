@@ -62,7 +62,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', routes);
 app.use('/api', users);
 app.use('/config', config);
-app.use('/api/setup', setup);
+app.use('/setup', setup);
 
 
 // catch 404 and forward to error handler
