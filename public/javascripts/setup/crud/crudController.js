@@ -1,6 +1,6 @@
 .controller('crudController',
-    ['$scope',
-        function ($scope) {
+    ['$scope','crudService',
+        function ($scope,crudService) {
             $scope.fieldName = [];
             $scope.showOnView = [];
             var stringFields = "";
@@ -69,11 +69,10 @@
                         stringShowOnView += value.showOnView;
                     }
                 });
-                console.log(
-                    "schemeName = "  + '"' + $scope.schemeName + '"' + "\n" +
-                    "fields = " + '"' +stringFields + '"' + "\n" +
-                    "dataTypes = " + '"' +stringDataTypes + '"' + "\n" +
-                    "showOnView = " + '"' +stringShowOnView  + '"'
-                )
+                crudService.generar($scope.schemeName,stringFields,stringDataTypes,stringShowOnView).then(function(result){
+                    $scope.result = result;
+                });
             }
+
+
         }])
