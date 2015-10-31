@@ -1,6 +1,6 @@
 .controller('modalUserCreateController',
-  ['$scope', '$modalInstance', 'item','AuthService','userService',
-  function ($scope, $modalInstance, item,AuthService,userService) {
+  ['$scope', '$uibModalInstance', 'item','AuthService','userService',
+  function ($scope, $uibModalInstance, item,AuthService,userService) {
   
     $scope.item = item;
     $scope.saving = false;
@@ -21,7 +21,7 @@
           $scope.saving = false;
         });
       }
-      $modalInstance.close(item);
+      $uibModalInstance.close(item);
     };
 
     $scope.peopleObj = {
