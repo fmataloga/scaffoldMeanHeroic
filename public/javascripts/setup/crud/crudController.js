@@ -6,8 +6,6 @@
             var stringFields = "";
             var stringDataTypes = "";
             var stringShowOnView = "";
-
-//initialize data on first Row
             $scope.collection = [{
                 field: '',
                 dataType: '',
@@ -73,6 +71,5 @@
                     $scope.result = result;
                 });
             }
-
 
         }])
