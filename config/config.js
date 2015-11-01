@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 var fss = require('fs');
 var fs = require('fs-extra');
 var replace = require("replace");
+var ModelMenu = mongoose.model('ModelMenu');
 /* GET home page. */
 router.get('/prueba', function(req, res, next) {
  
@@ -121,6 +123,15 @@ router.post('/cruds', function(req, res, next) {
 	var wsConfig = fs.createOutputStream('public/javascripts/controllers/'+crud+'/_config.js');
 	wsConfig.write(".config(function ($routeProvider) {\n  $routeProvider\n    .when('/"+crud+"', {\n      templateUrl: '/templates/"+crud+"/index.html',\n      controller: '"+crud+"Controller',\n      access: {\n        restricted: false,\n       rol: 1\n      }\n    });\n })");
 	/*		FRONT END 		*/
+	/*		SAVE MENU       */
+	var menu = new ModelMenu();
+	menu.name = crud;
+	menu.save(function (err, menu) {
+		if (err) {
+			return next(err)
+		}
+	})
+	/*		SAVE MENU       */
   	res.status(200).json({status: 'Crud Successful! your route is: ',route:crud});
 });
 

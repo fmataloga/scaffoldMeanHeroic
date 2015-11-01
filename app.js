@@ -10,16 +10,17 @@ var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
 var expressSession = require('express-session');
 
-mongoose.connect('mongodb://localhost/users');
+mongoose.connect('mongodb://localhost/meanCase');
 //MODELS CRUD BY SCAFFOLDMEANHEROIC
 var User = require('./models/Users.js');
 var ModelSetup = require('./config/setup/models/modelSetup.js');
-
+var ModelMenu = require('./config/setup/models/modelMenu.js');
 //ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var config = require('./config/config');
 var setup = require('./config/setup/routes/setup');
+var menu = require('./config/setup/routes/menu');
 
 var app = express();
 
@@ -63,7 +64,7 @@ app.use('/', routes);
 app.use('/api', users);
 app.use('/config', config);
 app.use('/setup', setup);
-
+app.use('/api', menu);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

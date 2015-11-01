@@ -1,5 +1,4 @@
  angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap'])
-
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {
@@ -120,8 +119,8 @@
  	});
  })
 .controller('bootstrapController',
-  ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  ['$scope', '$location', 'AuthService','bootstrapService',
+  function ($scope, $location, AuthService,bootstrapService) {
     $scope.test = "Menú 1";
     $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
@@ -132,6 +131,10 @@
 	        });
 
 	    };
+
+	    bootstrapService.getMenu().then(function(data) {
+	      $scope.menus = data;
+	    });
 
 }])
 .controller('homeController',
@@ -381,6 +384,31 @@
       return deferred.promise;
 
     }
+
+}])
+.factory('bootstrapService',
+  ['$q', '$http',
+  function ($q, $http) {
+  	return ({
+      getMenu: getMenu,
+    });
+
+
+    function getMenu () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/menu')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
 
 }])
 .factory('loginFactorie', function($http) {
