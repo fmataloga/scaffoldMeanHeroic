@@ -15,12 +15,14 @@ mongoose.connect('mongodb://localhost/meanCase');
 var User = require('./models/Users.js');
 var ModelSetup = require('./config/setup/models/modelSetup.js');
 var ModelMenu = require('./config/setup/models/modelMenu.js');
+var ModelGeneralConfig = require('./config/setup/models/ModelGeneralConfig.js');
 //ROUTES CRUD BY SCAFFOLDMEANHEROIC
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var config = require('./config/config');
 var setup = require('./config/setup/routes/setup');
 var menu = require('./config/setup/routes/menu');
+var generalConfig = require('./config/setup/routes/generalConfig');
 
 var app = express();
 
@@ -65,6 +67,7 @@ app.use('/api', users);
 app.use('/config', config);
 app.use('/setup', setup);
 app.use('/api', menu);
+app.use('/api', generalConfig);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,7 +6,8 @@ var ModelGeneralConfig = new Schema({
     login: String,
     projectName: String,
     username: String,
-    email:String
+    email:String,
+    meanCase:String
 });
 
 module.exports = mongoose.model('ModelGeneralConfig', ModelGeneralConfig);
