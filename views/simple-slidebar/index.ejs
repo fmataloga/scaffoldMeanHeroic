@@ -1,0 +1,86 @@
+<html ng-app="appAngular">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" initial-scale="1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>{{titleWeb}}</title>
+	<!-- Materials icons -->
+	<link href="stylesheets/fontAwesome/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Javascript Libraries -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
+	<script type="text/javascript" src="includes/concat.js"></script>
+	<script type="text/javascript" src="includes/angular-table.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- UI-SELECT -->
+	<script type="text/javascript" src="bower_components/ui-select/dist/select.js"></script>
+	<link rel="stylesheet" type="text/css" href="bower_components/ui-select/dist/select.css">
+	<!-- UI Bootsrap -->
+	<link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<!-- EXTRAS CSS -->
+	<link rel="stylesheet" href="simple-slidebar/css/simple-sidebar.css">
+
+
+</head>
+
+<body>
+
+<div id="wrapper" ng-show="route" ng-controller="bootstrapController">
+	 <!-- #Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#/">
+                       {{logo}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#/">{{user.username}}</a>
+                </li>
+                <li>
+                    <a href="#/crud">Crud Generator</a>
+                </li>
+                <li ng-if="user.rol >2">
+                    <a href="#/userList">User List</a>
+                </li>
+                <li>
+                    <a href=""> Access Test</a>
+                </li>
+                <li ng-repeat="menu in menus">
+                    <a href="#/{{menu.name}}">{{menu.name}}</a>
+                </li>
+                <li>
+                    <a href=""  ng-click='logout()'>LogOut</a>
+                </li>
+            </ul>
+        </div>
+    <!-- /#Sidebar -->
+	<!-- #Proyects views -->
+	<section ng-show="route" id="page-wrapper">
+		<div class="container-fluid">
+                <div class="row">
+                    <ng-view></ng-view>
+                </div>
+            </div>
+	</section>
+
+	<!-- /#Proyects views -->
+
+</div>
+
+<!-- #login -->
+<section ng-show="!route">
+	<ng-view></ng-view>
+</section>
+
+<!-- /#login -->
+</body>
+
+</html>

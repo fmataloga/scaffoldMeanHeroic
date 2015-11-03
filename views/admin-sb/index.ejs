@@ -177,13 +177,10 @@
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
-                                class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                                class="fa fa-fw fa-arrows-v"></i> Menu <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
-                        <li>
-                            <a href="">Dropdown Item</a>
-                        </li>
-                        <li>
-                            <a href="">Dropdown Item</a>
+                        <li ng-repeat="menu in menus">
+                            <a href="#/{{menu.name}}">{{menu.name}}</a>
                         </li>
                     </ul>
                 </li>
