@@ -5,6 +5,9 @@ var fss = require('fs');
 var fs = require('fs-extra');
 var replace = require("replace");
 var ModelMenu = mongoose.model('ModelMenu');
+var unzip = require('unzip');
+var ModelGeneralConfig = mongoose.model('ModelGeneralConfig');
+var ModelSetup = mongoose.model('ModelSetup');
 /* GET home page. */
 router.get('/prueba', function(req, res, next) {
  
@@ -135,6 +138,41 @@ router.post('/cruds', function(req, res, next) {
   	res.status(200).json({status: 'Crud Successful! your route is: ',route:crud});
 });
 
+
+
+router.post('/upload', function(req, res) {
+
+   var path = req.files.file.path
+   var newPath = 'tmp/'+req.body.name+'.zip'
+
+   var is = fss.createReadStream(path)
+   var os = fss.createWriteStream(newPath)
+
+   is.pipe(os)
+
+   is.on('end', function() {
+      //eliminamos el archivo temporal
+      fss.unlinkSync(path)
+   })
+   var layout = new ModelSetup({
+        name: req.body.name,
+        label:((req.body.name).toLowerCase()).replace(/ /g,"-")
+    });
+    layout.save();
+
+    ModelGeneralConfig.findOne({meanCase:"meancase"}, function (err, data) {
+		data.template = req.body.name;
+		data.save();
+	})
+
+   setTimeout(function() {
+   	fss.createReadStream(newPath).pipe(unzip.Extract({ path: 'views/' }));
+    res.send('Upload file success!');
+   }, 8000);
+   
+   
+   
+})
 
 
 module.exports = router;

@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "~1.13.2",
     "connect-history-api-fallback": "^1.1.0",
+    "connect-multiparty": "^2.0.0",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
@@ -38,7 +39,8 @@
     "password-hash": "^1.2.2",
     "path": "^0.12.7",
     "replace": "^0.3.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "unzip": "^0.1.11"
   },
   "devDependencies": {
     "gulp-nodemon": "^2.0.4",

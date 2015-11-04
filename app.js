@@ -9,6 +9,7 @@ var passwordHash = require('password-hash');
 var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
 var expressSession = require('express-session');
+var multipart = require('connect-multiparty');
 
 mongoose.connect('mongodb://localhost/meanCase');
 //MODELS CRUD BY SCAFFOLDMEANHEROIC
@@ -32,6 +33,7 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(multipart());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
