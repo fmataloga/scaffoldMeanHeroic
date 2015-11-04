@@ -8,189 +8,136 @@
     <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,navigation,control arrows, dots"/>
     <meta name="Resource-type" content="Document"/>
 
+    <link rel="stylesheet" type="text/css" href="../../../setup/public/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="../../../bower_components/fullpage.js/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../setup/public/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../setup/public/css/angular-bootstrap-lightbox.min.css"/>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
-    <script type="text/javascript" src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript"
+            src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript"
+            src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/fullpage.js/jquery.fullPage.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../../setup/public/js/angular-bootstrap-lightbox.min.js"></script>
     <script type="text/javascript" src="../../../setup/public/js/scripts.js"></script>
     <script type="text/javascript" src="../../../setup/public/js/setupApp.js"></script>
+
 </head>
 <body ng-controller="setupAppController">
 
 <div id="fullpage">
-    <!-- WELCOME -->
-    <div class="section" id="section0">
-        <div class="container">
-            <div class="row">
-                <img src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
-            </div>
-            <div class="row">
-                <h1>MEANCASE - Heroic</h1>
-<h3>{{greeting}}</h3>
-                <h3>Create your Applications at MAX Speed</h3>
-            </div>
-        </div>
-    </div>
     <!-- Project Settings -->
+    <div class="section " id="section0">
+        <div class="intro">
+            <div class="container">
+                <div class="row ">
+                    <img class="circle" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+                </div>
+                <div class="row">
+                    <h1>MEANCASE - Heroic</h1>
+                    <h3>{{greeting}}</h3>
+                    <h3>Create your Applications at MAX Speed</h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section" id="section1">
-        <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+        <div class="intro">
+            <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
 
-        <div class="container">
-            <div class="row">
-                <h1>Project Settings</h1>
-
-                <h3></h3>
-            </div>
-            <div class="row">
-                <form class="col-md-4 col-md-offset-4">
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="projectName">Project Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Project Name">
+            <div class="container">
+                <div class="row">
+                    <h1>Project Settings</h1>
+                </div>
+                <div class="row">
+                    <form class="col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="projectName">Project Name</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       placeholder="Project Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <h4>User login Authorization</h4>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username">
+                        <div class="row">
+                            <h4>User login Authorization</h4>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                   placeholder="Password">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12" ng-class="{'has-error' : item.password != passwordConfirm }">
+                                    <label for="password" class="bold">Password</label>
+                                    <input name="password" type="password" class="form-control" ng-model="item.password" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12 " ng-class="{'has-error' : item.password != passwordConfirm }">
+                                    <label for="passwordConfirm" class="bold">Password Confirm</label> <span class="alert-danger"
+                                     ng-show="item.password != passwordConfirm">Your passwords do not match!</span>
+                                    <input name="passwordConfirm" type="password" class="form-control"
+                                           ng-model="passwordConfirm" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Confirm Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                   placeholder="Confirm Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Navigation Template -->
     <div class="section" id="section2">
-        <div class="container">
-            <div class="row section-header">
-                <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+        <div class="intro">
+            <div class="container">
+                <div class="row section-header">
+                    <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
 
-                <h1>Navigation Template</h1>
-            </div>
-            <div class="row section-body">
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
-
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
+                    <h1>Navigation Template</h1>
                 </div>
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
-
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
+                <div class="section-body grid" ng-repeat="layout in layouts">
+                    <grid>
+                        <h3>{{layout.name}}</h3>
+                        <a ng-lightbox='{"trigger": "manual", "element": "uu"}'>
+                            <img src="../../../{{layout.label}}/preview.jpg" alt="">
+                        </a>
+                        <div class="lightbox" id="uu">
+                            <img src="../../../{{layout.label}}/preview.jpg" alt="">
+                        </div>
+                        <a href="" ng-class="{'btn-primary': $index == index}" ng-click="selectTemplate(layout, $index)" class="btn btn-default" role="button">
+                            <i class="glyphicon glyphicon-ok-sign"></i>Use</a>
+                    </grid>
                 </div>
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
-
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
-                </div>
+                <h2>Select Your Favorite Template</h2>
             </div>
         </div>
     </div>
-    <!-- Login Template -->
     <div class="section" id="section3">
-        <div class="container">
-            <div class="row section-header">
-                <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
 
-                <h1>Login Template</h1>
-            </div>
-            <div class="row section-body">
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
+        <div class="intro">
+            <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
 
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
+            <div class="container">
+                <div class="row">
+                    <h1>Finishing Configuration</h1>
                 </div>
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
-
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
+                <div class="row">
+                    <form class="col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <img src="../../../setup/public/imgs/thumb.svg" alt="">
-
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i>
-                            Live Preview</a>
-                        <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Use</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Finishing Configuration -->
-    <div class="section" id="section4">
-        <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
-
-        <div class="container">
-            <div class="row">
-                <h1>Finishing Configuration</h1>
-
-                <h3></h3>
-            </div>
-            <div class="row">
-                <form class="col-md-4 col-md-offset-4">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>
