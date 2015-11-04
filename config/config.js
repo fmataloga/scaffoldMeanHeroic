@@ -135,7 +135,10 @@ router.post('/cruds', function(req, res, next) {
 		}
 	})
 	/*		SAVE MENU       */
-  	res.status(200).json({status: 'Crud Successful! your route is: ',route:crud});
+	setTimeout(function() {
+   		res.status(200).json({status: 'Crud Successful! your route is: ',route:crud});
+    }, 10000);
+  	
 });
 
 

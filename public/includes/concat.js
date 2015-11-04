@@ -644,6 +644,7 @@
 .controller('crudController',
     ['$scope','crudService',
         function ($scope,crudService) {
+            $scope.spinner = false;
             $scope.fieldName = [];
             $scope.showOnView = [];
             var stringFields = "";
@@ -697,6 +698,7 @@
             }
 
             $scope.validate = function () {
+                $scope.spinner = true;
                 var cont = 0;
                 angular.forEach($scope.collection, function (value, key) {
                     cont++;
@@ -711,6 +713,7 @@
                     }
                 });
                 crudService.generar($scope.schemeName,stringFields,stringDataTypes,stringShowOnView).then(function(result){
+                    $scope.spinner = false;
                     $scope.result = result;
                 });
             }

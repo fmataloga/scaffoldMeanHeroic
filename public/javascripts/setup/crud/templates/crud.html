@@ -55,6 +55,9 @@
         </tr>
         </tbody>
     </table>
+    <div class="row col-lg-offset-6 col-md-offset-6 col-xs-offset-6" ng-show="spinner" >
+            <i class="fa fa-spinner fa-spin fa-5x position-spinner"></i>
+    </div>
     <div class="alert alert-success" ng-show="result">      {{result.status}} <a href="#/{{result.route}}">{{result.route}}</a>
     </div>
 </form>
