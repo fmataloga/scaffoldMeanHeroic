@@ -1,6 +1,6 @@
 .controller('bootstrapController',
-  ['$scope', '$location', 'AuthService','bootstrapService',
-  function ($scope, $location, AuthService,bootstrapService) {
+  ['$scope', '$location', 'AuthService','bootstrapService','usersModel',
+  function ($scope, $location, AuthService,bootstrapService,usersModel) {
     $scope.test = "Menú 1";
     $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
@@ -12,8 +12,13 @@
 
 	    };
 
-	    bootstrapService.getMenu().then(function(data) {
+	   /* bootstrapService.getMenu().then(function(data) {
 	      $scope.menus = data;
 	    });
-
+	    usersModel.getAll().then(function(result) {
+		  // code depending on result
+		  console.log(result);
+		}).catch(function() {
+		  // an error occurred
+		});	*/    	
 }])

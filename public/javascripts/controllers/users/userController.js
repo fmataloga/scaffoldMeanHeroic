@@ -1,15 +1,18 @@
 .controller('userController',
-  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
-  function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
+  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal','usersModel',
+  function ($rootScope,$scope, $location, userService,$timeout,$uibModal,usersModel) {
     $scope.titleLoginController = "MEAN-CASE SUPER HEROIC";
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     $scope.msjAlert = false;
-    userService.allUsers().then(function(data) {
-            $scope.usersList = data; 
+  
+    usersModel.getAll().then(function(data) {
+            $scope.usersList = JSON.parse(data); 
             $scope.usersTemp = angular.copy($scope.usersList);
-            $scope.preloader = false;      
-    });
+            $scope.preloader = false;
+    }).catch(function() {
+      // an error occurred
+    });     
 
     /*  Modal*/
 

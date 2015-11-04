@@ -119,8 +119,8 @@
  	});
  })
 .controller('bootstrapController',
-  ['$scope', '$location', 'AuthService','bootstrapService',
-  function ($scope, $location, AuthService,bootstrapService) {
+  ['$scope', '$location', 'AuthService','bootstrapService','usersModel',
+  function ($scope, $location, AuthService,bootstrapService,usersModel) {
     $scope.test = "Menú 1";
     $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
@@ -132,17 +132,21 @@
 
 	    };
 
-	    bootstrapService.getMenu().then(function(data) {
+	   /* bootstrapService.getMenu().then(function(data) {
 	      $scope.menus = data;
 	    });
-
+	    usersModel.getAll().then(function(result) {
+		  // code depending on result
+		  console.log(result);
+		}).catch(function() {
+		  // an error occurred
+		});	*/    	
 }])
 .controller('homeController',
   ['$scope', '$location', 'AuthService','$uibModal',
   function ($scope, $location, AuthService,$uibModal) {
     $scope.titleHomeController = "Welcome";
     
-
 }])
 .controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
   function ($rootScope, $scope, $location, AuthService) {
@@ -487,6 +491,11 @@
 
 
     }])
+.service('usersModel', function () {
+	var model = new optimumModel();
+	model.url = '/api/users';
+	return model;
+})
 .controller('modalUserCreateController',
   ['$scope', '$uibModalInstance', 'item','AuthService','userService',
   function ($scope, $uibModalInstance, item,AuthService,userService) {
@@ -544,17 +553,20 @@
 
 }])
 .controller('userController',
-  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal',
-  function ($rootScope,$scope, $location, userService,$timeout,$uibModal) {
+  ['$rootScope','$scope', '$location', 'userService','$timeout','$uibModal','usersModel',
+  function ($rootScope,$scope, $location, userService,$timeout,$uibModal,usersModel) {
     $scope.titleLoginController = "MEAN-CASE SUPER HEROIC";
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     $scope.msjAlert = false;
-    userService.allUsers().then(function(data) {
-            $scope.usersList = data; 
+  
+    usersModel.getAll().then(function(data) {
+            $scope.usersList = JSON.parse(data); 
             $scope.usersTemp = angular.copy($scope.usersList);
-            $scope.preloader = false;      
-    });
+            $scope.preloader = false;
+    }).catch(function() {
+      // an error occurred
+    });     
 
     /*  Modal*/
 
