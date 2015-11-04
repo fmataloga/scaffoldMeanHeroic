@@ -25,10 +25,7 @@
 
 		};
 
-
 		/* REGISTRAR  */
-
-
 		$scope.register = function () {
 
 			// initial values

@@ -171,10 +171,7 @@
 
 		};
 
-
 		/* REGISTRAR  */
-
-
 		$scope.register = function () {
 
 			// initial values
@@ -736,7 +733,7 @@
           defered.resolve(data);
         })
         .error(function (data) {
-          deferred.reject();
+          defered.reject();
         });
         return promise;
     }

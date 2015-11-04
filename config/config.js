@@ -129,15 +129,13 @@ router.post('/cruds', function(req, res, next) {
 	/*		SAVE MENU       */
 	var menu = new ModelMenu();
 	menu.name = crud;
-	menu.save(function (err, menu) {
-		if (err) {
-			return next(err)
-		}
-	})
+	menu.save();
 	/*		SAVE MENU       */
-	setTimeout(function() {
-   		res.status(200).json({status: 'Crud Successful! your route is: ',route:crud});
-    }, 10000);
+
+
+
+   	res.json({status: 'Crud Successful! your route is: ',route:crud});
+
   	
 });
 
