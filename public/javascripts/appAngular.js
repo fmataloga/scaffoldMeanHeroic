@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap','optimumModel'])
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {

@@ -6,13 +6,12 @@
     $scope.preloader = true;
     $scope.msjAlert = false;
   
-    usersModel.getAll().then(function(data) {
-            $scope.usersList = JSON.parse(data); 
+    usersModel.getAll().then(function(data){
+            $scope.usersList = data; 
             $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;
-    }).catch(function() {
-      // an error occurred
-    });     
+    })
+  
 
     /*  Modal*/
 

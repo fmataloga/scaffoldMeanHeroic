@@ -1,5 +1,5 @@
-.service('usersModel', function () {
-	var model = new optimumModel();
+.service('usersModel', function ($optimumModel) {
+	var model = new $optimumModel();
 	model.url = '/api/users';
 	return model;
 })

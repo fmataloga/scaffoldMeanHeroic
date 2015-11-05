@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap','optimumModel'])
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {
@@ -119,8 +119,8 @@
  	});
  })
 .controller('bootstrapController',
-  ['$scope', '$location', 'AuthService','bootstrapService','usersModel',
-  function ($scope, $location, AuthService,bootstrapService,usersModel) {
+  ['$scope', '$location', 'AuthService','bootstrapService',
+  function ($scope, $location, AuthService,bootstrapService) {
     $scope.test = "Menú 1";
     $scope.logo = "MEAN_CASE HEROIC";
          /*  LOGOUT  */
@@ -131,16 +131,9 @@
 	        });
 
 	    };
-
-	   /* bootstrapService.getMenu().then(function(data) {
+	    bootstrapService.getMenu().then(function(data) {
 	      $scope.menus = data;
-	    });
-	    usersModel.getAll().then(function(result) {
-		  // code depending on result
-		  console.log(result);
-		}).catch(function() {
-		  // an error occurred
-		});	*/    	
+	    });		  	
 }])
 .controller('homeController',
   ['$scope', '$location', 'AuthService','$uibModal',
@@ -491,8 +484,8 @@
 
 
     }])
-.service('usersModel', function () {
-	var model = new optimumModel();
+.service('usersModel', function ($optimumModel) {
+	var model = new $optimumModel();
 	model.url = '/api/users';
 	return model;
 })
@@ -560,13 +553,12 @@
     $scope.preloader = true;
     $scope.msjAlert = false;
   
-    usersModel.getAll().then(function(data) {
-            $scope.usersList = JSON.parse(data); 
+    usersModel.getAll().then(function(data){
+            $scope.usersList = data; 
             $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;
-    }).catch(function() {
-      // an error occurred
-    });     
+    })
+  
 
     /*  Modal*/
 

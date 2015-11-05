@@ -1,7 +1,7 @@
 <div class="page-wrapper">
     <div class="row div-padding">
         <button ng-click="open('md')" class="btn btn-default "><i class="fa fa-plus"></i> Create New</button>
-        <li ng-repeat="a in afvs">{{a.username}}</li>
+        {{preloader}}
         <div class="alert alert-{{alert}}" ng-show="msjAlert">{{message}}</div>
     </div>
     <div class="row">
