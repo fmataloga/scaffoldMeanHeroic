@@ -7,14 +7,11 @@
     <meta name="description" content="fullPage full-screen navigation and sections control menu."/>
     <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,navigation,control arrows, dots"/>
     <meta name="Resource-type" content="Document"/>
-
     <link rel="stylesheet" type="text/css" href="../../../setup/public/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="../../../bower_components/fullpage.js/jquery.fullPage.css"/>
     <link rel="stylesheet" type="text/css" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../setup/public/css/angular-bootstrap-lightbox.min.css"/>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript"
             src="../../../bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
     <script type="text/javascript"
@@ -22,10 +19,12 @@
     <script type="text/javascript" src="../../../bower_components/fullpage.js/jquery.fullPage.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="../../../setup/public/js/angular-bootstrap-lightbox.min.js"></script>
     <script type="text/javascript" src="../../../setup/public/js/scripts.js"></script>
     <script type="text/javascript" src="../../../setup/public/js/setupApp.js"></script>
-
+    <script type="text/javascript"
+            src="../../../bower_components/ngBootbox/dist/ngBootbox.js"></script>
+    <script type="text/javascript"
+            src="../../../bower_components/bootbox/bootbox.js"></script>
 </head>
 <body ng-controller="setupAppController">
 
@@ -38,9 +37,8 @@
                     <img class="circle" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
                 </div>
                 <div class="row">
-                    <h1>MEANCASE - Heroic</h1>
-                    <h3>{{greeting}}</h3>
-                    <h3>Create your Applications at MAX Speed</h3>
+                    <h1>MEANCASE - SuperHeroic</h1>
+                    <h4>Create your Applications at MAX Speed</h4>
                 </div>
             </div>
         </div>
@@ -56,45 +54,60 @@
                 <div class="row">
                     <form class="col-md-4 col-md-offset-4">
                         <div class="row">
+                            <!-- Project Name-->
                             <div class="form-group">
-                                <label for="projectName">Project Name</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       placeholder="Project Name">
+                                <h4>Project Name</h4>
+                                <input ng-model="projectName" ng-change="validate()" type="text" class="form-control"
+                                       id="exampleInputEmail1">
+
                             </div>
                         </div>
                         <div class="row">
                             <h4>User login Authorization</h4>
                         </div>
                         <div class="row">
+                            <!-- UserName -->
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
+                                <input ng-model="username" ng-change="validate()" type="text" class="form-control"
+                                       id="exampleInputEmail1">
                             </div>
+                            <!-- Password -->
                             <div class="row">
-                                <div class="form-group col-md-12" ng-class="{'has-error' : item.password != passwordConfirm }">
+                                <div class="form-group col-md-12"
+                                     ng-class="{'has-error' : password != passwordConfirm }">
                                     <label for="password" class="bold">Password</label>
-                                    <input name="password" type="password" class="form-control" ng-model="item.password" required>
+                                    <input ng-model="password" ng-change="validate()" name="password" type="password"
+                                           class="form-control">
                                 </div>
                             </div>
+                            <!-- Password Confirm -->
                             <div class="row">
-                                <div class="form-group col-md-12 " ng-class="{'has-error' : item.password != passwordConfirm }">
-                                    <label for="passwordConfirm" class="bold">Password Confirm</label> <span class="alert-danger"
-                                     ng-show="item.password != passwordConfirm">Your passwords do not match!</span>
-                                    <input name="passwordConfirm" type="password" class="form-control"
-                                           ng-model="passwordConfirm" required>
+                                <div class="form-group col-md-12 "
+                                     ng-class="{'has-error' : password != passwordConfirm }">
+                                    <label for="passwordConfirm" class="bold">Password Confirm</label> <span
+                                            class="alert-danger"
+                                            ng-show="password != passwordConfirm">Your passwords do not match!</span>
+                                    <input ng-model="passwordConfirm" ng-change="validate()" name="passwordConfirm"
+                                           type="password"
+                                           class="form-control">
                                 </div>
                             </div>
+                            <!-- Email -->
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" required>
+                                <label for="email">Email</label><span
+                                        class="alert-danger"
+                                        ng-show="!ve"> Email Invalid!</span>
+                                <input ng-model="email" ng-change="valEmail()" type="text" class="form-control"
+                                       id="exampleInputPassword1">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <!--Navigation Templates-->
     <div class="section" id="section2">
         <div class="intro">
             <div class="container">
@@ -106,24 +119,27 @@
                 <div class="section-body grid" ng-repeat="layout in layouts">
                     <grid>
                         <h3>{{layout.name}}</h3>
-                        <a ng-lightbox='{"trigger": "manual", "element": "uu"}'>
-                            <img src="../../../{{layout.label}}/preview.jpg" alt="">
-                        </a>
-                        <div class="lightbox" id="uu">
-                            <img src="../../../{{layout.label}}/preview.jpg" alt="">
-                        </div>
-                        <a href="" ng-class="{'btn-primary': $index == index}" ng-click="selectTemplate(layout, $index)" class="btn btn-default" role="button">
-                            <i class="glyphicon glyphicon-ok-sign"></i>Use</a>
+                        <img class="gridImg" ng-bootbox-title="{{layout.name}}"
+                             ng-bootbox-custom-dialog='<img class="modalImg" src="../../../{{layout.label}}/preview.jpg" alt="{{layout.name}}"/>'
+                             ng-bootbox-class-name="some-class"
+                             src="../../../{{layout.label}}/preview.jpg" alt="{{layout.name}}"/>
+                        <button ng-class="{'btn-primary': $index == index}"
+                                ng-click="selectTemplate(layout, $index)"
+                                class="btn btn-default" role="button"
+                                ng-model="template">
+                            <i class="glyphicon glyphicon-ok-sign"></i>Use
+                        </button>
                     </grid>
                 </div>
                 <h2>Select Your Favorite Template</h2>
             </div>
         </div>
     </div>
+    <!--Finishing Configuration-->
     <div class="section" id="section3">
 
         <div class="intro">
-            <img class="logo" src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
+            <img src="../../../setup/public/imgs/MEAN%20LOGO.png" alt="MEANCASE">
 
             <div class="container">
                 <div class="row">
@@ -131,7 +147,9 @@
                 </div>
                 <div class="row">
                     <form class="col-md-4 col-md-offset-4">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button ng-disabled="submitBtn" ng-click="setupConfig()" type="submit" class="btn btn-default">
+                            Submit
+                        </button>
                     </form>
                 </div>
             </div>

@@ -24,6 +24,8 @@
     "angular-bootstrap": "~0.14.2",
     "angular-sanitize": "~1.4.7",
     "ui-select": "angular-ui-select#~0.13.2",
-    "fullpage.js": "~2.7.4"
+    "fullpage.js": "~2.7.4",
+    "ngBootbox": "~0.1.2",
+    "bootbox.js": "bootbox#~4.4.0"
   }
 }
