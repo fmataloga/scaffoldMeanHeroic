@@ -69,7 +69,7 @@
 	<!-- #Proyects views -->
 	<section ng-show="route" id="page-wrapper">
 		<div class="container-fluid">
-                <div class="row">
+                <div class="row wrapper-content">
                     <ng-view></ng-view>
                 </div>
             </div>
@@ -81,9 +81,18 @@
 
 <!-- #login -->
 <section ng-show="!route">
-	<ng-view></ng-view>
+    <div class="wrapper-content">
+        <ng-view></ng-view>
+    </div>
 </section>
 
+<script>
+    $( document ).ready(function() {
+    $('.dropdown-toggle').dropdown()
+
+    });
+
+</script>
 <!-- /#login -->
 </body>
 

@@ -11,9 +11,9 @@ body {
 #wrapper {
     width: 100%;
 }
-
-#page-wrapper {
-    padding: 0 15px;
+/* Page Content*/
+div #page-wrapper {
+    padding: 25px;
     min-height: 568px;
     background-color: #fff;
 }
