@@ -1,11 +1,11 @@
 var myApp = angular.module('setupApp', ['ngBootbox']);
 
-myApp.controller('setupAppController', ['$scope', 'setupInitService', '$ngBootbox', function ($scope, setupInitService, $ngBootbox) {
+myApp.controller('setupAppController', ['$scope', 'setupInitService', '$ngBootbox','$window', function ($scope, setupInitService, $ngBootbox,$window) {
     $scope.templateClass = false;
     $scope.submitBtn = true;
     $scope.re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     $scope.ve = true;
-
+    $scope.msjAlert = false;
     $scope.validate = function () {
         if(!$scope.projectName ||  !$scope.username || !$scope.password || !$scope.passwordConfirm || !$scope.ve || ($scope.password != $scope.passwordConfirm) || !$scope.template){
             $scope.submitBtn = true;
@@ -31,11 +31,15 @@ myApp.controller('setupAppController', ['$scope', 'setupInitService', '$ngBootbo
     };
 
     $scope.setupConfig = function () {
-        console.log($scope.projectName);
-        console.log($scope.username);
-        console.log($scope.password);
-        console.log($scope.email);
-        console.log($scope.template);
+        setupInitService.setValues($scope.projectName,$scope.username,$scope.password,$scope.email,$scope.template.label).then(function(result){
+            console.log(result);
+            if(result == true){
+                $window.location.reload();
+            }else{
+               $scope.msjAlert = true; 
+               $scope.message = "An error has ocurred!";
+            }
+        });
     };
 
 }]);
@@ -44,7 +48,8 @@ myApp.factory('setupInitService',
     ['$q', '$http',
         function ($q, $http) {
             return ({
-                allLayouts: allLayouts
+                allLayouts: allLayouts,
+                setValues : setValues
             });
 
             function allLayouts() {
@@ -61,4 +66,23 @@ myApp.factory('setupInitService',
 
                 return promise;
             }
-        }]);
+
+            function setValues(projectName,username,password,email,template) {
+              var deferred = $q.defer();
+              $http.post('/setup/setValues', {projectName: projectName,username: username, password: password,email:email,template:template})
+                .success(function (data, status) {
+                    deferred.resolve(data);
+                })
+                .error(function (data) {
+                  deferred.reject();
+                });
+                return deferred.promise;
+
+            }
+
+
+
+
+
+
+}]);
