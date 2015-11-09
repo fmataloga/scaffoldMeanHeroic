@@ -4727,3 +4727,6 @@ table.text-center th {
     white-space: normal!important;
   }
 }
+.pad{
+  padding: 10px;
+}
