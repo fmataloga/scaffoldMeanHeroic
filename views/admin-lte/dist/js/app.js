@@ -10,6 +10,10 @@
  * @version 2.3.0
  * @license MIT <http://opensource.org/licenses/MIT>
  */
+$( document ).ready(function() {
+  $('.dropdown-toggle').dropdown();
+  console.log( "ready!" );
+});
 
 //Make sure jQuery has been loaded before app.js
 if (typeof jQuery === "undefined") {
