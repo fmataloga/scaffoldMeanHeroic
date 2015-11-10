@@ -13,7 +13,9 @@
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-
+    <!-- BootBox -->
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
 	<!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
 	<script type="text/javascript" src="includes/concat.js"></script>
 	<script type="text/javascript" src="includes/angular-table.min.js"></script>
@@ -277,18 +279,6 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#/crud"><i class="fa fa-dashboard fa-fw"></i> Crud Generator</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Templates<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#/uploadTemplates">Upload Template</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
                             <a href="#/userList"><i class="fa fa-table fa-fw"></i> User List</a>
                         </li>
                         <li>
@@ -366,8 +356,29 @@
 <section ng-show="!route">
 	<ng-view></ng-view>
 </section>
-
 <!-- /#login -->
+
+<footer id="footer" ng-show="route" ng-if="user.rol == 5">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#"><img class="logoMean" src="../../../setup/public/imgs/meanlogowhite.png" alt="MEANCASE"></a></li>
+
+            <li class="dropup" role="presentation">
+                <a class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-paint-brush"></i> Templates
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#/uploadTemplates">Upload Template</a></li>
+                    <li><a href="#/selectTemplates">Change Template</a></li>
+                </ul>
+            </li>
+            <li role="presentation"><a href="#/crud"><i class="fa fa-archive"></i> Crud Generator</a></li>
+
+        </ul>
+    </div>
+</footer>
 </body>
 
 </html>

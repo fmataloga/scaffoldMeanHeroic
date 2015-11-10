@@ -19,13 +19,14 @@
     <link rel="stylesheet" href="admin-lte/dist/css/skins/_all-skins.min.css">
     <!-- jQuery 2.1.4 -->
     <script src="admin-lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <!--<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
     <!-- Javascript Libraries -->
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="includes/optimumModel.js"></script>
+    <!-- BootBox -->
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
     <script type="text/javascript" src="includes/concat.js"></script>
     <script type="text/javascript" src="includes/angular-table.min.js"></script>
@@ -37,12 +38,6 @@
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="admin-lte/bootstrap/js/bootstrap.min.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- AdminLTE App -->
@@ -395,6 +390,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#/uploadTemplates"><i class="fa fa-circle-o"></i> Upload Template</a></li>
+                        <li><a href="#/selectTemplates"><i class="fa fa-circle-o"></i> Select Template</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -470,7 +466,8 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="#/crud"><i class="fa fa-circle-o"></i> Crud Generator</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Theme Selection</a></li>
+                <li><a href="#/selectTemplates"><i class="fa fa-circle-o"></i> Change Template</a></li>
+                <li><a href="#/uploadTemplates"><i class="fa fa-circle-o"></i> Upload Template</a></li>
             </ul>
         </li>
     </aside>

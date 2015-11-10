@@ -12,7 +12,9 @@
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-
+    <!-- BootBox -->
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
     <script type="text/javascript" src="includes/concat.js"></script>
     <script type="text/javascript" src="includes/angular-table.min.js"></script>
@@ -315,12 +317,6 @@
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="">
-                    <a class="" href="#/crud">
-                        <i class="icon_house_alt"></i>
-                        <span>Crud Generator</span>
-                    </a>
-                </li>
                 <li class="sub-menu">
                     <a href="" class="">
                         <i class="icon_document_alt"></i>
@@ -356,18 +352,6 @@
                     </a>
 
                 </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;" class="">
-                        <i class="icon_table"></i>
-                        <span>Templates</span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="#/uploadTemplates">Upload Template</a></li>
-                    </ul>
-                </li>
-
                 <li class="sub-menu ">
                     <a href="" class="">
                         <i class="icon_documents_alt"></i>
@@ -375,10 +359,10 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="profile.html">Profile</a></li>
-                        <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                        <li><a class="active" href="blank.html">Blank Page</a></li>
-                        <li><a class="" href="404.html">404 Error</a></li>
+                        <li><a class="" href="">Profile</a></li>
+                        <li><a class="" href=""><span>Login Page</span></a></li>
+                        <li><a class="" href="">Blank Page</a></li>
+                        <li><a class="" href="">404 Error</a></li>
                     </ul>
                 </li>
 
@@ -406,8 +390,29 @@
 <section ng-show="!route">
     <ng-view></ng-view>
 </section>
-
 <!-- /#login -->
+
+<footer id="footer" ng-show="route" ng-if="user.rol == 5">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#"><img class="logoMean" src="../../../setup/public/imgs/meanlogowhite.png" alt="MEANCASE"></a></li>
+
+            <li class="dropup" role="presentation">
+                <a class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-paint-brush"></i> Templates
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#/uploadTemplates">Upload Template</a></li>
+                    <li><a href="#/selectTemplates">Change Template</a></li>
+                </ul>
+            </li>
+            <li role="presentation"><a href="#/crud"><i class="fa fa-archive"></i> Crud Generator</a></li>
+
+        </ul>
+    </div>
+</footer>
 </body>
 
 </html>

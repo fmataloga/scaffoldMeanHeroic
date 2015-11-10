@@ -175,5 +175,19 @@ router.post('/upload', function(req, res) {
    
 })
 
+router.put('/updateTemplate', function (req, res) {
+	ModelGeneralConfig.findOne({meanCase:"meancase"}, function (err, data) {
+		data.template = req.body.template;
+		data.save(function (err) {
+			if (err) {
+				res.send(err)
+			}
+
+			res.send(true);
+		})
+	})
+})
+
+
 
 module.exports = router;
