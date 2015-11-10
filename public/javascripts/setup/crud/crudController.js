@@ -1,6 +1,6 @@
 .controller('crudController',
-    ['$scope','crudService',
-        function ($scope,crudService) {
+    ['$scope', 'crudService',
+        function ($scope, crudService) {
             $scope.spinner = false;
             $scope.fieldName = [];
             $scope.showOnView = [];
@@ -69,7 +69,7 @@
                         stringShowOnView += value.showOnView;
                     }
                 });
-                crudService.generar($scope.schemeName,stringFields,stringDataTypes,stringShowOnView).then(function(result){
+                crudService.generar($scope.schemeName, stringFields, stringDataTypes, stringShowOnView).then(function (result) {
                     $scope.spinner = false;
                     $scope.result = result;
                 });

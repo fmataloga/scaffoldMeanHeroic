@@ -15,7 +15,9 @@
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-
+    <!-- BootBox -->
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
     <script type="text/javascript" src="includes/concat.js"></script>
     <script type="text/javascript" src="includes/jquery-extras.js"></script>
@@ -50,7 +52,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#/">{{logo}}</a>
-</div>
+        </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
@@ -168,9 +170,6 @@
                     <a href="#/userList"><i class="fa fa-fw fa-table"></i> User List</a>
                 </li>
                 <li>
-                    <a href="#/crud"><i class="fa fa-fw fa-edit"></i>Crud Generator</a>
-                </li>
-                <li>
                     <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                 </li>
                 <li>
@@ -184,9 +183,6 @@
                             <a href="#/{{menu.name}}">{{menu.name}}</a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="#/uploadTemplates"><i class="fa fa-fw fa-file"></i> Upload Template</a>
                 </li>
                 <li>
                     <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
@@ -214,8 +210,29 @@
 <section ng-show="!route">
     <ng-view></ng-view>
 </section>
-
 <!-- /#login -->
+<footer id="footer" ng-show="route" ng-if="user.rol == 5">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#"><img class="logoMean" src="../../../setup/public/imgs/meanlogowhite.png" alt="MEANCASE"></a></li>
+
+            <li class="dropup" role="presentation">
+                <a class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-paint-brush"></i> Templates
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#/uploadTemplates">Upload Template</a></li>
+                    <li><a href="#/selectTemplates">Change Template</a></li>
+                </ul>
+            </li>
+            <li role="presentation"><a href="#/crud"><i class="fa fa-archive"></i> Crud Generator</a></li>
+
+        </ul>
+    </div>
+</footer>
+
 </body>
 
 </html>

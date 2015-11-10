@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table','ui.bootstrap','optimumModel'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ngBootbox','ui.bootstrap','optimumModel'])
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {
@@ -643,8 +643,8 @@
 
 }])
 .controller('crudController',
-    ['$scope','crudService',
-        function ($scope,crudService) {
+    ['$scope', 'crudService',
+        function ($scope, crudService) {
             $scope.spinner = false;
             $scope.fieldName = [];
             $scope.showOnView = [];
@@ -713,7 +713,7 @@
                         stringShowOnView += value.showOnView;
                     }
                 });
-                crudService.generar($scope.schemeName,stringFields,stringDataTypes,stringShowOnView).then(function(result){
+                crudService.generar($scope.schemeName, stringFields, stringDataTypes, stringShowOnView).then(function (result) {
                     $scope.spinner = false;
                     $scope.result = result;
                 });
@@ -744,14 +744,6 @@
 }])
 .config(function ($routeProvider) {
  	$routeProvider
- 		.when('/setup', {
- 			templateUrl: '/javascripts/setup/crud/templates/setup.html',
- 			controller: 'crudController',
- 			access: {
- 				restricted: true,
- 				rol: 1
- 			}
- 		})
  		.when('/crud', {
  		    templateUrl: '/javascripts/setup/crud/templates/crud.html',
  			controller: 'crudController',
@@ -761,6 +753,69 @@
  			}
  		});
  })
+.controller('selectTemplatesController', ['$scope', 'templateFactory','$ngBootbox','$window','$route', function ($scope, templateFactory,$window,$route) {
+    templateFactory.allLayouts().then(function (data) {
+        $scope.layouts = data;
+    });
+    $scope.selectTemplate = function (layout, index) {
+        $scope.template = layout;
+        $scope.index = index;
+        templateFactory.setValue(layout.label).then(function(result){
+            if(result == true){
+                $window.location.reload();
+            }
+        });
+    };
+}])
+    .factory('templateFactory', ['$q', '$http', function ($q, $http) {
+        return ({
+            allLayouts: allLayouts,
+            setValue: setValue
+        });
+
+        function allLayouts() {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.get('/setup/layouts')
+                .success(function (data) {
+                    defered.resolve(data);
+                })
+                .error(function (err) {
+                    defered.reject(err)
+                });
+
+            return promise;
+        }
+
+        function setValue(template) {
+            var deferred = $q.defer();
+            $http.put('/config/updateTemplate', {
+                template: template
+            })
+                .success(function (data, status) {
+                    deferred.resolve(data);
+                })
+                .error(function (data) {
+                    deferred.reject();
+                });
+            return deferred.promise;
+
+        }
+    }])
+.config(function ($routeProvider) {
+ 	$routeProvider
+ 		.when('/selectTemplates', {
+ 			templateUrl: '/javascripts/setup/selectTemplates/templates/selectTemplates.html',
+ 			controller: 'selectTemplatesController',
+ 			access: {
+ 				restricted: false,
+ 				rol: 1
+ 			}
+ 		});
+ })
+
+
 .controller('uploadTemplatesController',
     ['$scope','uploadTemplatesService',
         function ($scope,uploadTemplatesService) {

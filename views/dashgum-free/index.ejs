@@ -13,11 +13,13 @@
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-
+    <!-- BootBox -->
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
 	<!-- This Script concatenate all the file in the  folder /public/javascripts/ -->
 	<script type="text/javascript" src="includes/concat.js"></script>
 	<script type="text/javascript" src="includes/angular-table.min.js"></script>
-  <script type="text/javascript" src="includes/optimumModel.js"></script>
+    <script type="text/javascript" src="includes/optimumModel.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- UI-SELECT -->
 	<script type="text/javascript" src="bower_components/ui-select/dist/select.js"></script>
@@ -66,7 +68,7 @@
                                 <p class="green">You have 4 pending tasks</p>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="#">
                                     <div class="task-info">
                                         <div class="desc">DashGum Admin Panel</div>
                                         <div class="percent">40%</div>
@@ -79,7 +81,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <div class="task-info">
                                         <div class="desc">Database Update</div>
                                         <div class="percent">60%</div>
@@ -92,7 +94,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <div class="task-info">
                                         <div class="desc">Product Development</div>
                                         <div class="percent">80%</div>
@@ -105,7 +107,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <div class="task-info">
                                         <div class="desc">Payments Sent</div>
                                         <div class="percent">70%</div>
@@ -135,7 +137,7 @@
                                 <p class="green">You have 5 new messages</p>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <span class="photo"><img alt="avatar" src="dashgum-free/img/ui-zac.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Zac Snider</span>
@@ -147,7 +149,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <span class="photo"><img alt="avatar" src="dashgum-free/img/ui-divya.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Divya Manian</span>
@@ -159,7 +161,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <span class="photo"><img alt="avatar" src="dashgum-free/img/ui-danro.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dan Rogers</span>
@@ -171,7 +173,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a href="">
                                     <span class="photo"><img alt="avatar" src="dashgum-free/img/ui-sherman.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dj Sherman</span>
@@ -183,7 +185,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html#">See all messages</a>
+                                <a href="">See all messages</a>
                             </li>
                         </ul>
                     </li>
@@ -210,28 +212,21 @@
               
               	  <p class="centered"><a href="#/"><img src="dashgum-free/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">{{user.username}}</h5>
-              	  	
-                  <li class="mt">
-                      <a href="#/crud">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Crud Generator</span>
-                      </a>
-                  </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="" >
                           <i class="fa fa-desktop"></i>
                           <span>User</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="#/userList">User List</a></li>
                           <li ng-if="user.rol >2"><a  href="">Access Test</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
+                          <li><a  href="">Panels</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="" >
                           <i class="fa fa-cogs"></i>
                           <span>Menu</span>
                       </a>
@@ -240,43 +235,34 @@
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a class="active" href="" >
                           <i class="fa fa-book"></i>
                           <span>Extra Pages</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                          <li class="active"><a  href="">Blank Page</a></li>
+                          <li><a  href="">Login</a></li>
+                          <li><a  href="">Lock Screen</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-tasks"></i>
-                          <span>Templates</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="#/uploadTemplates">Upload Template</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="" >
                           <i class="fa fa-th"></i>
                           <span>Data Tables</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
+                          <li><a  href="">Basic Table</a></li>
+                          <li><a  href="">Responsive Table</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="" >
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>Charts</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="">Morris</a></li>
+                          <li><a  href="">Chartjs</a></li>
                       </ul>
                   </li>
 
@@ -297,16 +283,28 @@
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
-      <!--footer start-->
-      <footer class="site-footer">
-          <div class="text-center">
-              2015 - Fernando Saavedra
-              <a href="blank.html#" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      <!--footer end-->
+
+    <footer id="footer" ng-show="route" ng-if="user.rol == 5">
+        <div class="container-fluid">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="#"><img class="logoMean" src="../../../setup/public/imgs/meanlogowhite.png" alt="MEANCASE"></a></li>
+
+                <li class="dropup" role="presentation">
+                    <a class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-paint-brush"></i> Templates
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a href="#/uploadTemplates">Upload Template</a></li>
+                        <li><a href="#/selectTemplates">Change Template</a></li>
+                    </ul>
+                </li>
+                <li role="presentation"><a href="#/crud"><i class="fa fa-archive"></i> Crud Generator</a></li>
+
+            </ul>
+        </div>
+    </footer>
   </section>
 
 </div>
