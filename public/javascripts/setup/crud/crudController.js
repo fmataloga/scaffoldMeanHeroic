@@ -54,6 +54,10 @@
                 $scope.collection.splice(index, 1);
             }
 
+            $scope.refresh = function(){
+                 location.reload();
+            }
+
             $scope.validate = function () {
                 $scope.spinner = true;
                 var cont = 0;
@@ -72,7 +76,6 @@
                 crudService.generar($scope.schemeName, stringFields, stringDataTypes, stringShowOnView).then(function (result) {
                     $scope.spinner = false;
                     $scope.result = result;
-                    location.reload();
                 });
             }
 

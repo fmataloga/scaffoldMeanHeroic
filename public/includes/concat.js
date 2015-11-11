@@ -118,211 +118,6 @@
  		});
  	});
  })
-.factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    // create user variable
-    var user = null;
-
-    // return available functions for use in controller
-    return ({
-      isLoggedIn: isLoggedIn,
-      login: login,
-      logout: logout,
-      register: register
-    });
-
-    function isLoggedIn() {
-        if(user) {
-          return true;
-        } else {
-          return false;
-        }
-    }
-
-
-    function login(username, password,check) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/login', {username: username, password: password,check: check})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            user = true;
-            deferred.resolve();
-          } else {
-            user = false;
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function logout() {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a get request to the server
-      $http.get('/api/logout')
-        // handle success
-        .success(function (data) {
-          user = false;
-          deferred.resolve();
-        })
-        // handle error
-        .error(function (data) {
-          user = false;
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-    function register(username, password,rol) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.post('/api/register', {username: username, password: password,rol:rol})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-}])
-.factory('bootstrapService',
-  ['$q', '$http',
-  function ($q, $http) {
-  	return ({
-      getMenu: getMenu,
-    });
-
-
-    function getMenu () {
-        var defered = $q.defer();
-        var promise = defered.promise;
-
-        $http.get('/api/menu')
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-
-}])
-.factory('loginFactorie', function($http) {
-        var comun = {};
-
-
-        return comun;
-    })
-.factory('userService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
-
-    
-
-    // return available functions for use in controller
-    return ({
-      allUsers: allUsers,
-      deleteUser : deleteUser,
-      editUser   : editUser
-    });
-
-
-    function allUsers () {
-        var defered = $q.defer();
-        var promise = defered.promise;
-
-        $http.get('/api/users')
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-    function deleteUser (id) {
-      var defered = $q.defer();
-      var promise = defered.promise;
-      $http.delete('/api/users/' + id)
-        .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
-
-        return promise;
-    }
-
-   function editUser(username,newUsername, password,rol) {
-
-      // create a new instance of deferred
-      var deferred = $q.defer();
-
-      // send a post request to the server
-      $http.put('/api/register', {username: username,newUsername: newUsername, password: password,rol:rol})
-        // handle success
-        .success(function (data, status) {
-          if(status === 200 && data.status){
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
-        })
-        // handle error
-        .error(function (data) {
-          deferred.reject();
-        });
-
-      // return promise object
-      return deferred.promise;
-
-    }
-
-
-
-
-
-    }])
 .controller('bootstrapController',
   ['$scope', '$location', 'AuthService','bootstrapService','usersModel',
   function ($scope, $location, AuthService,bootstrapService,usersModel) {
@@ -501,6 +296,323 @@
 
 
 }])
+.factory('AuthService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    // create user variable
+    var user = null;
+
+    // return available functions for use in controller
+    return ({
+      isLoggedIn: isLoggedIn,
+      login: login,
+      logout: logout,
+      register: register
+    });
+
+    function isLoggedIn() {
+        if(user) {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+
+    function login(username, password,check) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/login', {username: username, password: password,check: check})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            user = true;
+            deferred.resolve();
+          } else {
+            user = false;
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function logout() {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a get request to the server
+      $http.get('/api/logout')
+        // handle success
+        .success(function (data) {
+          user = false;
+          deferred.resolve();
+        })
+        // handle error
+        .error(function (data) {
+          user = false;
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+    function register(username, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.post('/api/register', {username: username, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+}])
+.factory('autosService',
+  ['$q', '$http',
+  function ($q, $http) {
+    return ({
+      allautos: allautos,
+      create: create,
+      del : del,
+      edit   : edit
+    });
+    function allautos () {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.get('/api/autos')
+        .success(function(data) {
+          defered.resolve(data);
+        })
+        .error(function(err) {
+          defered.reject(err)
+        });
+      return promise;
+    }
+    function del (id) {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.delete('/api/autos/' + id)
+        .success(function(data) {
+           defered.resolve(data);
+        })
+        .error(function(err) {
+          defered.reject(err)
+        });
+      return promise;
+    }
+    function create(nombre) {
+      var deferred = $q.defer();
+       $http.post('/api/autos', {nombre: nombre})
+        .success(function (data, status) {
+          deferred.resolve(data);
+       })
+        .error(function (data) {
+          deferred.reject(data);
+        });
+      return deferred.promise;
+    }
+    function edit(nombre,id) {
+      var deferred = $q.defer();
+       $http.put('/api/autos/'+id, {nombre: nombre})
+        .success(function (data, status) {
+          deferred.resolve(data);
+        })
+        .error(function (data) {
+          deferred.reject(data);
+        });
+      return deferred.promise;
+    }
+}])
+.factory('bootstrapService',
+  ['$q', '$http',
+  function ($q, $http) {
+  	return ({
+      getMenu: getMenu,
+    });
+
+
+    function getMenu () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/menu')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+
+}])
+.factory('loginFactorie', function($http) {
+        var comun = {};
+
+
+        return comun;
+    })
+.factory('personasService',
+  ['$q', '$http',
+  function ($q, $http) {
+    return ({
+      allpersonas: allpersonas,
+      create: create,
+      del : del,
+      edit   : edit
+    });
+    function allpersonas () {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.get('/api/personas')
+        .success(function(data) {
+          defered.resolve(data);
+        })
+        .error(function(err) {
+          defered.reject(err)
+        });
+      return promise;
+    }
+    function del (id) {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.delete('/api/personas/' + id)
+        .success(function(data) {
+           defered.resolve(data);
+        })
+        .error(function(err) {
+          defered.reject(err)
+        });
+      return promise;
+    }
+    function create(nombres,apellidos) {
+      var deferred = $q.defer();
+       $http.post('/api/personas', {nombres: nombres,apellidos: apellidos})
+        .success(function (data, status) {
+          deferred.resolve(data);
+       })
+        .error(function (data) {
+          deferred.reject(data);
+        });
+      return deferred.promise;
+    }
+    function edit(nombres,apellidos,id) {
+      var deferred = $q.defer();
+       $http.put('/api/personas/'+id, {nombres: nombres,apellidos: apellidos})
+        .success(function (data, status) {
+          deferred.resolve(data);
+        })
+        .error(function (data) {
+          deferred.reject(data);
+        });
+      return deferred.promise;
+    }
+}])
+.factory('userService',
+  ['$q', '$timeout', '$http',
+  function ($q, $timeout, $http) {
+
+    
+
+    // return available functions for use in controller
+    return ({
+      allUsers: allUsers,
+      deleteUser : deleteUser,
+      editUser   : editUser
+    });
+
+
+    function allUsers () {
+        var defered = $q.defer();
+        var promise = defered.promise;
+
+        $http.get('/api/users')
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+    function deleteUser (id) {
+      var defered = $q.defer();
+      var promise = defered.promise;
+      $http.delete('/api/users/' + id)
+        .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
+            });
+
+        return promise;
+    }
+
+   function editUser(username,newUsername, password,rol) {
+
+      // create a new instance of deferred
+      var deferred = $q.defer();
+
+      // send a post request to the server
+      $http.put('/api/register', {username: username,newUsername: newUsername, password: password,rol:rol})
+        // handle success
+        .success(function (data, status) {
+          if(status === 200 && data.status){
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        // handle error
+        .error(function (data) {
+          deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+
+    }
+
+
+
+
+
+    }])
 .service('usersModel', function ($optimumModel) {
 	var model = new $optimumModel();
 	model.url = '/api/users';
@@ -508,6 +620,224 @@
 	return model;
 })
 
+.controller('autosController',
+  ['$rootScope','$scope', '$location', 'autosService','$uibModal',
+  function ($rootScope,$scope, $location, autosService,$uibModal) {
+    $scope.titleController = 'MEAN-CASE SUPER HEROIC';
+    $rootScope.titleWeb = 'autos';
+    $scope.preloader = true;
+    $scope.msjAlert = false;
+    autosService.allautos().then(function(data) {
+      $scope.autosList = data;
+      $scope.autosTemp = angular.copy($scope.autosList);
+      $scope.preloader = false;
+    });
+    /*  Modal */
+     $scope.open = function (item) {
+       var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/autos/modalCreate.html',
+        controller: 'modalautosCreateController',
+        size: 'lg',
+        resolve: {
+         item: function () {
+          return item;
+         }
+        }
+      });
+      modalInstance.result.then(function(data) {
+        if(!item) {
+           $scope.autosList.push(data);
+           $scope.autosTemp = angular.copy($scope.autosList);
+        }
+      },function(result){
+      $scope.autosList = $scope.autosTemp;
+      $scope.autosTemp = angular.copy($scope.autosList);
+    });
+  };
+  /*  Delete  */
+  $scope.openDelete = function (item) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'templates/autos/modalDelete.html',
+      controller: 'modalautosDeleteController',
+      size: 'lg',
+      resolve: {
+        item: function () {
+           return item;
+        }
+      }
+    });
+    modalInstance.result.then(function(data) {
+      var idx = $scope.autosList.indexOf(data);
+      $scope.autosList.splice(idx, 1);
+      autosService
+        .del(data._id)
+        .then(function(result) {
+          $scope.msjAlert = true;
+          $scope.alert = 'success';
+          $scope.message = result.message;
+        })
+        .catch(function(err) {
+          $scope.msjAlert = true;
+          $scope.alert = 'danger';
+          $scope.message = 'Error '+err;
+        })
+      });
+    };
+}])
+.controller('modalautosCreateController',
+  ['$scope', '$uibModalInstance', 'item','autosService',
+  function ($scope, $uibModalInstance, item,autosService) {
+    $scope.item = item;
+    $scope.saving = false;
+    $scope.save = function () {
+      if(!item){
+        $scope.saving = true;
+        item = {nombre: $scope.item.nombre};
+        autosService.create($scope.item.nombre).then(function(r){
+          $scope.saving = false;
+          $uibModalInstance.close(r);
+        });
+      }else{
+        autosService.edit($scope.item.nombre,$scope.item._id).then(function(r){
+         $scope.saving = false;
+          $uibModalInstance.close(item);
+        });
+      }
+    };
+}])
+.controller('modalautosDeleteController',
+  ['$scope', '$uibModalInstance', 'item',
+  function ($scope, $uibModalInstance, item) {
+    $scope.item = item;
+    $scope.ok = function () {
+      $uibModalInstance.close($scope.item);
+    };
+    $scope.cancel = function () {
+       $uibModalInstance.dismiss('cancel');
+     };
+}])
+.config(function ($routeProvider) {
+  $routeProvider
+    .when('/autos', {
+      templateUrl: '/templates/autos/index.html',
+      controller: 'autosController',
+      access: {
+        restricted: false,
+       rol: 1
+      }
+    });
+ })
+.controller('personasController',
+  ['$rootScope','$scope', '$location', 'personasService','$uibModal',
+  function ($rootScope,$scope, $location, personasService,$uibModal) {
+    $scope.titleController = 'MEAN-CASE SUPER HEROIC';
+    $rootScope.titleWeb = 'personas';
+    $scope.preloader = true;
+    $scope.msjAlert = false;
+    personasService.allpersonas().then(function(data) {
+      $scope.personasList = data;
+      $scope.personasTemp = angular.copy($scope.personasList);
+      $scope.preloader = false;
+    });
+    /*  Modal */
+     $scope.open = function (item) {
+       var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/personas/modalCreate.html',
+        controller: 'modalpersonasCreateController',
+        size: 'lg',
+        resolve: {
+         item: function () {
+          return item;
+         }
+        }
+      });
+      modalInstance.result.then(function(data) {
+        if(!item) {
+           $scope.personasList.push(data);
+           $scope.personasTemp = angular.copy($scope.personasList);
+        }
+      },function(result){
+      $scope.personasList = $scope.personasTemp;
+      $scope.personasTemp = angular.copy($scope.personasList);
+    });
+  };
+  /*  Delete  */
+  $scope.openDelete = function (item) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'templates/personas/modalDelete.html',
+      controller: 'modalpersonasDeleteController',
+      size: 'lg',
+      resolve: {
+        item: function () {
+           return item;
+        }
+      }
+    });
+    modalInstance.result.then(function(data) {
+      var idx = $scope.personasList.indexOf(data);
+      $scope.personasList.splice(idx, 1);
+      personasService
+        .del(data._id)
+        .then(function(result) {
+          $scope.msjAlert = true;
+          $scope.alert = 'success';
+          $scope.message = result.message;
+        })
+        .catch(function(err) {
+          $scope.msjAlert = true;
+          $scope.alert = 'danger';
+          $scope.message = 'Error '+err;
+        })
+      });
+    };
+}])
+.controller('modalpersonasCreateController',
+  ['$scope', '$uibModalInstance', 'item','personasService',
+  function ($scope, $uibModalInstance, item,personasService) {
+    $scope.item = item;
+    $scope.saving = false;
+    $scope.save = function () {
+      if(!item){
+        $scope.saving = true;
+        item = {nombres: $scope.item.nombres,apellidos: $scope.item.apellidos};
+        personasService.create($scope.item.nombres,$scope.item.apellidos).then(function(r){
+          $scope.saving = false;
+          $uibModalInstance.close(r);
+        });
+      }else{
+        personasService.edit($scope.item.nombres,$scope.item.apellidos,$scope.item._id).then(function(r){
+         $scope.saving = false;
+          $uibModalInstance.close(item);
+        });
+      }
+    };
+}])
+.controller('modalpersonasDeleteController',
+  ['$scope', '$uibModalInstance', 'item',
+  function ($scope, $uibModalInstance, item) {
+    $scope.item = item;
+    $scope.ok = function () {
+      $uibModalInstance.close($scope.item);
+    };
+    $scope.cancel = function () {
+       $uibModalInstance.dismiss('cancel');
+     };
+}])
+.config(function ($routeProvider) {
+  $routeProvider
+    .when('/personas', {
+      templateUrl: '/templates/personas/index.html',
+      controller: 'personasController',
+      access: {
+        restricted: false,
+       rol: 1
+      }
+    });
+ })
 .controller('modalUserCreateController',
   ['$scope', '$uibModalInstance', 'item','AuthService','userService',
   function ($scope, $uibModalInstance, item,AuthService,userService) {
@@ -717,6 +1047,10 @@
                 $scope.collection.splice(index, 1);
             }
 
+            $scope.refresh = function(){
+                 location.reload();
+            }
+
             $scope.validate = function () {
                 $scope.spinner = true;
                 var cont = 0;
@@ -735,7 +1069,6 @@
                 crudService.generar($scope.schemeName, stringFields, stringDataTypes, stringShowOnView).then(function (result) {
                     $scope.spinner = false;
                     $scope.result = result;
-                    location.reload();
                 });
             }
 
