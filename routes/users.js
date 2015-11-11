@@ -157,7 +157,7 @@ router.post('/users', function (req, res, next) {
 router.put('/users/:id', function (req, res) {
 	Users.findById(req.params.id, function (err, user) {
 		user.username = req.body.username;
-		user.password = req.body.password;
+		user.rol = req.body.rol;
 		user.rol = req.body.rol;
 		user.save(function (err) {
 			if (err) {
@@ -166,6 +166,13 @@ router.put('/users/:id', function (req, res) {
 
 			res.json(user);
 		})
+	})
+})
+
+//get - Find By Id User
+router.get('/users/:id', function (req, res) {
+	Users.findById(req.params.id, function (err, user) {
+		res.json(user);
 	})
 })
 
