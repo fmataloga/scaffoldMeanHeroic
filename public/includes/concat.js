@@ -118,167 +118,6 @@
  		});
  	});
  })
-.controller('bootstrapController',
-  ['$scope', '$location', 'AuthService','bootstrapService',
-  function ($scope, $location, AuthService,bootstrapService) {
-    $scope.test = "Menú 1";
-    $scope.logo = "MEAN_CASE HEROIC";
-         /*  LOGOUT  */
-	    $scope.logout = function () {
-	      AuthService.logout()
-	        .then(function () {
-	          $location.path('/login');
-	        });
-
-	    };
-	    bootstrapService.getMenu().then(function(data) {
-	      $scope.menus = data;
-	    });		  	
-}])
-.controller('homeController',
-  ['$scope', '$location', 'AuthService','$uibModal',
-  function ($scope, $location, AuthService,$uibModal) {
-    $scope.titleHomeController = "Welcome";
-    
-}])
-.controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
-  function ($rootScope, $scope, $location, AuthService) {
-		$scope.titleLoginController = "MEAN_CASE HEROIC";
-		$rootScope.titleWeb = "Login";
-		$scope.login = function () {
-
-			// initial values
-			$scope.error = false;
-			$scope.disabled = true;
-			// call login from service
-			AuthService.login($scope.loginForm.username, $scope.loginForm.password, $scope.remember)
-				// handle success
-				.then(function () {
-					$location.path('/');
-					$scope.disabled = false;
-					$scope.loginForm = {};
-				})
-				// handle error
-				.catch(function () {
-					$scope.error = true;
-					$scope.errorMessage = "Invalid username and/or password";
-					$scope.disabled = false;
-					$scope.loginForm = {};
-				});
-
-		};
-
-		/* REGISTRAR  */
-		$scope.register = function () {
-
-			// initial values
-			$scope.error = false;
-			$scope.disabled = true;
-
-			// call register from service
-			AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.rol)
-				// handle success
-				.then(function () {
-					$location.path('/');
-					$scope.disabled = false;
-					$scope.registerForm = {};
-				})
-				// handle error
-				.catch(function (err) {
-					$scope.error = true;
-					$scope.errorMessage = "User already exists!";
-					$scope.disabled = false;
-					$scope.registerForm = {};
-					$scope.rol = "";
-				});
-
-		};
-
-		$scope.personList = [
-			{
-				index: 1,
-				name: "Kristin Hill",
-				email: "kristin@hill.com"
-      },
-			{
-				index: 2,
-				name: "Valerie Francis",
-				email: "valerie@francis.com"
-      },
-			{
-				index: 3,
-				name: "Bob Abbott",
-				email: "bob@abbott.com"
-      },
-			{
-				index: 4,
-				name: "Greg Boyd",
-				email: "greg@boyd.com"
-      },
-			{
-				index: 5,
-				name: "Peggy Massey",
-				email: "peggy@massey.com"
-      },
-			{
-				index: 6,
-				name: "Janet Bolton",
-				email: "janet@bolton.com"
-      },
-			{
-				index: 7,
-				name: "Maria Liu",
-				email: "maria@liu.com"
-      },
-			{
-				index: 8,
-				name: "Anne Warren",
-				email: "anne@warren.com"
-      },
-			{
-				index: 9,
-				name: "Keith Steele",
-				email: "keith@steele.com"
-      },
-			{
-				index: 10,
-				name: "Jerome Lyons",
-				email: "jerome@lyons.com"
-      },
-			{
-				index: 11,
-				name: "Jacob Stone",
-				email: "jacob@stone.com"
-      },
-			{
-				index: 12,
-				name: "Marion Dunlap",
-				email: "marion@dunlap.com"
-      },
-			{
-				index: 13,
-				name: "Stacy Robinson",
-				email: "stacy@robinson.com"
-      },
-			{
-				index: 14,
-				name: "Luis Chappell",
-				email: "luis@chappell.com"
-      },
-			{
-				index: 15,
-				name: "Kimberly Horne",
-				email: "kimberly@horne.com"
-      },
-			{
-				index: 16,
-				name: "Andy Smith",
-				email: "andy@smith.com"
-      }
-    ]
-
-
-}])
 .factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
@@ -484,11 +323,191 @@
 
 
     }])
+.controller('bootstrapController',
+  ['$scope', '$location', 'AuthService','bootstrapService','usersModel',
+  function ($scope, $location, AuthService,bootstrapService,usersModel) {
+    $scope.test = "Menú 1";
+    $scope.logo = "MEAN_CASE HEROIC";
+         /*  LOGOUT  */
+	    $scope.logout = function () {
+	      AuthService.logout()
+	        .then(function () {
+	          $location.path('/login');
+	        });
+
+	    };
+	    bootstrapService.getMenu().then(function(data) {
+	      $scope.menus = data;
+	    });	
+	    /*save find
+	    usersModel.findById('5642b75ca310e00415ca6c00').then(function(data){
+			usersModel.username = "jesus";
+			usersModel.rol = 6;
+			usersModel.save();
+		})*/
+		/*asignate values a query
+		usersModel.findById('5642b75ca310e00415ca6c00').then(function(data){
+			 console.log(data.username);
+		})
+		*/
+	    //debugger;
+	    /*var user = usersModel.create();
+	    user.username = "chela";  	
+	    user.password = "chela";  	
+	    user.rol = 1; 
+	    user.save(); */
+}])
+.controller('homeController',
+  ['$scope', '$location', 'AuthService','$uibModal',
+  function ($scope, $location, AuthService,$uibModal) {
+    $scope.titleHomeController = "Welcome";
+    
+}])
+.controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
+  function ($rootScope, $scope, $location, AuthService) {
+		$scope.titleLoginController = "MEAN_CASE HEROIC";
+		$rootScope.titleWeb = "Login";
+		$scope.login = function () {
+
+			// initial values
+			$scope.error = false;
+			$scope.disabled = true;
+			// call login from service
+			AuthService.login($scope.loginForm.username, $scope.loginForm.password, $scope.remember)
+				// handle success
+				.then(function () {
+					$location.path('/');
+					$scope.disabled = false;
+					$scope.loginForm = {};
+				})
+				// handle error
+				.catch(function () {
+					$scope.error = true;
+					$scope.errorMessage = "Invalid username and/or password";
+					$scope.disabled = false;
+					$scope.loginForm = {};
+				});
+
+		};
+
+		/* REGISTRAR  */
+		$scope.register = function () {
+
+			// initial values
+			$scope.error = false;
+			$scope.disabled = true;
+
+			// call register from service
+			AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.rol)
+				// handle success
+				.then(function () {
+					$location.path('/');
+					$scope.disabled = false;
+					$scope.registerForm = {};
+				})
+				// handle error
+				.catch(function (err) {
+					$scope.error = true;
+					$scope.errorMessage = "User already exists!";
+					$scope.disabled = false;
+					$scope.registerForm = {};
+					$scope.rol = "";
+				});
+
+		};
+
+		$scope.personList = [
+			{
+				index: 1,
+				name: "Kristin Hill",
+				email: "kristin@hill.com"
+      },
+			{
+				index: 2,
+				name: "Valerie Francis",
+				email: "valerie@francis.com"
+      },
+			{
+				index: 3,
+				name: "Bob Abbott",
+				email: "bob@abbott.com"
+      },
+			{
+				index: 4,
+				name: "Greg Boyd",
+				email: "greg@boyd.com"
+      },
+			{
+				index: 5,
+				name: "Peggy Massey",
+				email: "peggy@massey.com"
+      },
+			{
+				index: 6,
+				name: "Janet Bolton",
+				email: "janet@bolton.com"
+      },
+			{
+				index: 7,
+				name: "Maria Liu",
+				email: "maria@liu.com"
+      },
+			{
+				index: 8,
+				name: "Anne Warren",
+				email: "anne@warren.com"
+      },
+			{
+				index: 9,
+				name: "Keith Steele",
+				email: "keith@steele.com"
+      },
+			{
+				index: 10,
+				name: "Jerome Lyons",
+				email: "jerome@lyons.com"
+      },
+			{
+				index: 11,
+				name: "Jacob Stone",
+				email: "jacob@stone.com"
+      },
+			{
+				index: 12,
+				name: "Marion Dunlap",
+				email: "marion@dunlap.com"
+      },
+			{
+				index: 13,
+				name: "Stacy Robinson",
+				email: "stacy@robinson.com"
+      },
+			{
+				index: 14,
+				name: "Luis Chappell",
+				email: "luis@chappell.com"
+      },
+			{
+				index: 15,
+				name: "Kimberly Horne",
+				email: "kimberly@horne.com"
+      },
+			{
+				index: 16,
+				name: "Andy Smith",
+				email: "andy@smith.com"
+      }
+    ]
+
+
+}])
 .service('usersModel', function ($optimumModel) {
 	var model = new $optimumModel();
 	model.url = '/api/users';
+	model.constructorModel = ['username','password','rol'];
 	return model;
 })
+
 .controller('modalUserCreateController',
   ['$scope', '$uibModalInstance', 'item','AuthService','userService',
   function ($scope, $uibModalInstance, item,AuthService,userService) {
@@ -716,6 +735,7 @@
                 crudService.generar($scope.schemeName, stringFields, stringDataTypes, stringShowOnView).then(function (result) {
                     $scope.spinner = false;
                     $scope.result = result;
+                    location.reload();
                 });
             }
 
@@ -753,7 +773,7 @@
  			}
  		});
  })
-.controller('selectTemplatesController', ['$scope', 'templateFactory','$ngBootbox','$window','$route', function ($scope, templateFactory,$window,$route) {
+.controller('selectTemplatesController', ['$scope', 'templateFactory','$ngBootbox','$location','$route', function ($scope, templateFactory,$location,$route) {
     templateFactory.allLayouts().then(function (data) {
         $scope.layouts = data;
     });
@@ -762,7 +782,7 @@
         $scope.index = index;
         templateFactory.setValue(layout.label).then(function(result){
             if(result == true){
-                $window.location.reload();
+                location.reload();
             }
         });
     };

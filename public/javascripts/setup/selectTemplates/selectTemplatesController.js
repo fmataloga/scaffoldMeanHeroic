@@ -1,4 +1,4 @@
-.controller('selectTemplatesController', ['$scope', 'templateFactory','$ngBootbox','$window','$route', function ($scope, templateFactory,$window,$route) {
+.controller('selectTemplatesController', ['$scope', 'templateFactory','$ngBootbox','$location','$route', function ($scope, templateFactory,$location,$route) {
     templateFactory.allLayouts().then(function (data) {
         $scope.layouts = data;
     });
@@ -7,7 +7,7 @@
         $scope.index = index;
         templateFactory.setValue(layout.label).then(function(result){
             if(result == true){
-                $window.location.reload();
+                location.reload();
             }
         });
     };
