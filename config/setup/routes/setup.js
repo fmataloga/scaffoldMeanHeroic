@@ -77,7 +77,7 @@ router.post('/setValues', function (req, res, next) {
         }
         Users.register(new Users({
         username: req.body.username,
-        rol: 4
+        rol: 5
         }), req.body.password, function (err, account) {
             passport.authenticate('local');
            
