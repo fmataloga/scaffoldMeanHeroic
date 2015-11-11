@@ -187,5 +187,14 @@ router.delete('/users/:id', function (req, res) {
 		});
 	})
 })
+//Optimum Model
+
+/*router.get('/users/fields', function (req, res) {
+	var concat = [];
+	Users.schema.eachPath(function(path) {
+    	concat.push({name:path});
+	});
+	res.send(concat)
+})*/
 
 module.exports = router;
