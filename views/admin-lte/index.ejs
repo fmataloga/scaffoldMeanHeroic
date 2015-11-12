@@ -317,8 +317,8 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    <li ng-show="user.rol == 5">
+                        <a href="" data-toggle="control-sidebar" ><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
@@ -380,17 +380,6 @@
                     <ul class="treeview-menu">
                         <li class="active"><a href="#/{{menu.name}}" ng-repeat="menu in menus"><i
                                         class="fa fa-circle-o"></i>{{menu.name}}</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="">
-                        <i class="fa fa-laptop"></i>
-                        <span>Templates</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#/uploadTemplates"><i class="fa fa-circle-o"></i> Upload Template</a></li>
-                        <li><a href="#/selectTemplates"><i class="fa fa-circle-o"></i> Select Template</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
