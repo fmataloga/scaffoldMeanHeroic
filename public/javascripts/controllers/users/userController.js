@@ -5,14 +5,11 @@
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     $scope.msjAlert = false;
-  
     usersModel.getAll().then(function(data){
             $scope.usersList = data; 
             $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;
     })
-  
-
     /*  Modal*/
 
     /*  Create    */

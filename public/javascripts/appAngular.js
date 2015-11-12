@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table','ngBootbox','ui.bootstrap','optimumModel'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ngBootbox','ui.bootstrap','optimumModel','ngSanitize', 'ui.select'])
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {
@@ -51,6 +51,43 @@
  			redirectTo: '/'
  		});
  })
+ /**
+ * AngularJS default filter with the following expression:
+ * "person in people | filter: {name: $select.search, age: $select.search}"
+ * performs a AND between 'name: $select.search' and 'age: $select.search'.
+ * We want to perform a OR.
+ */
+.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+        
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  };
+})
 
  .run(function ($rootScope, $location, $route, AuthService, $http, $window) {
  	$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -81,7 +118,13 @@
 
  		/*    Configuration Tables     */
  		/*    Users Labels rols    */
- 		$rootScope.labelRol = ["reader", "edit", "coordinator", "admin","root"];
+ 		$rootScope.labelRol = [
+							    { id: 1,      rol: 'reader'},
+							    { id: 2,      rol: 'edit'},
+							    { id: 3,      rol: 'coordinator'},
+							    { id: 4,      rol: 'admin'},
+							    { id: 5,      rol: 'root'}
+							  ];
  		/*    Users Labels rols    */
 
  		$http.get('/cookie').

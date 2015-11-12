@@ -1,4 +1,4 @@
- angular.module('appAngular', ['ngRoute', 'angular-table','ngBootbox','ui.bootstrap','optimumModel'])
+ angular.module('appAngular', ['ngRoute', 'angular-table','ngBootbox','ui.bootstrap','optimumModel','ngSanitize', 'ui.select'])
  .config(function ($routeProvider) {
  	$routeProvider
  		.when('/', {
@@ -51,6 +51,43 @@
  			redirectTo: '/'
  		});
  })
+ /**
+ * AngularJS default filter with the following expression:
+ * "person in people | filter: {name: $select.search, age: $select.search}"
+ * performs a AND between 'name: $select.search' and 'age: $select.search'.
+ * We want to perform a OR.
+ */
+.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+        
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  };
+})
 
  .run(function ($rootScope, $location, $route, AuthService, $http, $window) {
  	$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -81,7 +118,13 @@
 
  		/*    Configuration Tables     */
  		/*    Users Labels rols    */
- 		$rootScope.labelRol = ["reader", "edit", "coordinator", "admin","root"];
+ 		$rootScope.labelRol = [
+							    { id: 1,      rol: 'reader'},
+							    { id: 2,      rol: 'edit'},
+							    { id: 3,      rol: 'coordinator'},
+							    { id: 4,      rol: 'admin'},
+							    { id: 5,      rol: 'root'}
+							  ];
  		/*    Users Labels rols    */
 
  		$http.get('/cookie').
@@ -156,7 +199,6 @@
   ['$scope', '$location', 'AuthService','$uibModal',
   function ($scope, $location, AuthService,$uibModal) {
     $scope.titleHomeController = "Welcome";
-    
 }])
 .controller('loginController', ['$rootScope', '$scope', '$location', 'AuthService',
   function ($rootScope, $scope, $location, AuthService) {
@@ -450,19 +492,6 @@
       $uibModalInstance.close(item);
     };
 
-    $scope.peopleObj = {
-      '1' : { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
-      '2' : { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
-      '3' : { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
-      '4' : { name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador' },
-      '5' : { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30, country: 'Ecuador' },
-      '6' : { name: 'Samantha',  email: 'samantha@email.com',  age: 30, country: 'United States' },
-      '7' : { name: 'Nicole',    email: 'nicole@email.com',    age: 43, country: 'Colombia' },
-      '8' : { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
-      '9' : { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
-      '10' : { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
-    };
-
 }])
 
 .controller('modalUserDeleteController',
@@ -487,14 +516,11 @@
     $rootScope.titleWeb = "Users";
     $scope.preloader = true;
     $scope.msjAlert = false;
-  
     usersModel.getAll().then(function(data){
             $scope.usersList = data; 
             $scope.usersTemp = angular.copy($scope.usersList);
             $scope.preloader = false;
     })
-  
-
     /*  Modal*/
 
     /*  Create    */

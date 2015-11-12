@@ -20,7 +20,7 @@
                 <td at-implicit at-sortable at-attribute="User" width="150" at-initial-sorting="asc">
                     <validate ng-hide="item.rol == 5 && user.rol < 5">{{item.username}}</validate>
                 </td>
-                <td at-implicit at-sortable at-attribute="Rol" width="250"><validate ng-hide="item.rol == 5 && user.rol < 5">{{labelRol[item.rol-1]}}</validate></td>
+                <td at-implicit at-sortable at-attribute="Rol" width="250"><validate ng-hide="item.rol == 5 && user.rol < 5">{{labelRol[item.rol-1].rol}}</validate></td>
                 <td at-implicit at-attribute="Acción" width="250">
                     <validate ng-hide="item.rol == 5 && user.rol < 5">
                         <validate ng-show="user.rol >= 2">
