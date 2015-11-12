@@ -44,7 +44,7 @@
  			controller: 'userController',
  			access: {
  				restricted: false,
- 				rol: 4
+ 				rol: 1
  			}
  		})
  		.otherwise({
@@ -81,7 +81,7 @@
 
  		/*    Configuration Tables     */
  		/*    Users Labels rols    */
- 		$rootScope.labelRol = ["reader", "edit", "coordinator", "admin"];
+ 		$rootScope.labelRol = ["reader", "edit", "coordinator", "admin","root"];
  		/*    Users Labels rols    */
 
  		$http.get('/cookie').
