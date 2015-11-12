@@ -11,6 +11,7 @@
 	background: gray;
 }
 
+/* FOOTER */
 @media(min-width:768px){
 	#footer {
 		position: fixed;
@@ -55,3 +56,4 @@
 	height: auto;
 	top: 15px;
 }
+/* /FOOTER */
